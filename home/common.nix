@@ -39,7 +39,6 @@ in
     texlab
     starship
     unstable.yt-dlp
-    biber
     texliveFull
     ranger
   ];
