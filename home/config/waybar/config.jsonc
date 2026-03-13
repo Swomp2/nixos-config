@@ -33,7 +33,8 @@
     "format-muted": "<span font_desc='FiraCode Nerd Font 16'></span>   Без звука",
     "format-icons": {
       "headphone": "",
-      "default": ["", "", ""]
+      "default": ["", "", ""],
+    "on-click": "pavucontrol-qt"
     },
     "on-click-right": "~/.config/bemenu/pavucontrol.fish",
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
