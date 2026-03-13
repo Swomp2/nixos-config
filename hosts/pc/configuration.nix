@@ -5,28 +5,28 @@
     ./hardware-configuration.nix
     ../../disko/pc.nix
 
-    ../../modules/base.nix      # Тут находятся базовые настройки системы
-    ../../modules/desktop.nix   # Тут всё, что связано с GUI
-    ../../modules/packages.nix  # Тут все системные пакеты
-    ../../modules/security.nix  # Тут всё, что связано с безопасностью системы
-    ../../modules/boot.nix      # Тут всё, что связано с экраном загрузки
-    ../../modules/printing.nix  # Тут всё, что связано с принтерами
+    ../../modules/base.nix             # Тут находятся базовые настройки системы
+    ../../modules/desktop.nix          # Тут всё, что связано с GUI
+    ../../modules/packages.nix         # Тут все системные пакеты
+    ../../modules/security.nix         # Тут всё, что связано с безопасностью системы
+    ../../modules/boot.nix             # Тут всё, что связано с экраном загрузки
+    ../../modules/printing.nix         # Тут всё, что связано с принтерами
+    ../../modules/hardware-common.nix  # Тут всё, что общего в железе ноута и компа
+    ../../modules/performance.nix      # Тут всё, что связано с производительностью на компе
   ];
 
   networking.hostName = "Swomp-PC"; # Имя устройства в сети
   console.keyMap = "us";            # Дефолтная системная раскладка
 
-  boot.initrd.systemd.tpm2.enable = true;
-
   boot.initrd.luks.devices = {
     cryptroot0 = {
-      device = "/dev/disk/by-id/REPLACE_ME_PC_NVME0-part3";
+      device = "/dev/disk/by-partlabel/cryptroot0";
       allowDiscards = true;
       crypttabExtraOpts = [ "tpm2-device=auto" ];
     };
 
     cryptroot1 = {
-      device = "/dev/disk/by-id/REPLACE_ME_PC_NVME1-part1";
+      device = "/dev/disk/by-partlabel/cryptroot1";
       allowDiscards = true;
       crypttabExtraOpts = [ "tpm2-device=auto" ];
     };

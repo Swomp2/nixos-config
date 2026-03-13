@@ -11,6 +11,7 @@
     ../../modules/security.nix  # Тут всё, что связано с безопасностью системы
     ../../modules/laptop.nix    # Тут всё, что может быть нужно для ноута
     ../../modules/boot.nix      # Тут всё, что связано с экраном загрузки
+    ../../modules/hardware-common.nix  # Тут всё, что общего в железе ноута и компа
   ];
 
   networking.hostName = "Swomp-Laptop"; # Имя устройства в сети
@@ -18,15 +19,19 @@
 
   boot.initrd.systemd.tpm2.enable = true;
 
+  services.smartd.devices = [
+    {device = "/dev/disk/by-id/nvme-eui.002538a341b9084d";}
+  ];
+
   boot.initrd.luks.devices.cryptroot = {
-    device = "/dev/disk/by-id/REPLACE_ME_LAPTOP_NVME0-part4";
+    device = "/dev/disk/by-partlabel/cryptroot";
     allowDiscards = true;
     crypttabExtraOpts = [ "tpm2-device=auto" ];
   };
   
   zramSwap = {
     enable = true;
-    memoryPercent = 100;
+    memoryPercent = 25;
     priority = 100;
   };
   

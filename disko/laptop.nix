@@ -4,7 +4,7 @@
   disko.devices = {
     disk.system = {
       type = "disk";
-      device = "/dev/disk/by-id/REPLACE_ME_LAPTOP_NVME0";
+      device = "/dev/disk/by-id/nvme-eui.002538a341b9084d";
 
       content = {
         type = "gpt";

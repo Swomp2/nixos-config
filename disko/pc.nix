@@ -5,7 +5,7 @@
     disk = {
       nvme0 = {
         type = "disk";
-        device = "/dev/disk/by-id/REPLACE_ME_PC_NVME0";
+        device = "/dev/disk/by-id/nvme-eui.00000000000000016479a751e0c0162e";
 
         content = {
           type = "gpt";
@@ -53,7 +53,7 @@
 
       nvme1 = {
         type = "disk";
-        device = "/dev/disk/by-id/REPLACE_ME_PC_NVME1";
+        device = "/dev/disk/by-id/nvme-eui.00000000000000016479a751e0c01638";
 
         content = {
           type = "gpt";
