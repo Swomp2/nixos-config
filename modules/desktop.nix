@@ -114,7 +114,7 @@ in
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     QT_QPA_PLATFORMTHEME = "qt6ct";
-    XCURSOR_THEME = "Rose-Pine-Cursor";
+    XCURSOR_THEME = "BreezeX-RosePine-Linux";
     XCURSOR_SIZE = "24";
   };
   
