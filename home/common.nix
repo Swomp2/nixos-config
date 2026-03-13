@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{config, pkgs, inputs, ...}:
 let
   unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
 in
@@ -13,7 +13,7 @@ in
   xdg.configFile."fish".source = ./config/fish;
   xdg.configFile."fish".recursive = true;
 
-  xdg.configFile."starship.toml".source = ./config/starship.toml;
+  xdg.configFile."starship.toml".source = ./config/starship/starship.toml;
 
   xdg.configFile."mpv".source = ./config/mpv;
   xdg.configFile."mpv".recursive = true;
