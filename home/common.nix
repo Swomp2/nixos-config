@@ -15,6 +15,21 @@ in
     ./desktop.nix
   ];
 
+  # Тема для qt
+    qt = {
+    enable = true;
+
+    platformTheme.name = "qtct";
+
+    style = {
+      name = "kvantum";
+      package = with pkgs; [
+        kdePackages.qtstyleplugin-kvantum
+        gruvbox-kvantum
+      ];
+    };
+  };
+
   xdg.configFile."emacs".source = ./config/emacs.d;
   xdg.configFile."emacs".recursive = true;
 

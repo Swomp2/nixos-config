@@ -24,9 +24,9 @@ in
     text = ''
       [GTK]
       application_prefer_dark_theme = true
-      theme_name = "Gruvbox-Dark"
-      icon_theme_name = "Papirus-Dark"
-      cursor_theme_name = "Rose-Pine-Cursor"
+      theme_name = "Breeze"
+      icon_theme_name = "Papirus Dark"
+      cursor_theme_name = "Rose Pine Cursor"
       cursor_theme_size = 24
       font_name = "Ubuntu 15"
 
@@ -35,6 +35,19 @@ in
       fit = "Cover"
     '';
   };
+
+  # Раскраска regreet через css
+  environment.etc."greetd/regreet.css".text = ''
+    window, box, button, entry, list, popover {
+      background: #282828;
+      color: #ebdbb2;
+    }
+
+    button, entry {
+      border-radius: 8px;
+      border: 1px solid #d65d0e;
+    }
+  '';
 
   services.gnome.gnome-keyring.enable = true;
 
@@ -117,7 +130,8 @@ in
 
     papirus-icon-theme
     gruvbox-dark-gtk
-    libsForQt5.qtstyleplugin-kvantum
+    libsForQt5.qt5ct
+    kdePackages.qtstyleplugin-kvantum
     gruvbox-kvantum
     nwg-look
     rose-pine-cursor

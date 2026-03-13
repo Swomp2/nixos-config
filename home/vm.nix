@@ -1,4 +1,5 @@
-{config, pkgs, ...}:
+{config, pkgs, lib, ...}:
 {
-  xdg.configFile."hypr/hyprland.conf".source = ./config/hypr/hyprland-pc.conf;
+  wayland.windowManager.hyprland.extraConfig =
+    lib.mkAfter (builtins.readFile ./config/hypr/hyprland-pc.conf);
 }
