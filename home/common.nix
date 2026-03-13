@@ -3,6 +3,9 @@ let
   unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
 in
 {
+
+  # Отключение шрифтов на уровне home manager, потому что они включены на системном уровне
+  fonts.fontconfig.enable = lib.mkForce false;
   imports = [
     ./desktop.nix
   ];
