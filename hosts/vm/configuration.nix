@@ -32,7 +32,4 @@
       device = "nodev";
     };
   };
-
-  # Только для тестовой VM, чтобы ты смог войти после установки
-  users.users.swomp.initialPassword = "swomp";
 }

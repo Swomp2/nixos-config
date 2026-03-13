@@ -17,8 +17,6 @@
   networking.hostName = "Swomp-Laptop"; # Имя устройства в сети
   console.keyMap = "dvorak";            # Дефолтная системная раскладка
 
-  boot.initrd.systemd.tpm2.enable = true;
-
   services.smartd.devices = [
     {device = "/dev/disk/by-id/nvme-eui.002538a341b9084d";}
   ];

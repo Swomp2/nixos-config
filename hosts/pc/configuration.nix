@@ -12,11 +12,16 @@
     ../../modules/boot.nix             # Тут всё, что связано с экраном загрузки
     ../../modules/printing.nix         # Тут всё, что связано с принтерами
     ../../modules/hardware-common.nix  # Тут всё, что общего в железе ноута и компа
-    ../../modules/performance.nix      # Тут всё, что связано с производительностью на компе
+    ../../modules/performance-pc.nix      # Тут всё, что связано с производительностью на компе
   ];
 
   networking.hostName = "Swomp-PC"; # Имя устройства в сети
   console.keyMap = "us";            # Дефолтная системная раскладка
+
+  services.smartd.devices = [
+    {device = "/dev/disk/by-id/nvme-eui.00000000000000016479a751e0c0162e";}
+    {device = "/dev/disk/by-id/nvme-eui.00000000000000016479a751e0c01638";}
+  ];
 
   boot.initrd.luks.devices = {
     cryptroot0 = {
