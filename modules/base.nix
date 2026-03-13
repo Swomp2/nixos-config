@@ -13,6 +13,10 @@
   networking.networkmanager.enable = true;
 
   programs.fish.enable = true;
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+  };
 
   environment.shellAliases = {
     cat = "bat";

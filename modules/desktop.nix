@@ -11,22 +11,44 @@ in
 
   # Включение менеджера сеансов
   programs.regreet = {
+
     enable = true;
+
     theme = {
-      name = "Adwaita";
-      package = pkgs.gnome-themes-extra;
+      name = "Gruvbox-Dark";
+      package = pkgs.gruvbox-dark-gtk;
     };
+
     iconTheme = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
+      name = "Papirus";
+      package = pkgs.papirus-icon-theme;
     };
+
     cursorTheme = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
+      name = "Rose-Pine-Cursor";
+      package = pkgs.rose-pine-cursor;
     };
+
     font = {
       name = "FiraCode Nerd Font";
       size = 15;
+      package = pkgs.nerd-fonts.fira-code;
+    };
+
+    settings = {
+      GTK = {
+        application_prefer_dark_theme = true;
+        theme_name = "Gruvbox-Dark";
+        icon_theme_name = "Papirus-Dark";
+        cursor_theme_name = "Rose-Pine-Cursor";
+        font_name = "FiraCode Nerd Font 15";
+        cursor_theme_size = 24;
+      };
+
+      background = {
+        path = ../home/config/greeter/wallhaven-m9mevm.jpg;
+        fit = "Cover";
+      };
     };
   };
 
@@ -109,6 +131,7 @@ in
     gruvbox-kvantum
     nwg-look
     rose-pine-cursor
+    mpv
   ];
 
   fonts = {

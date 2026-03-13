@@ -82,6 +82,7 @@
           hostPath = ./hosts/pc/configuration.nix;
           homeImports = [
             ./home/pc.nix
+            ./home/common.nix
           ];
         };
 
@@ -89,6 +90,7 @@
           hostPath = ./hosts/laptop/configuration.nix;
           homeImports = [
             ./home/laptop.nix
+            ./home/common.nix
           ];
         };
 
@@ -96,6 +98,7 @@
           hostPath = ./hosts/vm/configuration.nix;
           homeImports = [
             ./home/vm.nix
+            ./home/common.nix
           ];
 
           extraModules = [

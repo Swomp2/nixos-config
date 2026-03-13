@@ -7,6 +7,17 @@
   home.homeDirectory = "/home/swomp/";
   home.stateVersion = "25.11";
 
+  xdg.configFile."emacs".source = ./config/emacs;
+  xdg.configFile."emacs".recursive = true;
+
+  xdg.configFile."fish".source = ./config/fish;
+  xdg.configFile."fish".recursive = true;
+
+  xdg.configFile."starship.toml".source = ./config/starship.toml;
+
+  xdg.configFile."mpv".source = ./config/mpv;
+  xdg.configFile."mpv".recursive = true;
+
   xdg.enable = true;
 
   home.packages = with pkgs; [
