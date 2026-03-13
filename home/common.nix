@@ -1,6 +1,11 @@
 {config, pkgs, inputs, lib, ...}:
 let
   unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
+
+  mkFishBin = name: file:
+    pkgs.writeShellScriptBin name ''
+      exec ${pkgs.fish}/bin/fish ${file} "$@"
+    '';
 in
 {
 
@@ -20,9 +25,6 @@ in
 
   xdg.configFile."mpv".source = ./config/mpv;
   xdg.configFile."mpv".recursive = true;
-
-  xdg.configFile."bemenu".source = ./config/bemenu;
-  xdg.configFile."bemenu".recursive = true;
 
   xdg.configFile."gammastep/config.ini".source = ./config/gammastep/config.ini;
 
@@ -82,5 +84,13 @@ in
     texliveFull
     ranger
     atuin
+
+    (mkFishBin "bemenu-cliphist" ./config/bemenu/cliphist.fish)
+    (mkFishBin "bemenu-lockscreen" ./config/bemenu/lockscreen.fish)
+    (mkFishBin "bemenu-menu" ./config/bemenu/menu.fish)
+    (mkFishBin "bemenu-pavucontrol" ./config/bemenu/pavucontrol.fish)
+    (mkFishBin "bemenu-power" ./config/bemenu/power.fish)
+    (mkFishBin "bemenu-swww-random" ./config/bemenu/swww-random.fish)
+    (mkFishBin "bemenu-screenshot" ./config/bemenu/screenshot.fish)
   ];
 }
