@@ -4,7 +4,7 @@
     ./desktop.nix
   ];
 
-  xdg.configFile."emacs".source = ./config/emacs;
+  xdg.configFile."emacs".source = ./config/emacs.d;
   xdg.configFile."emacs".recursive = true;
 
   xdg.configFile."fish".source = ./config/fish;
