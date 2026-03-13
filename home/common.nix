@@ -3,9 +3,6 @@
   imports = [
     ./desktop.nix
   ];
-  home.username = "swomp";
-  home.homeDirectory = "/home/swomp/";
-  home.stateVersion = "25.11";
 
   xdg.configFile."emacs".source = ./config/emacs;
   xdg.configFile."emacs".recursive = true;
