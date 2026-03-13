@@ -20,6 +20,11 @@
 
   xdg.enable = true;
 
+  # Включение starship
+  programs.starship = {
+    enable = true;
+  };
+
   home.packages = with pkgs; [
     cargo
     rustc
