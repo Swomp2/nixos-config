@@ -1,4 +1,7 @@
 {config, pkgs, ...}:
+let
+  unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
+in
 {
   imports = [
     ./desktop.nix
