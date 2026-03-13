@@ -24,9 +24,9 @@ in
     text = ''
       [GTK]
       application_prefer_dark_theme = true
-      theme_name = "Breeze"
-      icon_theme_name = "Papirus Dark"
-      cursor_theme_name = "Rose Pine Cursor"
+      theme_name = "Adwaita"
+      icon_theme_name = "Papirus-Dark"
+      cursor_theme_name = "BreezeX-RosePine-Linux"
       cursor_theme_size = 24
       font_name = "Ubuntu 15"
 
@@ -36,16 +36,71 @@ in
     '';
   };
 
-  # Раскраска regreet через css
   environment.etc."greetd/regreet.css".text = ''
-    window, box, button, entry, list, popover {
-      background: #282828;
+    window {
+      background: transparent;
       color: #ebdbb2;
     }
 
-    button, entry {
-      border-radius: 8px;
-      border: 1px solid #d65d0e;
+    box,
+    listview,
+    row,
+    popover,
+    menu,
+    scrolledwindow,
+    entry,
+    button,
+    dropdown > button {
+      background: rgba(40, 40, 40, 0.92);
+      color: #ebdbb2;
+      box-shadow: none;
+    }
+
+    entry,
+    button,
+    row,
+    dropdown > button,
+    popover {
+      border: 1px solid #504945;
+      border-radius: 10px;
+    }
+
+    button:hover,
+    row:hover,
+    dropdown > button:hover {
+      background: rgba(60, 56, 54, 0.96);
+      border-color: #d79921;
+    }
+
+    button:focus,
+    entry:focus,
+    row:selected,
+    dropdown > button:focus {
+      border-color: #fe8019;
+      outline: none;
+    }
+
+    entry {
+      caret-color: #fabd2f;
+      selection-background-color: #458588;
+      selection-color: #fbf1c7;
+    }
+
+    label {
+      color: #ebdbb2;
+    }
+
+    .error {
+      color: #fb4934;
+    }
+
+    trough {
+      background: #3c3836;
+    }
+
+    slider {
+      background: #d79921;
+      border-radius: 9999px;
     }
   '';
 
