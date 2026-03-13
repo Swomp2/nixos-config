@@ -127,6 +127,7 @@ in
     gruvbox-kvantum
     nwg-look
     rose-pine-cursor
+    rose-pine-hyprcursor
     mpv
   ];
 

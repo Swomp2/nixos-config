@@ -44,5 +44,6 @@ in
     unstable.yt-dlp
     texliveFull
     ranger
+    atuin
   ];
 }
