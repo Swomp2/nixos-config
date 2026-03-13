@@ -1,6 +1,6 @@
 {config, pkgs, inputs, ...}:
 let
-  unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stenv.hostPlatform.system};
+  unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   # Включение hyprland
@@ -57,6 +57,10 @@ in
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
+    QT_QPA_PLATFORMTHEME = "qtct";
+    QT_STYLE_OVERRIDE = "kvantum";
+    XCURSOR_THEME = "Rose-Pine-Cursor";
+    XCURSOR_SIZE = "24";
   };
   
   # Это нужно для поддержки filepicker
@@ -123,6 +127,8 @@ in
     gammastep
     swayosd
     emacs
+
+    gruvbox-dark-gtk
     libsForQt5.qtstyleplugin-kvantum
     gruvbox-kvantum
     nwg-look

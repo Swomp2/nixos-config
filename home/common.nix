@@ -21,6 +21,40 @@ in
   xdg.configFile."bemenu".source = ./config/bemenu;
   xdg.configFile."bemenu".recursive = true;
 
+  xdg.configFile."gammastep/config.ini".source = ./config/gammastep/config.ini;
+
+  xdg.configFile."hypr/hyprlock.conf".source = ./config/hypr/hyprlock.conf;
+  xdg.configFile."hypr/hypridle.conf".source = ./config/hypr/hypridle.conf;
+
+  xdg.configFile."waybar/config.jsonc".source = ./config/waybar/config.jsonc;
+  xdg.configFile."waybar/style.css".source = ./config/waybar/style.css;
+
+  xdg.configFile."kitty/kitty.conf".source = ./config/kitty/kitty.conf;
+  xdg.configFile."kitty/gruvbox_dark.conf".source = ./config/kitty/gruvbox_dark.conf;
+
+  xdg.configFile."dunst/dunstrc".source = ./config/dunst/dunstrc;
+
+  xdg.configFile."gtk-3.0".source = ./config/gtk-3.0;
+  xdg.configFile."gtk-3.0".recursive = true;
+
+  xdg.configFile."gtk-4.0".source = ./config/gtk-4.0;
+  xdg.configFile."gtk-4.0".recursive = true;
+
+  xdg.configFile."Kvantum".source = ./config/Kvantum;
+  xdg.configFile."Kvantum".recursive = true;
+
+  xdg.configFile."btop".source = ./config/btop;
+  xdg.configFile."btop".recursive = true;
+
+  xdg.configFile."nwg-look".source = ./config/nwg-look;
+  xdg.configFile."nwg-look".recursive = true;
+
+  xdg.configFile."pavucontrol-qt".source = ./config/pavucontrol-qt;
+  xdg.configFile."pavucontrol-qt".recursive = true;
+
+  xdg.configFile."strawberry".source = ./config/strawberry;
+  xdg.configFile."strawberry".recursive = true;
+
   xdg.enable = true;
 
   # Включение starship
