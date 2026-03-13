@@ -9,6 +9,13 @@ in
     xwayland.enable = true;
   };
 
+  # Это для тем и иконок для greeter
+  environment.pathsToLink = [
+    "/share/icons"
+    "/share/themes"
+    "/share/fonts"
+  ];
+
   # Включение менеджера сеансов
   programs.regreet.enable = true;
 
@@ -38,8 +45,7 @@ in
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-    QT_QPA_PLATFORMTHEME = "qtct";
-    QT_STYLE_OVERRIDE = "kvantum";
+    QT_QPA_PLATFORMTHEME = "qt6ct";
     XCURSOR_THEME = "Rose-Pine-Cursor";
     XCURSOR_SIZE = "24";
   };
@@ -109,6 +115,7 @@ in
     swayosd
     emacs
 
+    papirus-icon-theme
     gruvbox-dark-gtk
     libsForQt5.qtstyleplugin-kvantum
     gruvbox-kvantum
