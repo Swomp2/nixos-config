@@ -10,42 +10,23 @@ in
   };
 
   # Включение менеджера сеансов
-  programs.regreet = {
+  programs.regreet.enable = true;
 
-    enable = true;
+  # Его конфигурация
+  environment.etc."greetd/regreet.toml" = lib.mkForce {
+    text = ''
+      [GTK]
+      application_prefer_dark_theme = true
+      theme_name = "Gruvbox-Dark"
+      icon_theme_name = "Papirus-Dark"
+      cursor_theme_name = "Rose-Pine-Cursor"
+      cursor_theme_size = 24
+      font_name = "Ubuntu 15"
 
-    theme = {
-      name = "Gruvbox-Dark";
-      package = pkgs.gruvbox-dark-gtk;
-    };
-
-    iconTheme = {
-      name = "Papirus";
-      package = pkgs.papirus-icon-theme;
-    };
-
-    cursorTheme = {
-      name = "Rose-Pine-Cursor";
-      package = pkgs.rose-pine-cursor;
-    };
-
-    font = {
-      name = "FiraCode Nerd Font";
-      size = 15;
-      package = pkgs.nerd-fonts.fira-code;
-    };
-
-    settings = {
-      GTK = {
-        application_prefer_dark_theme = true;
-        cursor_theme_size = 24;
-      };
-
-      background = {
-        path = ../home/config/greeter/wallhaven-m9mevm.jpg;
-        fit = "Cover";
-      };
-    };
+      [background]
+      path = "${../home/config/greeter/wallhaven-m9mevm.jpg}"
+      fit = "Cover"
+    '';
   };
 
   services.gnome.gnome-keyring.enable = true;
