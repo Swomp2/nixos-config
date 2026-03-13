@@ -21,6 +21,7 @@
     unzip
     p7zip
     gnused
+    stow
 
     python3
 
