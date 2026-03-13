@@ -1,6 +1,6 @@
 {config, pkgs, ...}:
 {
-  xdg.configFile."hypr/hyprland.conf".source = ./config/hypr/hyprland.conf;
+  xdg.configFile."hypr/hyprland.conf".source = ./config/hypr/hyprland-laptop.conf;
   xdg.configFile."hypr/hyprlock.conf".source = ./config/hypr/hyprlock.conf;
   xdg.configFile."hypr/hypridle.conf".source = ./config/hypr/hypridle.conf;
 

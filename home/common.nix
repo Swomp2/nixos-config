@@ -18,6 +18,9 @@ in
   xdg.configFile."mpv".source = ./config/mpv;
   xdg.configFile."mpv".recursive = true;
 
+  xdg.configFile."bemenu".source = ./config/bemenu
+  xdg.configFile."bemenu".recursive = true;
+
   xdg.enable = true;
 
   # Включение starship
