@@ -20,7 +20,7 @@
     zip
     unzip
     p7zip
-    sed
+    gnused
 
     python3
 
