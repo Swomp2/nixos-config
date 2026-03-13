@@ -38,10 +38,6 @@ in
     settings = {
       GTK = {
         application_prefer_dark_theme = true;
-        theme_name = "Gruvbox-Dark";
-        icon_theme_name = "Papirus-Dark";
-        cursor_theme_name = "Rose-Pine-Cursor";
-        font_name = "FiraCode Nerd Font 15";
         cursor_theme_size = 24;
       };
 
