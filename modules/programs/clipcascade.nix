@@ -34,7 +34,7 @@ let
       mkdir -p $out/share/clipcascade
       cp -r ClipCascade_Desktop $out/share/clipcascade/
       mkdir -p $out/bin
-      makeWrapper ${pythonEnv}/bin/python3 $out/bin/clipcascade \\
+      makeWrapper ${pythonEnv}/bin/python3 $out/bin/clipcascade \
         --set PATH ${lib.makeBinPath [
           pkgs.xclip
           pkgs.wl-clipboard
@@ -43,8 +43,7 @@ let
           pkgs.dbus
           pkgs.ffmpeg
           pkgs.gtk3
-        ]} \\
-        --prefix PYTHONPATH : "${pythonEnv}/${pythonEnv.sitePackages}" \\
+        ]} \
         --add-flags "$out/share/clipcascade/ClipCascade_Desktop/src/main.py"
       runHook postInstall
     '';
@@ -67,8 +66,8 @@ in
 
     hash = lib.mkOption {
       type = lib.types.str;
-      default = "sha256-CsAEPCdPHxWz7gp4ES4r5bOnVUKDw3oo8lt4MXqKyo=";
-      description = "Хэш исходников fetchFromGitHub";
+      default = "sha256-+csAEPCdPHxWz7gp4ES4r5bOnVUKDw3oo8lt4MXqKyo=";
+      description = "Хэш исходников";
     };
 
   };

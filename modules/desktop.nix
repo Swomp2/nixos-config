@@ -32,6 +32,7 @@ in
   	enable    = true;
   	autostart = true;
   	version   = "3.1.0";
+  	hash      = "sha256-+csAEPCdPHxWz7gp4ES4r5bOnVUKDw3oo8lt4MXqKyo=";
   };
 
   # Это для тем и иконок для greeter
