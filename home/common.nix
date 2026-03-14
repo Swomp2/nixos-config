@@ -54,15 +54,6 @@ in
 
   xdg.configFile."dunst/dunstrc".source = ./config/dunst/dunstrc;
 
-  xdg.configFile."gtk-3.0".source = ./config/gtk-3.0;
-  xdg.configFile."gtk-3.0".recursive = true;
-
-  xdg.configFile."gtk-4.0".source = ./config/gtk-4.0;
-  xdg.configFile."gtk-4.0".recursive = true;
-
-  xdg.configFile."Kvantum".source = ./config/Kvantum;
-  xdg.configFile."Kvantum".recursive = true;
-
   xdg.configFile."btop".source = ./config/btop;
   xdg.configFile."btop".recursive = true;
 

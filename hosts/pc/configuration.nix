@@ -12,7 +12,8 @@
     ../../modules/boot.nix             # Тут всё, что связано с экраном загрузки
     ../../modules/printing.nix         # Тут всё, что связано с принтерами
     ../../modules/hardware-common.nix  # Тут всё, что общего в железе ноута и компа
-    ../../modules/performance-pc.nix      # Тут всё, что связано с производительностью на компе
+    ../../modules/performance-pc.nix   # Тут всё, что связано с производительностью на компе
+    ../../modules/virtualization.nix   # Тут всё, что связано с виртуализацией и виртуальными машинами
   ];
 
   networking.hostName = "Swomp-PC"; # Имя устройства в сети

@@ -5,13 +5,14 @@
     ./hardware-configuration.nix
     ../../disko/laptop.nix
     
-    ../../modules/base.nix      # Тут находятся базовые настройки системы
-    ../../modules/desktop.nix   # Тут всё, что связано с GUI
-    ../../modules/packages.nix  # Тут все системные пакеты
-    ../../modules/security.nix  # Тут всё, что связано с безопасностью системы
-    ../../modules/laptop.nix    # Тут всё, что может быть нужно для ноута
-    ../../modules/boot.nix      # Тут всё, что связано с экраном загрузки
+    ../../modules/base.nix             # Тут находятся базовые настройки системы
+    ../../modules/desktop.nix          # Тут всё, что связано с GUI
+    ../../modules/packages.nix         # Тут все системные пакеты
+    ../../modules/security.nix         # Тут всё, что связано с безопасностью системы
+    ../../modules/laptop.nix           # Тут всё, что может быть нужно для ноута
+    ../../modules/boot.nix             # Тут всё, что связано с экраном загрузки
     ../../modules/hardware-common.nix  # Тут всё, что общего в железе ноута и компа
+    ../../modules/virtualization.nix   # Тут всё, что связано с виртуализацией и виртуальными машинами
   ];
 
   networking.hostName = "Swomp-Laptop"; # Имя устройства в сети
