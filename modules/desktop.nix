@@ -1,6 +1,11 @@
 {config, pkgs, inputs, lib, ...}:
 let
   unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+
+  defaultCursorTheme = pkgs.writeTextDir "share/icons/default/index.theme" ''
+	[Icon Theme]
+	Inherits=BreezeX-RosePine-Linux
+  '';
 in
 {
   # Включение hyprland
@@ -34,6 +39,20 @@ in
       path = "${../home/config/greeter/wallhaven-m9mevm.jpg}"
       fit = "Cover"
     '';
+  };
+
+  # Установка темы курсора в greeter сессию
+  services.greetd.settings.default__session = {
+    command = '' 
+      env \
+        XCURSOR_THEME=BreezeX-RosePine-Linux \
+        XCURSOR_SIZE=24 \
+        XCURSOR_PATH=/run/current-system/sw/share/icons \
+		WLR_NO_HARDWARE_CURSORS=1 \
+        GTK_THEME=Gruvbox-Dark \
+        ${pkgs.cage}/bin/cage -s -mlast -- ${pkgs.regreet}/bin/regreet
+    '';
+    user = "greeter";
   };
 
   services.gnome.gnome-keyring.enable = true;

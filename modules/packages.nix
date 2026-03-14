@@ -22,6 +22,7 @@
     p7zip
     gnused
     stow
+    micro
 
     python3
 
