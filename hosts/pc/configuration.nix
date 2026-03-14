@@ -24,20 +24,9 @@
     {device = "/dev/disk/by-id/nvme-eui.00000000000000016479a751e0c01638";}
   ];
 
-  boot.initrd.luks.devices = {
-    cryptroot0 = {
-      device = "/dev/disk/by-partlabel/cryptroot0";
-      allowDiscards = true;
-      crypttabExtraOpts = [ "tpm2-device=auto" ];
-    };
-
-    cryptroot1 = {
-      device = "/dev/disk/by-partlabel/cryptroot1";
-      allowDiscards = true;
-      crypttabExtraOpts = [ "tpm2-device=auto" ];
-    };
-  };
-  
+  boot.initrd.luks.devices.cryptroot0.crypttabExtraOpts = ["tpm2-device-auto"];
+  boot.initrd.luks.devices.cryptroot1.crypttabExtraOpts = ["tpm2-device-auto"];
+    
   zramSwap = {
     enable = true;
     memoryPercent = 100;
@@ -50,10 +39,12 @@
       efiSysMountPoint = "/boot/efi/";
     };
 
-    grub = {
-      enable = true;
-      efiSupport = true;
-      device = "nodev";         # Это означает использовать только EFI версию для grub
-    };
+    grub.enable = false;
+
+    systemd-boot.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [
+  	linuxKernel.packages.linux_lqx.cpupower
+  ];
 }

@@ -6,9 +6,23 @@ let
     pkgs.writeShellScriptBin name ''
       exec ${pkgs.fish}/bin/fish ${file} "$@"
     '';
+
+  kvTheme = pkgs.gruvbox-kvantum;
 in
 {
 
+  # Включение стандартных директорий
+  xdg.userDirs = {
+  	enable = true;
+  	createDirectories = true;
+
+  	documents = "$HOME/Документы";
+  	download  = "$HOME/Загрузки";
+  	music     = "$HOME/Музыка";
+  	pictures  = "$HOME/Изображения";
+  	videos    = "$HOME/Видео";
+  };
+  
   # Отключение шрифтов на уровне home manager, потому что они включены на системном уровне
   fonts.fontconfig.enable = lib.mkForce false;
   imports = [
@@ -16,22 +30,51 @@ in
   ];
 
   # Тема для qt
-    qt = {
+  qt = {
     enable = true;
 
     platformTheme.name = "qtct";
+
+	qt5ctSettings = {
+	  Appearance = {
+	    style = "kvantum";
+	    icon_theme = "Papirus-Dark";
+	  };
+	};
+
+	qt6ctSettings = {
+	  Appearance = {
+	    style = "kvantum";
+	    icon_theme = "Papirus-Dark";
+	  };
+	};
 
     style = {
       name = "kvantum";
       package = with pkgs; [
         kdePackages.qtstyleplugin-kvantum
-        gruvbox-kvantum
+        kvTheme
       ];
     };
   };
 
-  xdg.configFile."emacs".source = ./config/emacs.d;
-  xdg.configFile."emacs".recursive = true;
+  xdg.configFile."Kvantum/kvantum.kvconfig" = {
+    text = "
+	  [General]
+	  theme=Gruvbox-Dark-Brown
+  	";
+  	force = true;
+  };
+
+  xdg.configFile."Kvantum/Gruvbox-Dark-Brown" = { 
+
+  	source = "${kvTheme}/share/Kvantum/Gruvbox-Dark-Brown";
+
+	recursive = true;
+
+	# Перезаписывать этот файл с помощью home manager
+    force = true;
+  };
 
   xdg.configFile."fish".source = ./config/fish;
   xdg.configFile."fish".recursive = true;

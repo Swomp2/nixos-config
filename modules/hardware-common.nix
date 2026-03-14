@@ -22,7 +22,6 @@
     nvme-cli
     fwupd
     lm_sensors
-    cpupower
     pciutils
     usbutils
     nvtopPackages.amd

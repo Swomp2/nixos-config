@@ -1,5 +1,10 @@
-{pkgs, username, ...}:
+{pkgs, username, lib, ...}:
 {
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "hplip"
+    ];
+  
   services.printing = {
     enable = true;
     drivers = [

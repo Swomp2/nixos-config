@@ -1,6 +1,16 @@
-{config, pkgs, ...}:
-
+{config, pkgs, lib, ...}:
 {
+  # Включение lanzaboote
+  boot.loader.systemd-boot.enable = lib.mkForce false;
+
+  boot.lanzaboote = {
+  	enable = true;
+  	pkiBundle = "/var/lib/sbctl";
+  };
+
+  environment.systemPackages = [
+  	pkgs.sbctl
+  ];
 
   # Включение apparmor и файервола
 
@@ -10,7 +20,7 @@
   
   # Замена sudo на doas
   
-  security.sudo.enable = false;
+  security.sudo.enable = true;
 
   security.doas.enable = true;
 

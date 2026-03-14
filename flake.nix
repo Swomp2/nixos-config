@@ -14,9 +14,14 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, disko, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, disko, home-manager, lanzaboote, ... }:
     let
       system = "x86_64-linux";
       username = "swomp";
@@ -36,12 +41,13 @@
 
           modules = [
             disko.nixosModules.disko
+            lanzaboote.nixosModules.lanzaboote
             home-manager.nixosModules.default
             hostPath
 
             ({ pkgs, ... }: {
 
-              users.mutableUsers = true;
+              users.mutableUsers = false;
 
               users.users.${username} = {
                 isNormalUser = true;
@@ -61,6 +67,9 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
+
+                # Включение бэкапов файлов в домашней директории
+                backupFileExtension = "backup";
 
                 extraSpecialArgs = {
                   inherit inputs username homeDir;
@@ -88,9 +97,9 @@
 
           extraModules = [
             {
-              users.users.${username}.initialPassword = "swomp";
+              users.users.${username}.hashedPassword = "$y$j9T$3wXS1qCIBpSmkvHf/s6mn.$IzM1ZoDQufoR.5wS/lLKZD.f1k8b/Nyj1J/hHYwsgp1";
             }
-          ];
+		  ];
         };
 
         laptop = mkHost {
@@ -102,9 +111,9 @@
 
           extraModules = [
             {
-              users.users.${username}.initialPassword = "swomp";
+              users.users.${username}.hashedPassword = "$y$j9T$Q2r6j1dZlRGIHYVnhXk4T.$FBGNdh1hckjNonKRcCruXa41vtB/2s.i9Lg8QktABg4";
             }
-          ];
+		  ];
         };
 
         vm = mkHost {
@@ -117,7 +126,7 @@
           extraModules = [
             {
               users.users.${username}.initialPassword = "swomp";
-            }
+			}
           ];
         };
       };

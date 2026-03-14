@@ -14,6 +14,16 @@ in
     xwayland.enable = true;
   };
 
+  # Импорт впн
+  imports = [
+  	./programs/adguardvpn.nix
+  ];
+
+  programs.adguardvpn-cli = {
+  	enable=true;
+  	channel = "nightly";
+  };
+
   # Это для тем и иконок для greeter
   environment.pathsToLink = [
     "/share/icons"
@@ -60,7 +70,10 @@ in
   security.pam.services = {
     greetd.enableGnomeKeyring = true;
     hyprlock.enableGnomeKeyring = true;
+    login.enableGnomeKeyring = true;
   };
+
+  programs.seahorse.enable = true;
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
