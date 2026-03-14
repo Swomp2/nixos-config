@@ -40,6 +40,7 @@
             hostPath
 
             ({ pkgs, ... }: {
+
               users.mutableUsers = true;
 
               users.users.${username} = {
@@ -84,6 +85,12 @@
             ./home/pc.nix
             ./home/common.nix
           ];
+
+          extraModules = [
+            {
+              users.users.${username}.initialPassword = "swomp";
+            }
+          ];
         };
 
         laptop = mkHost {
@@ -91,6 +98,12 @@
           homeImports = [
             ./home/laptop.nix
             ./home/common.nix
+          ];
+
+          extraModules = [
+            {
+              users.users.${username}.initialPassword = "swomp";
+            }
           ];
         };
 

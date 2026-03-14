@@ -12,6 +12,8 @@
 
   networking.networkmanager.enable = true;
 
+  services.openssh.enable = true;
+
   programs.fish.enable = true;
 
   environment.shellAliases = {

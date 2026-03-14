@@ -4,6 +4,7 @@
   programs.virt-manager.enable = true;
 
   virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation.libvirt.quemu.ovmf.enable = true;
 
   virtualisation.libvirtd = {
     enable = true;
