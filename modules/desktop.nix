@@ -8,20 +8,30 @@ let
   '';
 in
 {
+  # Разрешение несвободных пакетов
+  nixpkgs.config.allowUnfree = true;
+  
   # Включение hyprland
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
 
-  # Импорт впн
+  # Импорт впн и clipcascade
   imports = [
   	./programs/adguardvpn.nix
+  	./programs/clipcascade.nix
   ];
 
   programs.adguardvpn-cli = {
-  	enable=true;
+  	enable  = true;
   	channel = "nightly";
+  };
+
+  programs.clipcascade = {
+  	enable    = true;
+  	autostart = true;
+  	version   = "3.1.0";
   };
 
   # Это для тем и иконок для greeter
@@ -146,6 +156,7 @@ in
     gammastep
     swayosd
     emacs
+    libnotify
 
     papirus-icon-theme
     gruvbox-gtk-theme
@@ -165,6 +176,11 @@ in
       nerd-fonts.ubuntu
       nerd-fonts.fira-code
       nerd-fonts.symbols-only
+
+      # Шрифты Майкрософт
+      corefonts
     ];
   };
+
+  fonts.fontDir.enable = true;
 }

@@ -14,6 +14,7 @@
     ../../modules/hardware-common.nix  # Тут всё, что общего в железе ноута и компа
     ../../modules/performance-pc.nix   # Тут всё, что связано с производительностью на компе
     ../../modules/virtualization.nix   # Тут всё, что связано с виртуализацией и виртуальными машинами
+    ../../modules/gaming.nix           # Тут всё, что связано с играми
   ];
 
   networking.hostName = "Swomp-PC"; # Имя устройства в сети

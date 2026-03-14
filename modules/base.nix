@@ -5,6 +5,19 @@
 
   i18n.defaultLocale = "ru_RU.UTF-8";
 
+  # Автоудаление старых версий системы
+  nix.gc = {
+  	automatic  = true;
+  	dates      = "weekly";
+  	options    = "--delete-older-than 14d";
+  	persistent = true;
+  };
+
+  boot.loader.systemd-boot.configurationLimit = 10;
+
+  # Сокрытие загрузчика
+  boot.loader.timeout = 0;
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"

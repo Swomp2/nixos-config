@@ -10,6 +10,7 @@
   "modules-left": [
     "network",
     "wireplumber",
+    "gamemode"
   ],
 
   "modules-center": [
@@ -75,7 +76,20 @@
     "format": "{name}",
     "sort-by-number": true,
     "on-click": "activate",
-    "on-scroll-up": "hyprctl dispatch workspace +1",
-    "on-scroll-down": "hyprctl dispatch workspace -1"
+    "on-scroll-up": "hyprctl dispatch workspace -1",
+    "on-scroll-down": "hyprctl dispatch workspace +1"
+  },
+
+  "gamemode": {
+    "format": "{glyph}",
+    "format-alt": "{glyph} {count}",
+    "glyph": "",
+    "hide-not-running": true,
+    "use-icon": true,
+    "icon-name": "input-gaming-symbolic",
+    "icon-spacing": 4,
+    "icon-size": 20,
+    "tooltip": true,
+    "tooltip-format": "Игр запущено: {count}"
   }
 }

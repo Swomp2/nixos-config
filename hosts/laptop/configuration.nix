@@ -13,6 +13,7 @@
     ../../modules/boot.nix             # Тут всё, что связано с экраном загрузки
     ../../modules/hardware-common.nix  # Тут всё, что общего в железе ноута и компа
     ../../modules/virtualization.nix   # Тут всё, что связано с виртуализацией и виртуальными машинами
+	../../modules/gaming.nix           # Тут всё, что связано с играми
   ];
 
   networking.hostName = "Swomp-Laptop"; # Имя устройства в сети

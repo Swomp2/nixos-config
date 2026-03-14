@@ -109,6 +109,17 @@ window#waybar {
   padding-right: 10px;
 }
 
+/* ===== gamemode  ===== */
+#gamemode {
+  background-color: #d65d0e;
+  color: #282828;
+}
+
+#gamemode {
+  background-color: #d79921;
+  color: #282828;
+}
+
 /* ===== состояния ===== */
 
 #network.disconnected {
