@@ -75,7 +75,9 @@ window#waybar {
 /* ===== tray ===== */
 
 #tray {
-  background: #d65d0e;
+  background-color: #d65d0e;
+  border-left: 5px solid #d65d0e;
+  border-right: 5px solid #d65d0e;
   border-radius: 8px;
 }
 
@@ -117,6 +119,51 @@ window#waybar {
 #gamemode.running {
   background-color: #d79921;
   color: #282828;
+}
+
+/* ===== bluetooth ===== */
+#bluetooth {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#bluetooth.connected {
+  background-color: #cc241d;
+  color: #282828;
+}
+
+#bluetooth.disabled,
+#bluetooth.on {
+  background-color: #d65d0e;
+  color: #282828;
+}
+
+/* ===== профили энергопотребления ===== */
+#power-profiles-daemon {
+  background-color: #d65d0e;
+  color: #282828;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#power-profiles-daemon.performance {
+  background-color: #cc241d;
+}
+
+#power-profiles-daemon.balanced {
+  background-color: #d79921;
+}
+
+/* ===== батарея ===== */
+#battery {
+  background-color: #d65d0e;
+  color: #282828;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#battery.charging {
+  background-color: #d79921;
 }
 
 /* ===== состояния ===== */

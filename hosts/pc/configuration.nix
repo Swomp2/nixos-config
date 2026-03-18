@@ -33,16 +33,12 @@
     memoryPercent = 100;
     priority = 100;
   };
-  
+
   boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi/";
-    };
-
-    grub.enable = false;
-
-    systemd-boot.enable = true;
+  	efi = {
+  	  canTouchEfiVariables = true;
+  	  efiSysMountPoint = "/boot/efi";
+  	};
   };
 
   environment.systemPackages = with pkgs; [

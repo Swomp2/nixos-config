@@ -48,14 +48,6 @@ in
 	    icon_theme = "Papirus-Dark";
 	  };
 	};
-
-    style = {
-      name = "kvantum";
-      package = with pkgs; [
-        kdePackages.qtstyleplugin-kvantum
-        kvTheme
-      ];
-    };
   };
 
   xdg.configFile."Kvantum/kvantum.kvconfig" = {

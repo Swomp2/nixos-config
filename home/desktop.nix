@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{config, pkgs, unstable, ...}:
 {
   # Включение плагина для курсора в hyprland
   wayland.windowManager.hyprland = {
@@ -7,7 +7,7 @@
     portalPackage = null;
 
     plugins = [
-      pkgs.hyprlandPlugins.hypr-dynamic-cursors
+      unstable.hyprlandPlugins.hypr-dynamic-cursors
     ];
 
     extraConfig = ''

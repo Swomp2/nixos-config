@@ -27,6 +27,20 @@
       username = "swomp";
       homeDir = "/home/${username}";
 
+	  unstable = import inputs.nixpkgs-unstable {
+	  	inherit system;
+	  	config = {
+	  	  allowUnfreePredicate = pkg: 
+	  	    builtins.elem (nixpkgs.lib.getName pkg) [
+	  	  	  "steam"
+	  	  	  "steam-unwrapped"
+	  	  	  "steam-run"
+	  	  	  "steam-cmd"
+	  	  	  "corefonts"
+	  	    ];
+	  	};
+	  };
+ 	  
       mkHost =
         { hostPath
         , homeImports
@@ -36,7 +50,7 @@
           inherit system;
 
           specialArgs = {
-            inherit inputs username homeDir;
+            inherit inputs username homeDir unstable;
           };
 
           modules = [
@@ -72,7 +86,7 @@
                 backupFileExtension = "backup";
 
                 extraSpecialArgs = {
-                  inherit inputs username homeDir;
+                  inherit inputs username homeDir unstable;
                 };
 
                 users.${username} = {

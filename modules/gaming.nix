@@ -1,19 +1,17 @@
-{lib, pkgs, ...}:
+{lib, pkgs, unstable, ...}:
 {
-  nixpkgs.config.allowUnfreePredicate = pkg:
-    builtins.elem (lib.getName pkg) [
-      "steam"
-      "steam-unwrapped"
-      "corefonts"
-    ];
-
   programs.steam = {
   	enable = true;
+  	package = unstable.steam;
   	remotePlay.openFirewall = true;
   	dedicatedServer.openFirewall = false;
   };
 
   programs.gamemode.enable = true;
+  programs.gamescope = {
+  	enable = true;
+  	capSysNice = true;
+  };
 
   environment.systemPackages = with pkgs; [
   	mangohud

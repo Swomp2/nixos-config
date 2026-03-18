@@ -1,6 +1,6 @@
 #!/bin/fish
 
-grim ~/Изображения/Скрины/"ПК и ноут"/Блок.png && convert -blur 18,4 ~/Изображения/Скрины/"ПК и ноут"/Блок.png ~/Изображения/Скрины/"ПК и ноут"/Блок.png
+grim ~/lockscreen/lockscreen.png && convert -blur 18,4 ~/lockscreen/lockscreen.png ~/lockscreen/lockscreen.png
 
 playerctl stop
 

@@ -1,7 +1,5 @@
-{config, pkgs, inputs, lib, ...}:
+{config, pkgs, lib, unstable, inputs, ...}:
 let
-  unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-
   defaultCursorTheme = pkgs.writeTextDir "share/icons/default/index.theme" ''
 	[Icon Theme]
 	Inherits=BreezeX-RosePine-Linux
@@ -13,8 +11,10 @@ in
   
   # Включение hyprland
   programs.hyprland = {
-    enable = true;
+    enable          = true;
     xwayland.enable = true;
+    package         = unstable.hyprland;
+    portalPackage  = unstable.xdg-desktop-portal-hyprland;
   };
 
   # Импорт впн и clipcascade
@@ -53,7 +53,7 @@ in
       theme_name = "Gruvbox-Dark"
       icon_theme_name = "Papirus-Dark"
       cursor_theme_name = "BreezeX-RosePine-Linux"
-      cursor_theme_size = 24
+      cursor_theme_size = 32
       font_name = "Ubuntu 15"
 
       [background]
@@ -69,7 +69,6 @@ in
         XCURSOR_THEME=BreezeX-RosePine-Linux \
         XCURSOR_SIZE=24 \
         XCURSOR_PATH=/run/current-system/sw/share/icons \
-		WLR_NO_HARDWARE_CURSORS=1 \
         GTK_THEME=Gruvbox-Dark \
         ${pkgs.cage}/bin/cage -s -mlast -- ${pkgs.regreet}/bin/regreet
     '';
@@ -89,8 +88,8 @@ in
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     QT_QPA_PLATFORMTHEME = "qt6ct";
+    XCURSOR_SIZE = "32";
     XCURSOR_THEME = "BreezeX-RosePine-Linux";
-    XCURSOR_SIZE = "24";
   };
   
   # Это нужно для поддержки filepicker
@@ -111,6 +110,40 @@ in
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+  
+    wireplumber = {
+      enable = true;
+  
+      extraConfig = {
+        "10-audio-policy" = {
+          "wireplumber.settings" = {
+            "device.restore-routes" = false;
+            "node.restore-default-targets" = false;
+            "linking.follow-default-target" = true;
+            "node.stream.restore-target" = false;
+            "linking.allow-moving-streams" = true;
+          };
+        };
+  
+        "15-lower-hdmi-priority" = {
+          "monitor.alsa.rules" = [
+            {
+              matches = [
+                {
+                  "node.name" = "~alsa_output.*hdmi.*";
+                  "media.class" = "Audio/Sink";
+                }
+              ];
+              actions = {
+                "update-props" = {
+                  "priority.session" = 700;
+                };
+              };
+            }
+          ];
+        };
+      };
+    };
   };
 
   # Включение службы для работы с внешними накопителями
@@ -157,7 +190,9 @@ in
     gammastep
     swayosd
     emacs
+    nomacs # Для просмотра фоток)
     libnotify
+    kdePackages.okular
 
     papirus-icon-theme
     gruvbox-gtk-theme

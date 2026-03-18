@@ -7,6 +7,7 @@
   
   services.printing = {
     enable = true;
+    webInterface = true;
     drivers = [
       pkgs.hplipWithPlugin
     ];
@@ -18,6 +19,12 @@
       pkgs.hplipWithPlugin
     ];
   };
+
+  environment.systemPackages = with pkgs; [
+  	hplipWithPlugin
+  	system-config-printer
+  	simple-scan
+  ];
 
   users.users.${username}.extraGroups = [
     "lp"
