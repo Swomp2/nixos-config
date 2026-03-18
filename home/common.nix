@@ -98,9 +98,6 @@ in
   xdg.configFile."pavucontrol-qt".source = ./config/pavucontrol-qt;
   xdg.configFile."pavucontrol-qt".recursive = true;
 
-  xdg.configFile."strawberry".source = ./config/strawberry;
-  xdg.configFile."strawberry".recursive = true;
-
   xdg.enable = true;
 
   # Включение starship

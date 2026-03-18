@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../disko/laptop.nix
+    ../../disko/laptop.nix             # Тут всё, что связано с ноутом
     
     ../../modules/base.nix             # Тут находятся базовые настройки системы
     ../../modules/desktop.nix          # Тут всё, что связано с GUI
