@@ -87,9 +87,16 @@ in
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-    QT_QPA_PLATFORMTHEME = "qt6ct";
     XCURSOR_SIZE = "32";
     XCURSOR_THEME = "BreezeX-RosePine-Linux";
+  };
+
+  systemd.user.services.xdg-desktop-portal.environment = {
+  	QT_QPA_PLATFORMTHEME = "qtct";
+  };
+
+  systemd.user.services.xdg-desktop-portal-hyprland.environment = {
+    QT_QPA_PLATFORMTHEME = "qtct";
   };
   
   # Это нужно для поддержки filepicker

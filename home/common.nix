@@ -29,22 +29,42 @@ in
     ./desktop.nix
   ];
 
+  # Тема для gtk
+  gtk = {
+  	enable = true;
+
+  	theme = {
+  	  name = "Gruvbox-Dark";
+  	  package = pkgs.gruvbox-gtk-theme;
+  	};
+
+  	iconTheme = {
+  	  name = "Papirus-Dark";
+  	  package = pkgs.papirus-icon-theme;
+  	};
+
+  	cursorTheme = {
+  	  name = "BreezeX-RosePine-Linux";
+  	  package = pkgs.rose-pine-cursor;
+  	  size = 32;
+  	};
+  };
+
   # Тема для qt
   qt = {
     enable = true;
 
     platformTheme.name = "qtct";
+    style.name = "kvantum";
 
 	qt5ctSettings = {
 	  Appearance = {
-	    style = "kvantum";
 	    icon_theme = "Papirus-Dark";
 	  };
 	};
 
 	qt6ctSettings = {
 	  Appearance = {
-	    style = "kvantum";
 	    icon_theme = "Papirus-Dark";
 	  };
 	};
@@ -130,5 +150,6 @@ in
     (mkFishBin "bemenu-power" ./config/bemenu/power.fish)
     (mkFishBin "bemenu-swww-random" ./config/bemenu/swww-random.fish)
     (mkFishBin "bemenu-screenshot" ./config/bemenu/screenshot.fish)
+    (mkFishBin "bemenu-wifi" ./config/bemenu/wifi.fish)
   ];
 }
