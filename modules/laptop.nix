@@ -14,10 +14,14 @@
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
 
+  # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = false;
 
   services.libinput.enable = true;
+
+  # Яркость
+  hardware.brightnessctl.enable = true;
 
   services.logind.lidSwitch = "suspend";
   services.logind.lidSwitchDocked = "ignore";

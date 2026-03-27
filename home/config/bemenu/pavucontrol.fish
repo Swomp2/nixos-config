@@ -1,4 +1,4 @@
-#!/bin/fish
+#!/run/current-system/sw/bin/fish
 
 if pgrep -x pavucontrol-qt
    pkill pavucontrol-qt

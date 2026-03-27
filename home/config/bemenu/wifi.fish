@@ -1,4 +1,4 @@
-#!/usr/bin/env fish
+#!/run/current-system/sw/bin/fish
 
 function wifi_notify
     set -l title $argv[1]
@@ -35,7 +35,7 @@ set -l choice (
     begin
         echo "[ввести SSID вручную]"
         printf '%s\n' $ssids
-    end | bemenu --nb "#282828" --nf "#fbf1c7" --tb "#d65d0e" --tf "#282828" --fb "#282828" --ff "#fbf1c7" --hb "#d65d0e" --hf "#282828" --ab "#282828" --af "#fbf1c7" -H 10 -M 850 -c --border 2 --bdr "#d65d0e" --list 15 -i --fn "Ubuntu Regular 12" --prompt="Wi-Fi"
+    end | bemenu --nb "#282828" --nf "#fbf1c7" --tb "#d65d0e" --tf "#282828" --fb "#282828" --ff "#fbf1c7" --hb "#d65d0e" --hf "#282828" --ab "#282828" --af "#fbf1c7" -H 10 -W 0.13 -c --border 2 --bdr "#d65d0e" --list 15 -i --fn "Ubuntu Regular 12" --prompt="Wi-Fi"
 )
 
 # Отмена
