@@ -53,7 +53,7 @@ if test "$choice" = "[ввести SSID вручную]"
 end
 
 # Пароль
-set -l password (printf '' | bemenu -p "Пароль (пусто = open)" -x indicator)
+set -l password (printf '' | bemenu --nb "#282828" --nf "#fbf1c7" --tb "#d65d0e" --tf "#282828" --fb "#282828" --ff "#fbf1c7" --hb "#d65d0e" --hf "#282828" --ab "#282828" --af "#fbf1c7" -H 10 -W 0.13 -c --border 2 --bdr "#d65d0e" --list 15 -i --fn "Ubuntu Regular 12" -p "Пароль (пусто = open)" -x indicator)
 
 # Подключение
 if test -n "$password"

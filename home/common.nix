@@ -60,12 +60,16 @@ in
 	qt5ctSettings = {
 	  Appearance = {
 	    icon_theme = "Papirus-Dark";
+	    style = "kvantum";
+	    standard_dialogs = "xdgdesktopportal";
 	  };
 	};
 
 	qt6ctSettings = {
 	  Appearance = {
 	    icon_theme = "Papirus-Dark";
+	    style = "kvantum";
+	    standard_dialogs = "xdgdesktopportal";
 	  };
 	};
   };
@@ -100,9 +104,6 @@ in
 
   xdg.configFile."hypr/hyprlock.conf".source = ./config/hypr/hyprlock.conf;
   xdg.configFile."hypr/hypridle.conf".source = ./config/hypr/hypridle.conf;
-
-  xdg.configFile."waybar/config.jsonc".source = ./config/waybar/config.jsonc;
-  xdg.configFile."waybar/style.css".source = ./config/waybar/style.css;
 
   xdg.configFile."kitty/kitty.conf".source = ./config/kitty/kitty.conf;
   xdg.configFile."kitty/gruvbox_dark.conf".source = ./config/kitty/gruvbox_dark.conf;
@@ -140,8 +141,11 @@ in
     starship
     unstable.yt-dlp
     texliveFull
+    qpdf
     ranger
     atuin
+    prismlauncher
+    ungoogled-chromium
 
     (mkFishBin "bemenu-cliphist" ./config/bemenu/cliphist.fish)
     (mkFishBin "bemenu-lockscreen" ./config/bemenu/lockscreen.fish)

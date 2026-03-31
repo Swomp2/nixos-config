@@ -11,6 +11,7 @@
     "network",
     "bluetooth",
     "wireplumber",
+    "backlight",
     "gamemode"
   ],
 
@@ -103,7 +104,8 @@
   },
 
   "bluetooth": {
-    "format": "<span font_desc='FiraCode Nerd Font 16'>󰂯</span> Включён",
+    "format-on": "<span font_desc='FiraCode Nerd Font 16'>󰂯</span> Включён",
+    "format-off": "<span font_desc='FiraCode Nerd Font 16'>󰂲</span> Выключен",
     "format-disabled": "<span font_desc='FiraCode Nerd Font 16'>󰂲</span> Выключен",
     "format-connected": "<span font_desc='FiraCode Nerd Font 16'>󰂯</span> {device_alias}",
     "format-connected-battery": "<span font_desc='FiraCode Nerd Font 16'>󰥈</span> {device_alias}, {device_battery_percentage}%",
@@ -131,5 +133,14 @@
       "charging": ["<span font_desc='FiraCode Nerd Font 16'>󰢜</span> ", "<span font_desc='FiraCode Nerd Font 16'>󰂆</span> ", "<span font_desc='FiraCode Nerd Font 16'>󰂇</span> ", "<span font_desc='FiraCode Nerd Font 16'>󰂈</span> ", "<span font_desc='FiraCode Nerd Font 16'>󰢝</span> ", "<span font_desc='FiraCode Nerd Font 16'>󰂉</span> ", "<span font_desc='FiraCode Nerd Font 16'>󰢞</span> ", "<span font_desc='FiraCode Nerd Font 16'>󰂊</span> ", "<span font_desc='FiraCode Nerd Font 16'>󰂋</span> ", "<span font_desc='FiraCode Nerd Font 16'>󰂅</span> "]
     },
     "tooltip": false
+  },
+
+  "backlight": {
+  	"device": "amdgpu_bl1",
+  	"format": "{icon}  {percent}%",
+  	"format-icons": ["<span font_desc='FiraCode Nerd Font 16'>󰃚</span>", "<span font_desc='FiraCode Nerd Font 16'>󰃛</span>", "<span font_desc='FiraCode Nerd Font 16'>󰃜</span>", "<span font_desc='FiraCode Nerd Font 16'>󰃝</span>", "<span font_desc='FiraCode Nerd Font 16'>󰃞</span>", "<span font_desc='FiraCode Nerd Font 16'>󰃟</span>", "<span font_desc='FiraCode Nerd Font 16'>󰃠</span>"],
+  "on-scroll-up": "brightnessctl set 5%+",
+  "on-scroll-down": "brightnessctl set 5%-",
+  "tooltip": false
   }
 }

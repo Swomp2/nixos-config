@@ -12,6 +12,28 @@
   # Включение apparmor и файервола
 
   security.apparmor.enable = true;
+
+  security.apparmor.packages = [
+  	pkgs.apparmor-profiles
+  ];
+
+  security.apparmor.policies = {
+  	"firefox" = {
+  	  state = "enforce";
+  	  path = "${pkgs.apparmor-profiles}/etc/apparmor.d/firefox";
+  	};
+
+  	"element-desktop" = {
+  	  state = "enforce";
+  	  path = "${pkgs.apparmor-profiles}/etc/apparmor.d/element-desktop";
+  	};
+
+  	"steam" = {
+  	  state = "enforce";
+  	  path = "${pkgs.apparmor-profiles}/etc/apparmor.d/steam";
+  	};
+  };
+  
   networking.firewall = {
   	enable = true;
   	
@@ -41,16 +63,6 @@
   	];
   };
   
-  # Замена sudo на doas
+  # Включение sudo
   security.sudo.enable = true;
-
-  security.doas.enable = true;
-
-  security.doas.extraRules = [
-    {
-      groups = ["wheel"];
-      keepEnv = true;
-      persist = true;
-    }
-  ];
 }

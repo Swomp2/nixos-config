@@ -1,10 +1,4 @@
 {config, pkgs, lib, unstable, inputs, ...}:
-let
-  defaultCursorTheme = pkgs.writeTextDir "share/icons/default/index.theme" ''
-	[Icon Theme]
-	Inherits=BreezeX-RosePine-Linux
-  '';
-in
 {
   # Разрешение несвободных пакетов
   nixpkgs.config.allowUnfree = true;
@@ -56,23 +50,13 @@ in
       cursor_theme_size = 32
       font_name = "Ubuntu 15"
 
+      [appearance]
+      greeting_msg = "О, здарова"
+
       [background]
       path = "${../home/config/greeter/wallhaven-m9mevm.jpg}"
       fit = "Cover"
     '';
-  };
-
-  # Установка темы курсора в greeter сессию
-  services.greetd.settings.default__session = {
-    command = '' 
-      env \
-        XCURSOR_THEME=BreezeX-RosePine-Linux \
-        XCURSOR_SIZE=24 \
-        XCURSOR_PATH=/run/current-system/sw/share/icons \
-        GTK_THEME=Gruvbox-Dark \
-        ${pkgs.cage}/bin/cage -s -mlast -- ${pkgs.regreet}/bin/regreet
-    '';
-    user = "greeter";
   };
 
   services.gnome.gnome-keyring.enable = true;
@@ -117,7 +101,7 @@ in
       extraConfig = {
         "10-audio-policy" = {
           "wireplumber.settings" = {
-            "device.restore-routes" = false;
+            "device.restore-routes" = true;
             "node.restore-default-targets" = false;
             "linking.follow-default-target" = true;
             "node.stream.restore-target" = false;
@@ -150,12 +134,6 @@ in
   services.udisks2.enable = true;
   services.gvfs.enable = true;
 
-  # Включение поддержки только AMD
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
   # Включение flatpak
   services.flatpak.enable = true;
   
@@ -175,6 +153,7 @@ in
     j4-dmenu-desktop
     grim
     slurp
+    ffmpeg-full
     cliphist
     hyprshot
     unstable.hyprlock
@@ -189,10 +168,13 @@ in
     kdePackages.ark
     gammastep
     swayosd
-    emacs
     nomacs # Для просмотра фоток)
     libnotify
     kdePackages.okular
+    element-desktop
+    logseq
+    octaveFull
+    vscodium
 
     papirus-icon-theme
     gruvbox-gtk-theme

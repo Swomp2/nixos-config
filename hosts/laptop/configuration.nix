@@ -23,7 +23,7 @@
     {device = "/dev/disk/by-id/nvme-eui.002538a341b9084d";}
   ];
 
-  boot.initrd.luks.devices.cryptroot.crypttabExtraOpts = ["tpm2-device-auto"];
+  boot.initrd.luks.devices.cryptroot.crypttabExtraOpts = ["tpm2-device=auto"];
   
   zramSwap = {
     enable = true;
@@ -39,7 +39,7 @@
 
     grub.enable = false;
 
-    systemd-boot.enable = true;
+    systemd-boot.enable = false;
   };
 
   environment.systemPackages = with pkgs; [

@@ -5,6 +5,14 @@
 
   i18n.defaultLocale = "ru_RU.UTF-8";
 
+  # Включение runtime библиотек для питона
+  programs.nix-ld = {
+  	enable = true;
+  	libraries = with pkgs; [
+  	  stdenv.cc.cc
+  	];
+  };
+
   # Автоудаление старых версий системы
   nix.gc = {
   	automatic  = true;

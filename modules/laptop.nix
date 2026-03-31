@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{config, pkgs, unstable, inputs, ...}:
 
 {
   powerManagement.enable = true;
@@ -8,33 +8,60 @@
 
   boot.kernelParams = [
     "amd_pstate=active"
+    "amdgpu_dcdebugmask=0x40000"
   ];
 
   # Профили энергопотребления
-  services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
 
   # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = false;
+  services.blueman.enable = true;
 
   services.libinput.enable = true;
-
-  # Яркость
-  hardware.brightnessctl.enable = true;
 
   services.logind.lidSwitch = "suspend";
   services.logind.lidSwitchDocked = "ignore";
   services.logind.lidSwitchExternalPower = "lock";
 
+  disabledModules = [ "services/hardware/tlp.nix" ];
+  
+  imports = [
+    "${inputs.nixpkgs-unstable}/nixos/modules/services/hardware/tlp.nix"
+  ];
+  
+  # Параметры батареи
+  services.power-profiles-daemon.enable = true;
+
   # Настройки для аудио девайсов
   services.pipewire.wireplumber.extraConfig."30-laptop-bluetooth" = {
     "monitor.bluez.properties" = {
       "bluez5.enable-hw-volume" = true;
+      "bluez5.enable-sbc-xq" = true;
+      "bluez5.hfphsp-backend" = "native";
+      "bluez5.roles" = [ "a2dp_sink" "hfp_hf" "hfp_ag" ];
     };
-
+  
     "monitor.bluez.rules" = [
-      # Любой bluetooth-вывод делаем приоритетнее обычной встроенной карты
+      # Для всех bluetooth-гарнитур:
+      # при подключении сразу поднимать аудиопрофиль
+      {
+        matches = [
+          {
+            "device.name" = "~bluez_card.*";
+          }
+        ];
+        actions = {
+          "update-props" = {
+            "bluez5.auto-connect" = [ "a2dp_sink" "hfp_hf" ];
+            "bluez5.hw-volume" = [ "a2dp_sink" "hfp_hf" ];
+            "device.profile" = "a2dp-sink";
+          };
+        };
+      }
+  
+      # Любой bluetooth-вывод делаем приоритетнее встроенной карты
       {
         matches = [
           {
@@ -48,7 +75,7 @@
           };
         };
       }
-
+  
       # Любой bluetooth-вход делаем приоритетнее встроенных микрофонов
       {
         matches = [
@@ -65,10 +92,11 @@
       }
     ];
   };
-
+  
   environment.systemPackages = with pkgs; [
     brightnessctl
     acpi
     powertop
+    blueman
   ];
 }

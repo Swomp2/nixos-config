@@ -17,6 +17,12 @@
     notifications.systembus-notify.enable = true;
   };
 
+  # Включение поддержки видеокарт
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
   environment.systemPackages = with pkgs; [
     smartmontools
     nvme-cli
@@ -27,5 +33,9 @@
     nvtopPackages.amd
     dmidecode
     lshw
+    vulkan-tools
+    libva-utils
+    vdpauinfo
+    clinfo
   ];
 }

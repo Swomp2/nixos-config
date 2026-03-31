@@ -133,6 +133,7 @@ window#waybar {
 }
 
 #bluetooth.disabled,
+#bluetooth.off,
 #bluetooth.on {
   background-color: #d65d0e;
   color: #282828;
@@ -154,12 +155,26 @@ window#waybar {
   background-color: #d79921;
 }
 
+/* ===== яркость =====*/
+
+#backlight {
+  background-color: #d65d0e;
+  color: #282828;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 /* ===== батарея ===== */
 #battery {
   background-color: #d65d0e;
   color: #282828;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+#battery.critical {
+  background-color: #cc241d;
+  color: #282828
 }
 
 #battery.charging {

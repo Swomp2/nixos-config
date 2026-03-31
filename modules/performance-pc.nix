@@ -9,6 +9,8 @@
     "amd_pstate=active"
   ];
 
+  hardware.amdgpu.opencl.enable = true;
+
   # Настройки для аудио девайсов
   services.pipewire.wireplumber.extraConfig."30-pc-audio-cleanup" = {
     "monitor.alsa.rules" = [
