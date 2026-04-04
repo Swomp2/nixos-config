@@ -8,7 +8,6 @@
 
   boot.kernelParams = [
     "amd_pstate=active"
-    "amdgpu_dcdebugmask=0x40000"
   ];
 
   # Профили энергопотребления
@@ -21,9 +20,11 @@
 
   services.libinput.enable = true;
 
-  services.logind.lidSwitch = "suspend";
-  services.logind.lidSwitchDocked = "ignore";
-  services.logind.lidSwitchExternalPower = "lock";
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchDocked = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
+  };
 
   disabledModules = [ "services/hardware/tlp.nix" ];
   

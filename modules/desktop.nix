@@ -136,6 +136,12 @@
 
   # Включение flatpak
   services.flatpak.enable = true;
+
+  # Включение java
+  programs.java = {
+  	enable = true;
+  	package = pkgs.jdk;
+  };
   
   environment.systemPackages = with pkgs; [
     firefox
@@ -175,6 +181,11 @@
     logseq
     octaveFull
     vscodium
+    p7zip-rar
+    rar
+    unrar
+
+    jdk
 
     papirus-icon-theme
     gruvbox-gtk-theme

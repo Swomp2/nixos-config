@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{pkgs, unstable, ...}:
 {
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = "schedutil";
@@ -10,6 +10,11 @@
   ];
 
   hardware.amdgpu.opencl.enable = true;
+
+  hardware.graphics = {
+  	package = unstable.mesa;
+  	package32 = unstable.pkgsi686Linux.mesa;
+  };
 
   # Настройки для аудио девайсов
   services.pipewire.wireplumber.extraConfig."30-pc-audio-cleanup" = {

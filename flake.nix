@@ -72,6 +72,7 @@
                   "networkmanager"
                   "audio"
                   "video"
+                  "gamemode"
                 ];
                 shell = pkgs.fish;
               };
