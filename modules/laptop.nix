@@ -23,7 +23,8 @@
   services.logind.settings.Login = {
     HandleLidSwitch = "suspend";
     HandleLidSwitchDocked = "ignore";
-    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitchExternalPower = "suspend";
+    HandlePowerKey = "ignore";
   };
 
   disabledModules = [ "services/hardware/tlp.nix" ];
