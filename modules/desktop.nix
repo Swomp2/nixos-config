@@ -185,6 +185,9 @@
     rar
     unrar
 
+    hysteria
+    v2raya
+
     jdk
 
     papirus-icon-theme
