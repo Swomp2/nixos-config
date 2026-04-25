@@ -1,12 +1,12 @@
-{pkgs, unstable, ...}:
+{config, pkgs, unstable, ...}:
 {
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = "schedutil";
 
-  boot.kernelPackages = pkgs.linuxPackages_lqx;
+  boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linuxKernel.kernels.linux_xanmod_stable;
 
   boot.kernelParams = [
-    "amd_pstate=active"
+      "amd_pstate=active"
   ];
 
   hardware.amdgpu.opencl.enable = true;
@@ -80,4 +80,8 @@
       }
     ];
   };
+
+  environment.systemPackages = with pkgs; [
+    config.boot.kernelPackages.cpupower
+  ];
 }

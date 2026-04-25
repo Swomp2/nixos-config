@@ -40,8 +40,4 @@
   	  efiSysMountPoint = "/boot/efi";
   	};
   };
-
-  environment.systemPackages = with pkgs; [
-  	linuxKernel.packages.linux_lqx.cpupower
-  ];
 }

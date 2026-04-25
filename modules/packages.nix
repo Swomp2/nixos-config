@@ -25,6 +25,8 @@
     micro
 
     python3
+    gcc
+    gdb
 
     dosfstools
     btrfs-progs

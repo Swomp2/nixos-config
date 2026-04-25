@@ -24,7 +24,7 @@
 
   programs.clipcascade = {
   	enable    = true;
-  	autostart = true;
+  	autostart = false;
   	version   = "3.1.0";
   	hash      = "sha256-+csAEPCdPHxWz7gp4ES4r5bOnVUKDw3oo8lt4MXqKyo=";
   };
@@ -142,6 +142,12 @@
   	enable = true;
   	package = pkgs.jdk;
   };
+
+  # Настройки VPN
+  programs.throne = {
+  	enable = true;
+  	tunMode.enable = true;
+  };
   
   environment.systemPackages = with pkgs; [
     firefox
@@ -185,9 +191,13 @@
     rar
     unrar
 
-    hysteria
-    v2raya
-
+	sing-box
+	xray
+	v2raya
+	v2rayn
+	gui-for-singbox
+	flclash
+	
     jdk
 
     papirus-icon-theme
