@@ -21,7 +21,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, disko, home-manager, lanzaboote, ... }:
+  outputs = { self, nixpkgs, disko, home-manager, lanzaboote, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "swomp";
@@ -101,7 +101,44 @@
             })
           ] ++ extraModules;
         };
+
+        mkHome = {
+          {homeImports}:
+          home-manager.lib.homeManagerConfiguration {
+          	pkgs = import nixpkgs {
+          	  inherit system;
+          	  config.allowUnfree = true;
+          	};
+          	extraSpecialArgs = {
+              inherit inputs username homeDir unstable;
+          	};
+
+          	modules = homeImports ++ [
+          	  {
+          	  	home.username = username;
+          	  	home.homeDirectory = homeDir;
+          	  	home.stateVersion = "25.11";
+          	  }
+          	];
+          }
+        }:
     in {
+      homeConfigurations = {
+      	pc = mkHome {
+      	  homeImports = [
+      	  	./home/pc.nix
+      	  	./home/common.nix
+      	  ];
+      	};
+
+      	laptop = mkHome {
+      	  homeImports [
+      	  	./home/laptop.nix
+      	  	./home/common.nix
+      	  ];
+      	};
+      };
+      
       nixosConfigurations = {
         pc = mkHost {
           hostPath = ./hosts/pc/configuration.nix;
