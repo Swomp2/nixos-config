@@ -1,5 +1,6 @@
 {config, pkgs, unstable, ...}:
 {
+  
   # Включение плагина для курсора в hyprland
   wayland.windowManager.hyprland = {
     enable = true;

@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{config, pkgs, inputs, ...}:
 
 {
   time.timeZone = "Europe/Moscow";
@@ -37,10 +37,26 @@
 
   programs.fish.enable = true;
 
+  # Псевдонимы
   environment.shellAliases = {
     cat = "bat";
     ls  = "lsd";
+    clear = "clear -T xterm-256color";
   };
+
+  # Переопределение глобальных переменных
+  environment.sessionVariables = {
+  	EDITOR = "micro";
+  	VISUAL = "micro";
+
+  	TERMINAL = "kitty";
+  	TERMCMD = "kitty";
+  };
+
+  # Включение команды home-manager
+  environment.systemPackages = [
+  	inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.home-manager
+  ];
   
   system.stateVersion = "25.11"; # Версия первой установленной NixOS на этой машине не связана с версией пакетов
 

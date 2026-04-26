@@ -1,0 +1,18 @@
+{
+	"label": "shutdown",
+	"action": "systemctl poweroff",
+	"text": "Выключиться",
+	"keybind": "s"
+}
+{
+	"label": "reboot",
+	"action": "systemctl reboot",
+	"text": "Перезагрузиться",
+	"keybind": "r"
+}
+{
+	"label": "logout",
+	"action": "hyprctl dispatch exit",
+	"text": "Выйти",
+	"keybind": "l"
+}

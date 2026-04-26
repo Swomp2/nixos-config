@@ -25,8 +25,10 @@ in
   
   # Отключение шрифтов на уровне home manager, потому что они включены на системном уровне
   fonts.fontconfig.enable = lib.mkForce false;
+
   imports = [
     ./desktop.nix
+    ./config/starship/starship.nix
   ];
 
   # Тема для gtk
@@ -95,10 +97,11 @@ in
   xdg.configFile."fish".source = ./config/fish;
   xdg.configFile."fish".recursive = true;
 
-  xdg.configFile."starship.toml".source = ./config/starship/starship.toml;
-
   xdg.configFile."mpv".source = ./config/mpv;
   xdg.configFile."mpv".recursive = true;
+
+  xdg.configFile."wlogout".source = ./config/wlogout;
+  xdg.configFile."wlogout".recursive = true;
 
   xdg.configFile."gammastep/config.ini".source = ./config/gammastep/config.ini;
 
@@ -138,7 +141,6 @@ in
     tex-fmt
     asm-lsp
     texlab
-    starship
     unstable.yt-dlp
     texliveFull
     qpdf
@@ -146,6 +148,8 @@ in
     atuin
     prismlauncher
     ungoogled-chromium
+    wofi
+    wlogout
 
     (mkFishBin "bemenu-cliphist" ./config/bemenu/cliphist.fish)
     (mkFishBin "bemenu-lockscreen" ./config/bemenu/lockscreen.fish)
