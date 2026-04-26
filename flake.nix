@@ -102,8 +102,8 @@
           ] ++ extraModules;
         };
 
-        mkHome = {
-          {homeImports}:
+        mkHome = 
+          { homeImports }:
           home-manager.lib.homeManagerConfiguration {
           	pkgs = import nixpkgs {
           	  inherit system;
@@ -120,8 +120,7 @@
           	  	home.stateVersion = "25.11";
           	  }
           	];
-          }
-        }:
+          };
     in {
       homeConfigurations = {
       	pc = mkHome {
@@ -132,7 +131,7 @@
       	};
 
       	laptop = mkHome {
-      	  homeImports [
+      	  homeImports = [
       	  	./home/laptop.nix
       	  	./home/common.nix
       	  ];
