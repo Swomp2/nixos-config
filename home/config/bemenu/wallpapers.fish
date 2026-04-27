@@ -84,7 +84,7 @@ begin
     echo "dmenu-print_line_num=true"
     echo "no_actions=true"
     echo "no_custom_entry=true"
-    echo "hide_scroll=false"
+    echo "hide_scroll=true"
     echo "hide_search=true"
     echo "cache_file=/dev/null"
 
@@ -175,9 +175,6 @@ function apply_wallpaper
         echo "Файл не найден: $file"
         return 1
     end
-
-    ensure_swww_daemon
-    or return 1
 
     # Без -o применяется ко всем output'ам.
     # --resize crop явно указывает нормальное поведение для обоев.
