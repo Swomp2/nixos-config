@@ -103,6 +103,9 @@ in
   xdg.configFile."wlogout".source = ./config/wlogout;
   xdg.configFile."wlogout".recursive = true;
 
+  xdg.configFile."wofi".source = ./config/wofi;
+  xdg.configFile."wofi".recursive = true;
+
   xdg.configFile."gammastep/config.ini".source = ./config/gammastep/config.ini;
 
   xdg.configFile."hypr/hyprlock.conf".source = ./config/hypr/hyprlock.conf;
