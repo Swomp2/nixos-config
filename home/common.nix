@@ -153,7 +153,6 @@ in
 
     (mkFishBin "bemenu-cliphist" ./config/bemenu/cliphist.fish)
     (mkFishBin "bemenu-lockscreen" ./config/bemenu/lockscreen.fish)
-    (mkFishBin "bemenu-menu" ./config/bemenu/menu.fish)
     (mkFishBin "bemenu-pavucontrol" ./config/bemenu/pavucontrol.fish)
     (mkFishBin "bemenu-swww-random" ./config/bemenu/swww-random.fish)
     (mkFishBin "bemenu-screenshot" ./config/bemenu/screenshot.fish)
