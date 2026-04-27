@@ -29,6 +29,7 @@ in
   imports = [
     ./desktop.nix
     ./config/starship/starship.nix
+    ./config/ranger/ranger.nix
   ];
 
   # Тема для gtk
@@ -147,7 +148,6 @@ in
     unstable.yt-dlp
     texliveFull
     qpdf
-    ranger
     atuin
     prismlauncher
     ungoogled-chromium
