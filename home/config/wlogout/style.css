@@ -37,7 +37,7 @@ button:focus {
   background-image: image(url("./logout.png"));
 }
 #logout:hover {
-  background-image: image(url("./logout-hover.png"));
+  background-image: image(url("./logout.png"));
 }
 
 #shutdown {
@@ -47,7 +47,7 @@ button:focus {
   background-image: image(url("./power.png"));
 }
 #shutdown:hover {
-  background-image: image(url("./power-hover.png"));
+  background-image: image(url("./power.png"));
 }
 
 #reboot {
@@ -57,9 +57,8 @@ button:focus {
   background-image: image(url("./restart.png"));
 }
 #reboot:hover {
-  background-image: image(url("./restart-hover.png"));
+  background-image: image(url("./restart.png"));
 }
-
 #lock {
   background-image: image(url("./lock-hover.png"));
 }
@@ -67,5 +66,5 @@ button:focus {
   background-image: image(url("./lock.png"));
 }
 #lock:hover {
-  background-image: image(url("./lock-hover.png"));
+  background-image: image(url("./lock.png"));
 }
