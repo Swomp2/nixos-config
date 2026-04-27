@@ -159,6 +159,7 @@ in
     (mkFishBin "bemenu-pavucontrol" ./config/bemenu/pavucontrol.fish)
     (mkFishBin "bemenu-swww-random" ./config/bemenu/swww-random.fish)
     (mkFishBin "bemenu-screenshot" ./config/bemenu/screenshot.fish)
+    (mkFishBin "bemenu-wallpapers" ./config/bemenu/wallpapers.fish)
     (mkFishBin "bemenu-wifi" ./config/bemenu/wifi.fish)
   ];
 }
