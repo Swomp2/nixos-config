@@ -115,6 +115,8 @@ in
   xdg.configFile."kitty/kitty.conf".source = ./config/kitty/kitty.conf;
   xdg.configFile."kitty/gruvbox_dark.conf".source = ./config/kitty/gruvbox_dark.conf;
 
+  xdg.configFile."hypr/animations.conf"
+
   xdg.configFile."dunst/dunstrc".source = ./config/dunst/dunstrc;
 
   xdg.configFile."btop".source = ./config/btop;
