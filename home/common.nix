@@ -160,6 +160,7 @@ in
     ungoogled-chromium
     wofi
     wlogout
+    obs-studio
 
     (mkFishBin "bemenu-cliphist" ./config/bemenu/cliphist.fish)
     (mkFishBin "bemenu-lockscreen" ./config/bemenu/lockscreen.fish)
