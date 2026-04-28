@@ -116,6 +116,11 @@ in
   xdg.configFile."kitty/gruvbox_dark.conf".source = ./config/kitty/gruvbox_dark.conf;
 
   xdg.configFile."hypr/animations.conf".source = ./config/hypr/animations.conf;
+  xdg.configFile."hypr/envVars.conf".source = ./config/hypr/envVars.conf;
+  xdg.configFile."hypr/common.conf".source = ./config/hypr/common.conf;
+  xdg.configFile."hypr/commonBinds.conf".source = ./config/hypr/commonBinds.conf;
+  xdg.configFile."hypr/autostart.conf".source = ./config/hypr/autostart.conf;
+  xdg.configFile."hypr/winRules.conf".source = ./config/hypr/winRules.conf;
 
   xdg.configFile."dunst/dunstrc".source = ./config/dunst/dunstrc;
 
