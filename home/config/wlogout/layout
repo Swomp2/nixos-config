@@ -2,17 +2,31 @@
 	"label": "shutdown",
 	"action": "systemctl poweroff",
 	"text": "Выключиться",
-	"keybind": "s"
+	"keybind": "s",
+	"width": 0.18,
+	"height": 0.55
 }
 {
 	"label": "reboot",
 	"action": "systemctl reboot",
 	"text": "Перезагрузиться",
-	"keybind": "r"
+	"keybind": "r",
+	"width": 0.18,
+	"height": 0.55
 }
 {
 	"label": "logout",
 	"action": "hyprctl dispatch exit",
 	"text": "Выйти",
-	"keybind": "l"
+	"keybind": "o",
+	"width": 0.18,
+	"height": 0.55
+}
+{
+	"label": "lock",
+	"action": "bemenu-lockscreen",
+	"text": "Заблокировать",
+	"keybind": "l",
+	"width": 0.18,
+	"height": 0.55
 }
