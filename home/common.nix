@@ -1,6 +1,5 @@
 {config, pkgs, inputs, lib, ...}:
 let
-  unstable = inputs.nixpkgs-unstable.legacyPackages.${pkgs.system};
 
   mkFishBin = name: file:
     pkgs.writeShellScriptBin name ''
@@ -141,27 +140,6 @@ in
   };
 
   home.packages = with pkgs; [
-    cargo
-    rustc
-    rustfmt
-    rust-analyzer
-    nodejs_24
-    pyright
-    eslint
-    prettier
-    tex-fmt
-    asm-lsp
-    texlab
-    unstable.yt-dlp
-    texliveFull
-    qpdf
-    atuin
-    prismlauncher
-    ungoogled-chromium
-    wofi
-    wlogout
-    obs-studio
-
     (mkFishBin "bemenu-cliphist" ./config/bemenu/cliphist.fish)
     (mkFishBin "bemenu-lockscreen" ./config/bemenu/lockscreen.fish)
     (mkFishBin "bemenu-pavucontrol" ./config/bemenu/pavucontrol.fish)

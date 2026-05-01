@@ -1,7 +1,9 @@
 {lib, pkgs, unstable, ...}:
-{
+{	
   programs.steam = {
   	enable = true;
+
+		# Это нужно для того, чтобы игры можно было запускать с gamemoderun
   	package = unstable.steam.override {
   	  extraPkgs = steamPkgs: with steamPkgs; [
   	  	gamemode
@@ -27,10 +29,4 @@
   	enable = true;
   	capSysNice = true;
   };
-
-  environment.systemPackages = with pkgs; [
-  	mangohud
-  	protonup-ng
-  	unstable.lutris  	
-  ];
 }

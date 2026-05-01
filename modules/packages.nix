@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{config, pkgs, unstable, ...}:
 {
   environment.systemPackages = with pkgs; [
     git
@@ -23,15 +23,60 @@
     gnused
     stow
     micro
-
+    imagemagick
+    ffmpeg-full
+    p7zip-rar
+    rar
+    unrar
     python3
     gcc
     gdb
-
     dosfstools
     btrfs-progs
     ntfs3g
     xfsprogs
     exfatprogs
+    mangohud
+  	protonup-ng
+  	unstable.lutris
+    smartmontools
+    nvme-cli
+    fwupd
+    lm_sensors
+    pciutils
+    usbutils
+    nvtopPackages.amd
+    dmidecode
+    lshw
+    vulkan-tools
+    libva-utils
+    vdpauinfo
+    clinfo
+    rose-pine-cursor
+    libnotify
+    unstable.hyprlock
+    unstable.hypridle
+    sing-box
+    xray
+    v2raya
+    v2rayn
+    virt-viewer
+    guestfs-tools
+    cargo
+    rustc
+    nodejs_24
   ];
+
+  fonts = {
+    packages = with pkgs; [
+      ubuntu-sans
+      fira-code
+      nerd-fonts.ubuntu
+      nerd-fonts.fira-code
+      nerd-fonts.symbols-only
+
+      # Шрифты Майкрософт
+      corefonts
+    ];
+  };
 }

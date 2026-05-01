@@ -20,9 +20,4 @@
   ];
 
   networking.firewall.trustedInterfaces = [ "virbr0" ];
-
-  environment.systemPackages = with pkgs; [
-    virt-viewer
-    guestfs-tools
-  ];
 }
