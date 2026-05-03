@@ -118,11 +118,11 @@ in
     vscodium
     gui-for-singbox
     papirus-icon-theme
-    gruvbox-gtk-theme
     libsForQt5.qt5ct
     kdePackages.qtstyleplugin-kvantum
     gruvbox-kvantum
     nwg-look
+    unstable.lutris
     rose-pine-hyprcursor
     mpv
     prismlauncher

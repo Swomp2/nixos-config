@@ -38,7 +38,7 @@
     exfatprogs
     mangohud
   	protonup-ng
-  	unstable.lutris
+    gruvbox-gtk-theme
     smartmontools
     nvme-cli
     fwupd

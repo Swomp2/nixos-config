@@ -3,18 +3,18 @@
   wayland.windowManager.hyprland = {
     settings = {
       windowrule = [
-        "title:^(Громкость)$, float on"
-        "title:^(Копирование файлов)$, float on"
-        "title:^(Подтвердить замену файлов)$, float on"
-        "title:^(Настройки)$, float on"
-        "title:^(Настройки — Strawberry Music Player)$, float on"
-        "title:^(Эквалайзер — Strawberry Music Player)$, float on"
-        "title:^(Менеджер обложек — Strawberry Music Player)$, float on"
-        "title:^(Библиотека)$, float on"
+        "match:title ^(Громкость)$, float on"
+        "match:title ^(Копирование файлов)$, float on"
+        "match:title ^(Подтвердить замену файлов)$, float on"
+        "match:title ^(Настройки)$, float on"
+        "match:title ^(Настройки — Strawberry Music Player)$, float on"
+        "match:title ^(Эквалайзер — Strawberry Music Player)$, float on"
+        "match:title ^(Менеджер обложек — Strawberry Music Player)$, float on"
+        "match:title ^(Библиотека)$, float on"
 
-        "class:^(lxqt-policykit-agent)$, float on"
-        "class:^(org.strawberrymusicplayer.strawberry)$, workspace 2"
-        "class:^(org.kde.ark)$ float on"
+        "match:class ^(lxqt-policykit-agent)$, float on"
+        "match:class ^(org.strawberrymusicplayer.strawberry)$, workspace 2"
+        "match:class ^(org.kde.ark)$ float on"
       ];
     };
   };
