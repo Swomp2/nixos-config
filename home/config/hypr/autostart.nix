@@ -15,6 +15,12 @@
     startInBackground = true;
   };
 
+  # Чтобы nextcloud не задерживал выключение
+  systemd.user.services.nextcloud-client.Service = {
+  	TimeoutStopSec = "5s";
+  	KillMode       = "mixed";
+  };
+
   programs.waybar = {
     enable         = true;
     package        = unstable.waybar;
