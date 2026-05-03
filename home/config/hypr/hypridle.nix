@@ -1,0 +1,37 @@
+{pkgs, unstable, ...}:
+{
+  services.hypridle = {
+    enable = true;
+    package = unstable.hypridle;
+
+    settings = {
+      general = {
+        lock_cmd = "bemenu-lockscreen";
+        before_sleep_cmd = "loginctl lock-session";
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+        ignore_dbus_inhibit = false;
+        ignore_systemd_inhibit = false;
+        inhibit_sleep = 3;
+      };
+
+      listener = [ 
+        {
+          timeout = 180;
+          on-timeout = "brightnessctl -s set 10";
+          on-resume = "brightnessctl -r";
+        }
+
+        {
+          timeout = 300;
+          on-timeout = "loginctl lock-session && hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on && brightnessctl -r";
+        }
+
+        {
+          timeout = 900;
+          on-timeout = "systemctl suspend";
+        }
+      ];
+    };
+  };
+}

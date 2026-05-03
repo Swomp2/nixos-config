@@ -22,20 +22,4 @@
     enable = true;
     enable32Bit = true;
   };
-
-  environment.systemPackages = with pkgs; [
-    smartmontools
-    nvme-cli
-    fwupd
-    lm_sensors
-    pciutils
-    usbutils
-    nvtopPackages.amd
-    dmidecode
-    lshw
-    vulkan-tools
-    libva-utils
-    vdpauinfo
-    clinfo
-  ];
 }

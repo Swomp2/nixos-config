@@ -2,13 +2,17 @@
 {
   # Разрешение несвободных пакетов
   nixpkgs.config.allowUnfree = true;
+
+  # Universal Wayland Session Manager
+  programs.uwsm.enable = true;
   
   # Включение hyprland
   programs.hyprland = {
     enable          = true;
     xwayland.enable = true;
+    withUWSM        = true;
     package         = unstable.hyprland;
-    portalPackage  = unstable.xdg-desktop-portal-hyprland;
+    portalPackage   = unstable.xdg-desktop-portal-hyprland;
   };
 
   # Импорт впн и clipcascade
@@ -147,81 +151,6 @@
   programs.throne = {
   	enable = true;
   	tunMode.enable = true;
-  };
-  
-  environment.systemPackages = with pkgs; [
-    firefox
-    keepassxc
-    imagemagick
-    nextcloud-client
-    libreoffice-qt-fresh
-
-    kitty
-    unstable.waybar
-    dunst
-    swww
-    wl-clipboard
-    bemenu
-    j4-dmenu-desktop
-    grim
-    slurp
-    ffmpeg-full
-    cliphist
-    hyprshot
-    unstable.hyprlock
-    unstable.hypridle
-    lxqt.lxqt-policykit
-    playerctl
-    udiskie
-    strawberry
-    kdePackages.qt6ct
-    lxqt.pavucontrol-qt
-    pcmanfm-qt
-    kdePackages.ark
-    gammastep
-    swayosd
-    nomacs # Для просмотра фоток)
-    libnotify
-    kdePackages.okular
-    element-desktop
-    logseq
-    octaveFull
-    vscodium
-    p7zip-rar
-    rar
-    unrar
-
-	sing-box
-	xray
-	v2raya
-	v2rayn
-	gui-for-singbox
-	flclash
-	
-    jdk
-
-    papirus-icon-theme
-    gruvbox-gtk-theme
-    libsForQt5.qt5ct
-    kdePackages.qtstyleplugin-kvantum
-    gruvbox-kvantum
-    nwg-look
-    rose-pine-cursor
-    rose-pine-hyprcursor
-    mpv
-  ];
-
-  fonts = {
-    packages = with pkgs; [
-      ubuntu-sans
-      fira-code
-      nerd-fonts.ubuntu
-      nerd-fonts.fira-code
-      nerd-fonts.symbols-only
-
-      # Шрифты Майкрософт
-      corefonts
-    ];
   };
 
   fonts.fontDir.enable = true;
