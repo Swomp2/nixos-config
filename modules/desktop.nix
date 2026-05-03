@@ -2,13 +2,17 @@
 {
   # Разрешение несвободных пакетов
   nixpkgs.config.allowUnfree = true;
+
+  # Universal Wayland Session Manager
+  programs.uwsm.enable = true;
   
   # Включение hyprland
   programs.hyprland = {
     enable          = true;
     xwayland.enable = true;
+    withUWSM        = true;
     package         = unstable.hyprland;
-    portalPackage  = unstable.xdg-desktop-portal-hyprland;
+    portalPackage   = unstable.xdg-desktop-portal-hyprland;
   };
 
   # Импорт впн и clipcascade

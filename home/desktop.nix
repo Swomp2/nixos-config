@@ -1,18 +1,15 @@
-{config, pkgs, unstable, ...}:
+{config, pkgs, unstable, lib, ...}:
 let 
   kvTheme = pkgs.gruvbox-kvantum;
 in
 {
-  programs.uwsm.enable = true;
-
   # Включение плагина для курсора в hyprland
   wayland.windowManager.hyprland = {
     enable          = true;
     package         = null;
     portalPackage   = null;
-    withUWSM        = true;
     xwayland.enable = true;
-    systemd.enable  = true;
+    systemd.enable  = false;
   };
 
   # Отключение шрифтов на уровне home manager, потому что они включены на системном уровне
