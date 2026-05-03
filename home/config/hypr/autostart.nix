@@ -35,7 +35,6 @@
   wayland.windowManager.hyprland.settings = {
     "exec-once" = [
       "clipcascade &"
-      "keepassxc &"
     ];
   };
 }

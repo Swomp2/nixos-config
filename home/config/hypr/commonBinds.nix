@@ -8,15 +8,15 @@ in
       "$mod" = "SUPER";
 
       bind = [
-        "$mod, I, exec, pcmanfm-qt"
-        "$mod, U, exec, firefox"
-        "$mod, O, exec, strawberry"
-        "$mod, P, exec, kitty"
+        "$mod, I, exec, uwsm app -- pcmanfm-qt"
+        "$mod, U, exec, uwsm app -- firefox"
+        "$mod, O, exec, uwsm app -- strawberry"
+        "$mod, P, exec, uwsm app -- kitty"
 
         "$mod, V, exec, bemenu-wallpapers"
         "$mod, W, exec, bemenu-swww-random"
         "$mod, semicolon, killactive"
-        "$mod, A, exec, wofi"
+        "$mod, A, exec, uwsm app -- wofi"
         "$mod, E, exec, wlogout --buttons-per-row 4 --column-spacing 20 --row-spacing 20 --margin-left 500 --margin-right 500 --margin-top 500 --margin-bottom 500"
         "$mod, J, exec, bemenu-cliphist"
         ", PRINT, exec, bemenu-screenshot"
