@@ -10,29 +10,30 @@
   ];
 
   # Включение apparmor и файервола
+  security.apparmor = {
+		enable = true;
 
-  security.apparmor.enable = true;
+		packages = [
+			pkgs.apparmor-profiles
+		];
 
-  security.apparmor.packages = [
-  	pkgs.apparmor-profiles
-  ];
+		policies = {
+			firefox = {
+				state = "enforce";
+				path  = "${pkgs.apparmor-profiles}/etc/apparmor.d/firefox";
+			};
 
-  security.apparmor.policies = {
-  	"firefox" = {
-  	  state = "enforce";
-  	  path = "${pkgs.apparmor-profiles}/etc/apparmor.d/firefox";
-  	};
-
-  	"element-desktop" = {
-  	  state = "enforce";
-  	  path = "${pkgs.apparmor-profiles}/etc/apparmor.d/element-desktop";
-  	};
-
-  	"steam" = {
-  	  state = "enforce";
-  	  path = "${pkgs.apparmor-profiles}/etc/apparmor.d/steam";
-  	};
-  };
+			element-desktop = {
+				state = "enforce";
+				path  = "${pkgs.apparmor-profiles}/etc/apparmor.d/element-desktop";
+			};
+			
+			steam = {
+				state = "enforce";
+				path = "${pkgs.apparmor-profiles}/etc/apparmor.d/steam";
+			};
+		};
+	};
   
   networking.firewall = {
   	enable = true;

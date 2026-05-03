@@ -16,7 +16,7 @@ in
         "$mod, V, exec, bemenu-wallpapers"
         "$mod, W, exec, bemenu-swww-random"
         "$mod, semicolon, killactive"
-        "$mod, A, exec, uwsm app -- wofi"
+        ''$mod, A, exec, sh -lc 'app=$(wofi --show drun --define=drun-print_desktop_file=true | sed -E "s/(\\.desktop) /\\1:/"); [ -n "$app" ] && exec uwsm app -- "$app" || exit 0' ''
         "$mod, E, exec, wlogout --buttons-per-row 4 --column-spacing 20 --row-spacing 20 --margin-left 500 --margin-right 500 --margin-top 500 --margin-bottom 500"
         "$mod, J, exec, bemenu-cliphist"
         ", PRINT, exec, bemenu-screenshot"

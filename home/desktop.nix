@@ -95,25 +95,41 @@ in
     force = true;
   };
 
+  home.file.".mozilla/native-messaging-hosts/org.keepassxc.keepassxc_browser.json".text =
+    builtins.toJSON {
+      name = "org.keepassxc.keepassxc_browser";
+      description = "KeePassXC integration with native messaging support";
+      path = "${lib.getBin pkgs.keepassxc}/bin/keepassxc-proxy";
+      type = "stdio";
+      allowed_extensions = [
+        "keepassxc-browser@keepassxc.org"
+      ];
+    };
+
   home.packages = with pkgs; [
-    firefox
     keepassxc
-    libreoffice-qt-fresh
     wl-clipboard
     bemenu
     grim
     slurp
-    strawberry
     hyprshot
     playerctl
+    libreoffice-qt-fresh
+    ungoogled-chromium
+    mpv
+    kdePackages.okular
+    kdePackages.ark
+    nomacs
+    element-desktop
+    firefox
+    logseq
+    strawberry
+    prismlauncher
+    obs-studio
+    unstable.lutris
     kdePackages.qt6ct
     lxqt.pavucontrol-qt
     pcmanfm-qt
-    kdePackages.ark
-    nomacs # Для просмотра фоток)
-    kdePackages.okular
-    element-desktop
-    logseq
     octaveFull
     vscodium
     gui-for-singbox
@@ -121,11 +137,7 @@ in
     kdePackages.qtstyleplugin-kvantum
     gruvbox-kvantum
     nwg-look
-    unstable.lutris
     rose-pine-hyprcursor
-    mpv
-    prismlauncher
-    ungoogled-chromium
     wofi
     wlogout
     obs-studio
