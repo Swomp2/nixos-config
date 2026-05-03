@@ -5,123 +5,22 @@ let
     pkgs.writeShellScriptBin name ''
       exec ${pkgs.fish}/bin/fish ${file} "$@"
     '';
-
-  kvTheme = pkgs.gruvbox-kvantum;
 in
 {
-
-  # Включение стандартных директорий
-  xdg.userDirs = {
-  	enable = true;
-  	createDirectories = true;
-
-  	documents = "$HOME/Документы";
-  	download  = "$HOME/Загрузки";
-  	music     = "$HOME/Музыка";
-  	pictures  = "$HOME/Изображения";
-  	videos    = "$HOME/Видео";
-  };
-  
-  # Отключение шрифтов на уровне home manager, потому что они включены на системном уровне
-  fonts.fontconfig.enable = lib.mkForce false;
-
   imports = [
     ./desktop.nix
     ./config/starship/starship.nix
     ./config/ranger/ranger.nix
+    ./config/wlogout/wlogout.nix
+    ./config/wofi/wofi.nix
+    ./config/kitty/kitty.nix
+    ./config/fish/fish.nix
+    ./config/dunst/dunst.nix
+    ./config/btop/btop.nix
   ];
-
-  # Тема для gtk
-  gtk = {
-  	enable = true;
-
-  	theme = {
-  	  name = "Gruvbox-Dark";
-  	  package = pkgs.gruvbox-gtk-theme;
-  	};
-
-  	iconTheme = {
-  	  name = "Papirus-Dark";
-  	  package = pkgs.papirus-icon-theme;
-  	};
-
-  	cursorTheme = {
-  	  name = "BreezeX-RosePine-Linux";
-  	  package = pkgs.rose-pine-cursor;
-  	  size = 32;
-  	};
-  };
-
-  # Тема для qt
-  qt = {
-    enable = true;
-
-    platformTheme.name = "qtct";
-    style.name = "kvantum";
-
-	qt5ctSettings = {
-	  Appearance = {
-	    icon_theme = "Papirus-Dark";
-	    style = "kvantum";
-	    standard_dialogs = "xdgdesktopportal";
-	  };
-	};
-
-	qt6ctSettings = {
-	  Appearance = {
-	    icon_theme = "Papirus-Dark";
-	    style = "kvantum";
-	    standard_dialogs = "xdgdesktopportal";
-	  };
-	};
-  };
-
-  xdg.configFile."Kvantum/kvantum.kvconfig" = {
-    text = "
-	  [General]
-	  theme=Gruvbox-Dark-Brown
-  	";
-  	force = true;
-  };
-
-  xdg.configFile."Kvantum/Gruvbox-Dark-Brown" = { 
-
-  	source = "${kvTheme}/share/Kvantum/Gruvbox-Dark-Brown";
-
-	recursive = true;
-
-	# Перезаписывать этот файл с помощью home manager
-    force = true;
-  };
-
-  xdg.configFile."fish".source = ./config/fish;
-  xdg.configFile."fish".recursive = true;
 
   xdg.configFile."mpv".source = ./config/mpv;
   xdg.configFile."mpv".recursive = true;
-
-  xdg.configFile."wlogout".source = ./config/wlogout;
-  xdg.configFile."wlogout".recursive = true;
-
-  xdg.configFile."wofi".source = ./config/wofi;
-  xdg.configFile."wofi".recursive = true;
-
-  xdg.configFile."gammastep/config.ini".source = ./config/gammastep/config.ini;
-
-  xdg.configFile."hypr/hyprlock.conf".source = ./config/hypr/hyprlock.conf;
-  xdg.configFile."hypr/hypridle.conf".source = ./config/hypr/hypridle.conf;
-
-  xdg.configFile."kitty/kitty.conf".source = ./config/kitty/kitty.conf;
-  xdg.configFile."kitty/gruvbox_dark.conf".source = ./config/kitty/gruvbox_dark.conf;
-
-  xdg.configFile."hypr/animations.conf".source = ./config/hypr/animations.conf;
-  xdg.configFile."hypr/envVars.conf".source = ./config/hypr/envVars.conf;
-  xdg.configFile."hypr/common.conf".source = ./config/hypr/common.conf;
-  xdg.configFile."hypr/commonBinds.conf".source = ./config/hypr/commonBinds.conf;
-  xdg.configFile."hypr/autostart.conf".source = ./config/hypr/autostart.conf;
-  xdg.configFile."hypr/winRules.conf".source = ./config/hypr/winRules.conf;
-
-  xdg.configFile."dunst/dunstrc".source = ./config/dunst/dunstrc;
 
   xdg.configFile."btop".source = ./config/btop;
   xdg.configFile."btop".recursive = true;
@@ -133,11 +32,6 @@ in
   xdg.configFile."pavucontrol-qt".recursive = true;
 
   xdg.enable = true;
-
-  # Включение starship
-  programs.starship = {
-    enable = true;
-  };
 
   home.packages = with pkgs; [
     (mkFishBin "bemenu-cliphist" ./config/bemenu/cliphist.fish)

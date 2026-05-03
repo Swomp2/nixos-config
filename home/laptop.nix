@@ -1,8 +1,7 @@
-{config, pkgs, lib, ...}:
+{...}:
 {
-  wayland.windowManager.hyprland.extraConfig =
-    lib.mkAfter (builtins.readFile ./config/hypr/hyprland-laptop.conf);
-
-  xdg.configFile."waybar".source = ./config/waybar-laptop;
-  xdg.configFile."waybar".recursive = true;
+  imports = [
+    ./config/hypr/hyprland-laptop.nix
+    ./config/waybar-laptop/waybar.nix
+  ];
 }

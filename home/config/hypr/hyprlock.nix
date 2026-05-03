@@ -1,7 +1,8 @@
-{...}:
+{pkgs, unstable, ...}:
 {
   programs.hyprlock = {
     enable = true;
+    package = unstable.hyprlock;
 
     settings = {
       background = [
@@ -38,7 +39,7 @@
           swap_font_color = false;
           invert_numlock = false;
 
-          position = "0, 20";
+          position = "0, -20";
           halign = "center";
           valign = "center";
         }

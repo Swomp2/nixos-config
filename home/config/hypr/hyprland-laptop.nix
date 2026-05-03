@@ -3,6 +3,19 @@ let
   workspaces = builtins.genList (x: x + 1) 9;
 in
 {
+  imports = [
+    ./animations.nix
+    ./autostart.nix
+    ./common.nix
+    ./commonBinds.nix
+    ./envVars.nix
+    ./winRules.nix
+    ./plugins.nix
+    ./hypridle.nix
+    ./hyprlock.nix
+    ./hyprsunset.nix
+  ];
+
   wayland.windowManager.hyprland = {
     settings = {
       monitorv2 = [

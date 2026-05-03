@@ -1,63 +1,118 @@
 {config, pkgs, unstable, ...}:
+let 
+  kvTheme = pkgs.gruvbox-kvantum;
+in
 {
-  
+  programs.uwsm.enable = true;
+
   # Включение плагина для курсора в hyprland
   wayland.windowManager.hyprland = {
-    enable = true;
-    package = null;
-    portalPackage = null;
-
+    enable          = true;
+    package         = null;
+    portalPackage   = null;
+    withUWSM        = true;
     xwayland.enable = true;
+    systemd.enable  = true;
+  };
 
-    systemd.enable = true;
+  # Отключение шрифтов на уровне home manager, потому что они включены на системном уровне
+  fonts.fontconfig.enable = lib.mkForce false;
 
-    systemd.variables = ["--all"];
+  # Включение starship
+  programs.starship = {
+    enable = true;
+  };
 
-    plugins = [
-      unstable.hyprlandPlugins.hypr-dynamic-cursors
-    ];
+  # Включение стандартных директорий
+  xdg.userDirs = {
+  	enable = true;
+  	createDirectories = true;
 
-    extraConfig = ''
-      plugin:dynamic-cursors {
-        enabled = true
-        mode = tilt
-        threshold = 2
+  	documents = "$HOME/Документы";
+  	download  = "$HOME/Загрузки";
+  	music     = "$HOME/Музыка";
+  	pictures  = "$HOME/Изображения";
+  	videos    = "$HOME/Видео";
+  };
 
-        shake {
-          enabled = true
-          threshold = 6.0
-          limit = 2
-          timeout = 1000
-        }
-      }
-    '';
+  # Тема для gtk
+  gtk = {
+  	enable = true;
+
+  	theme = {
+  	  name    = "Gruvbox-Dark";
+  	  package = pkgs.gruvbox-gtk-theme;
+  	};
+
+  	iconTheme = {
+  	  name    = "Papirus-Dark";
+  	  package = pkgs.papirus-icon-theme;
+  	};
+
+  	cursorTheme = {
+  	  name    = "BreezeX-RosePine-Linux";
+  	  package = pkgs.rose-pine-cursor;
+  	  size    = 32;
+  	};
+  };
+
+  # Тема для qt
+  qt = {
+    enable = true;
+
+    platformTheme.name = "qtct";
+    style.name         = "kvantum";
+
+    qt5ctSettings = {
+      Appearance = {
+        icon_theme       = "Papirus-Dark";
+        style            = "kvantum";
+        standard_dialogs = "xdgdesktopportal";
+      };
+    };
+
+    qt6ctSettings = {
+      Appearance = {
+        icon_theme       = "Papirus-Dark";
+        style            = "kvantum";
+        standard_dialogs = "xdgdesktopportal";
+      };
+    };
+  };
+
+  xdg.configFile."Kvantum/kvantum.kvconfig" = {
+    text = "
+	  [General]
+	  theme=Gruvbox-Dark-Brown
+  	";
+  	force = true;
+  };
+
+  xdg.configFile."Kvantum/Gruvbox-Dark-Brown" = { 
+
+  	source = "${kvTheme}/share/Kvantum/Gruvbox-Dark-Brown";
+
+	  recursive = true;
+
+	  # Перезаписывать этот файл с помощью home manager
+    force = true;
   };
 
   home.packages = with pkgs; [
     firefox
     keepassxc
-    nextcloud-client
     libreoffice-qt-fresh
-    kitty
-    unstable.waybar
-    dunst
     wl-clipboard
-    swww
     bemenu
     grim
     slurp
     strawberry
-    udiskie
-    cliphist
     hyprshot
-    lxqt.lxqt-policykit
     playerctl
     kdePackages.qt6ct
     lxqt.pavucontrol-qt
     pcmanfm-qt
     kdePackages.ark
-    unstable.hyprsunset
-    swayosd
     nomacs # Для просмотра фоток)
     kdePackages.okular
     element-desktop
