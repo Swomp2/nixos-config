@@ -10,6 +10,7 @@
       misc = {
         disable_hyprland_logo     = true;
         on_focus_under_fullscreen = 2;
+        disable_watchdog_warning  = true;
       };
 
       master = {

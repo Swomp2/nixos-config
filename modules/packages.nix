@@ -39,6 +39,7 @@
     mangohud
   	protonup-ng
     gruvbox-gtk-theme
+    papirus-icon-theme
     smartmontools
     nvme-cli
     fwupd

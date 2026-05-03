@@ -117,7 +117,6 @@ in
     octaveFull
     vscodium
     gui-for-singbox
-    papirus-icon-theme
     libsForQt5.qt5ct
     kdePackages.qtstyleplugin-kvantum
     gruvbox-kvantum

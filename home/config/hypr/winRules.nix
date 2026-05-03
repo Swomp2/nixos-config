@@ -14,7 +14,8 @@
 
         "match:class ^(lxqt-policykit-agent)$, float on"
         "match:class ^(org.strawberrymusicplayer.strawberry)$, workspace 2"
-        "match:class ^(org.kde.ark)$ float on"
+        "match:class ^(org.kde.ark)$, float on"
+        "match:class ^(xdg-desktop-portal-gtk)$, float on"
       ];
     };
   };
