@@ -54,7 +54,7 @@
         color: #282828;
         margin: 10px;
         transition:
-          background-color 0.3s ease-in-out;
+        background-color 0.3s ease-in-out;
       }
 
       button:hover {
