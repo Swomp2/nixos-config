@@ -35,6 +35,7 @@
   wayland.windowManager.hyprland.settings = {
     "exec-once" = [
       "clipcascade &"
+      "systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-hyprland.service xdg-document-portal.service"
     ];
   };
 }

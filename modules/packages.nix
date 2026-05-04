@@ -37,7 +37,7 @@
     xfsprogs
     exfatprogs
     mangohud
-  	protonup-ng
+    protonup-ng
     gruvbox-gtk-theme
     papirus-icon-theme
     smartmontools

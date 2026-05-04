@@ -3,13 +3,18 @@ let
   kvTheme = pkgs.gruvbox-kvantum;
 in
 {
-  # Включение плагина для курсора в hyprland
+  # Включение hyprland в home manager
   wayland.windowManager.hyprland = {
     enable          = true;
-    package         = null;
-    portalPackage   = null;
-    xwayland.enable = true;
     systemd.enable  = false;
+  };
+
+  # Переменные графического окружения
+  home.sessionVariables = {
+    QT_QPA_PLATFORM = "wayland;xcb";
+    MOZ_ENABLE_WAYLAND = 1;
+    VDPAU_DRIVER = "radeonsi";
+    LIBVA_DRIVER_NAME = "radeonsi";
   };
 
   # Отключение шрифтов на уровне home manager, потому что они включены на системном уровне
@@ -86,25 +91,12 @@ in
   };
 
   xdg.configFile."Kvantum/Gruvbox-Dark-Brown" = { 
-
   	source = "${kvTheme}/share/Kvantum/Gruvbox-Dark-Brown";
-
 	  recursive = true;
 
 	  # Перезаписывать этот файл с помощью home manager
     force = true;
   };
-
-  home.file.".mozilla/native-messaging-hosts/org.keepassxc.keepassxc_browser.json".text =
-    builtins.toJSON {
-      name = "org.keepassxc.keepassxc_browser";
-      description = "KeePassXC integration with native messaging support";
-      path = "${lib.getBin pkgs.keepassxc}/bin/keepassxc-proxy";
-      type = "stdio";
-      allowed_extensions = [
-        "keepassxc-browser@keepassxc.org"
-      ];
-    };
 
   home.packages = with pkgs; [
     keepassxc
