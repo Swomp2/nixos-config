@@ -118,7 +118,7 @@ in
     strawberry
     prismlauncher
     obs-studio
-    unstable.lutris
+    lutris
     kdePackages.qt6ct
     lxqt.pavucontrol-qt
     pcmanfm-qt
