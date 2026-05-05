@@ -4,7 +4,7 @@
   powerManagement.enable = true;
 
   # Последнее стабильное ядро, а не lts
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxKernel.kernels.linux_6_18;
 
   boot.kernelParams = [
     "amd_pstate=active"
