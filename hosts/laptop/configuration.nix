@@ -43,7 +43,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-  	linuxKernel.packages.linux_6_19.cpupower
+  	config.boot.kernelPackages.cpupower
   ];
 
 }
