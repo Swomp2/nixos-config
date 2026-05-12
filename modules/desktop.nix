@@ -28,9 +28,7 @@
 
   programs.clipcascade = {
   	enable    = true;
-  	autostart = false;
-  	version   = "3.1.0";
-  	hash      = "sha256-+csAEPCdPHxWz7gp4ES4r5bOnVUKDw3oo8lt4MXqKyo=";
+  	autostart = true;
   };
 
   # Это для тем и иконок для greeter
