@@ -38,29 +38,6 @@
     "/share/fonts"
   ];
 
-  # Включение менеджера сеансов
-  programs.regreet.enable = true;
-
-  # Его конфигурация
-  environment.etc."greetd/regreet.toml" = lib.mkForce {
-    text = ''
-      [GTK]
-      application_prefer_dark_theme = true
-      theme_name = "Gruvbox-Dark"
-      icon_theme_name = "Papirus-Dark"
-      cursor_theme_name = "BreezeX-RosePine-Linux"
-      cursor_theme_size = 32
-      font_name = "Ubuntu 15"
-
-      [appearance]
-      greeting_msg = "О, здарова"
-
-      [background]
-      path = "${../home/config/greeter/wallhaven-m9mevm.jpg}"
-      fit = "Cover"
-    '';
-  };
-
   services.gnome.gnome-keyring.enable = true;
 
   security.pam.services = {

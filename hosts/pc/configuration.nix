@@ -3,19 +3,21 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../disko/pc.nix
+    ../../disko/pc.nix                            # Тут всё, что связано с ПК
 
-    ../../modules/base.nix             # Тут находятся базовые настройки системы
-    ../../modules/desktop.nix          # Тут всё, что связано с GUI
-    ../../modules/packages.nix         # Тут все системные пакеты
-    ../../modules/security.nix         # Тут всё, что связано с безопасностью системы
-    ../../modules/boot.nix             # Тут всё, что связано с экраном загрузки
-    ../../modules/printing.nix         # Тут всё, что связано с принтерами
-    ../../modules/hardware-common.nix  # Тут всё, что общего в железе ноута и компа
-    ../../modules/performance-pc.nix   # Тут всё, что связано с производительностью на компе
-    ../../modules/virtualization.nix   # Тут всё, что связано с виртуализацией и виртуальными машинами
-    ../../modules/gaming.nix           # Тут всё, что связано с играми
-    ../../modules/vial.nix             # Тут всё, что связано с моей десктопной клавой
+    ../../modules/base.nix                        # Тут находятся базовые настройки системы
+    ../../modules/desktop.nix                     # Тут всё, что связано с GUI
+    ../../modules/packages.nix                    # Тут все системные пакеты
+    ../../modules/security.nix                    # Тут всё, что связано с безопасностью системы
+    ../../modules/boot.nix                        # Тут всё, что связано с экраном загрузки
+    ../../modules/printing.nix                    # Тут всё, что связано с принтерами
+    ../../modules/hardware-common.nix             # Тут всё, что общего в железе ноута и компа
+    ../../modules/performance-pc.nix              # Тут всё, что связано с производительностью на компе
+    ../../modules/virtualization.nix              # Тут всё, что связано с виртуализацией и виртуальными машинами
+    ../../modules/gaming.nix                      # Тут всё, что связано с играми
+    ../../modules/vial.nix                        # Тут всё, что связано с моей десктопной клавой
+    ../../modules/regreet/regreet.nix             # Тут всё, что связано с regreet
+    ../../modules/regreet/hyprland-regreet-pc.nix # Тут всё, что связано с конфигом hyprland для regreet
   ];
 
   networking.hostName = "Swomp-PC"; # Имя устройства в сети

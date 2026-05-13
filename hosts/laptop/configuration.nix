@@ -3,17 +3,19 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../disko/laptop.nix             # Тут всё, что связано с ноутом
+    ../../disko/laptop.nix                            # Тут всё, что связано с ноутом
     
-    ../../modules/base.nix             # Тут находятся базовые настройки системы
-    ../../modules/desktop.nix          # Тут всё, что связано с GUI
-    ../../modules/packages.nix         # Тут все системные пакеты
-    ../../modules/security.nix         # Тут всё, что связано с безопасностью системы
-    ../../modules/laptop.nix           # Тут всё, что может быть нужно для ноута
-    ../../modules/boot.nix             # Тут всё, что связано с экраном загрузки
-    ../../modules/hardware-common.nix  # Тут всё, что общего в железе ноута и компа
-    ../../modules/virtualization.nix   # Тут всё, что связано с виртуализацией и виртуальными машинами
-	../../modules/gaming.nix           # Тут всё, что связано с играми
+    ../../modules/base.nix                            # Тут находятся базовые настройки системы
+    ../../modules/desktop.nix                         # Тут всё, что связано с GUI
+    ../../modules/packages.nix                        # Тут все системные пакеты
+    ../../modules/security.nix                        # Тут всё, что связано с безопасностью системы
+    ../../modules/laptop.nix                          # Тут всё, что может быть нужно для ноута
+    ../../modules/boot.nix                            # Тут всё, что связано с экраном загрузки
+    ../../modules/hardware-common.nix                 # Тут всё, что общего в железе ноута и компа
+    ../../modules/virtualization.nix                  # Тут всё, что связано с виртуализацией и виртуальными машинами
+	../../modules/gaming.nix                          # Тут всё, что связано с играми
+	../../modules/regreet/regreet.nix                 # Тут всё, что связано с regreet
+	../../modules/regreet/hyprland-regreet-laptop.nix # Тут всё, что связано с конфигом hyprland для regreet
   ];
 
   networking.hostName = "Swomp-Laptop"; # Имя устройства в сети
