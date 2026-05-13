@@ -11,14 +11,17 @@
         	];
             attrs = {
                 monitorv2 = {
-                    output   = "eDP-1";
-                    mode     = "2048x1280@120";
-                    position = "auto";
-                    scale    = 1;
+                    output         = "DP-1";
+                    mode           = "2560x1440@165";
+                    position       = "auto";
+                    scale          = 1;
 
-                    bitdepth = 10;
-                    cm       = "auto";
-                    vrr      = 1;
+                    bitdepth       = 10;
+                    cm             = "hdr";
+                    vrr            = 1;
+
+                    sdrbrightness  = 1.3;
+                    sdrsaturation  = 1.0;
                 };
 
                 exec-once = [
@@ -32,14 +35,13 @@
 
                 input = {
                     kb_layout  = "us, ru";
-                    kb_variant = "dvorak,";
-                    kb_options = "grp:win_space_toggle";
+                    kb_options = "grp:rshift_toggle";
 
                     follow_mouse = 0;
 
                     natural_scroll = true;
                     accel_profile  = "adaptive";
-                    sensitivity    = 0.9;
+                    sensitivity    = 1;
                 };
 
                 general = {
