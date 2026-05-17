@@ -1,8 +1,8 @@
-{unstable, ...}:
+{unstable, inputs, pkgs, ...}:
 {
   wayland.windowManager.hyprland = {
     plugins = [
-      unstable.hyprlandPlugins.hypr-dynamic-cursors
+      inputs.hypr-dynamic-cursors.packages.${pkgs.stdenv.hostPlatform.system}.hypr-dynamic-cursors
     ];
 
     settings = {

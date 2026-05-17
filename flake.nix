@@ -6,6 +6,18 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    # Версия hyprland
+    hyprland = {
+    	url  = "github:hyprwm/Hyprland/v0.55.2";
+    	inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    # Версия плагина курсоров для hyprland
+    hypr-dynamic-cursors = {
+    	url = "github:VirtCode/hypr-dynamic-cursors";
+    	inputs.hyprland.follows = "hyprland";
+    };
+
     # Добавление модуля для декларативной разметки дисков
     disko = {
       url = "github:nix-community/disko";
@@ -32,19 +44,23 @@
       username = "swomp";
       homeDir = "/home/${username}";
 
-      # Простая обёртка для нестабильных пакетов
+      allowUnfreePredicate = pkg:
+        builtins.elem (nixpkgs.lib.getName pkg) [
+          "steam"
+          "steam-unwrapped"
+          "steam-run"
+          "steamcmd"
+          "corefonts"
+        ];
+      
+      pkgsStable = import inputs.nixpkgs {
+        inherit system;
+        config.allowUnfreePredicate = allowUnfreePredicate;
+      };
+      
       unstable = import inputs.nixpkgs-unstable {
         inherit system;
-
-        # Разрешение на установку несвободных компонентов для стима
-        config.allowUnfreePredicate = pkg: 
-          builtins.elem (nixpkgs.lib.getName pkg) [
-            "steam"
-            "steam-unwrapped"
-            "steam-run"
-            "steam-cmd"
-            "corefonts"
-          ];
+        config.allowUnfreePredicate = allowUnfreePredicate;
       };
  	  
       # Эта функция нужна, чтобы не писать каждый раз 
@@ -84,13 +100,7 @@
             # следовательно там не надо объявлять pkgs.
             # Тут надо.
             # То же самое с unstable
-            pkgs = import inputs.nixpkgs {
-              inherit system;
-            };
-
-            unstable = import inputs.nixpkgs-unstable {
-              inherit system;
-            };
+            pkgs = pkgsStable;
 
           	extraSpecialArgs = {
               inherit inputs username homeDir unstable homeImports;

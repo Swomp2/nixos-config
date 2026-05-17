@@ -26,12 +26,8 @@ in
           scale         = 1;
 
           bitdepth      = 10;
-          cm            = "hdr";
 
           vrr           = 1;
-
-          sdrbrightness = 1.3;
-          sdrsaturation = 1.0;
         }
       ];
 

@@ -7,6 +7,9 @@ in
   wayland.windowManager.hyprland = {
     enable          = true;
     systemd.enable  = false;
+
+    package         = null;
+    portalPackage   = null;
   };
 
   # Переменные графического окружения
