@@ -8,8 +8,6 @@ in
     enable          = true;
     systemd.enable  = false;
 
-    configType = "lua";
-
     package         = null;
     portalPackage   = null;
   };
@@ -34,6 +32,8 @@ in
   xdg.userDirs = {
   	enable = true;
   	createDirectories = true;
+
+  	setSessionVariables = true;
 
   	documents = "$HOME/Документы";
   	download  = "$HOME/Загрузки";
@@ -61,6 +61,9 @@ in
   	  package = pkgs.rose-pine-cursor;
   	  size    = 32;
   	};
+
+  	# Фикс для новой версии home-manager
+  	gtk4.theme = config.gtk.theme;
   };
 
   # Тема для qt
@@ -137,7 +140,6 @@ in
     rose-pine-hyprcursor
     wofi
     wlogout
-    obs-studio
     rustfmt
     rust-analyzer
     pyright

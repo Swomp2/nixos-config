@@ -39,20 +39,18 @@ in
         sensitivity    = 1;
       };
 
-      "$mod" = "SUPER";
-
       bind = [
-        "$mod CTRL, L, exec, bemenu-lockscreen"
-        "$mod CTRL, F, togglefloating, active"
+        "SUPER CTRL, L, exec, bemenu-lockscreen"
+        "SUPER CTRL, F, togglefloating, active"
         
-        "$mod CTRL, M, layoutmsg, swapwithmaster"
-        "$mod CTRL, H, movewindow, l"
-        "$mod CTRL, T, movewindow, d"
-        "$mod CTRL, N, movewindow, u"
-        "$mod CTRL, S, movewindow, r"
+        "SUPER CTRL, M, layoutmsg, swapwithmaster"
+        "SUPER CTRL, H, movewindow, l"
+        "SUPER CTRL, T, movewindow, d"
+        "SUPER CTRL, N, movewindow, u"
+        "SUPER CTRL, S, movewindow, r"
       ] ++ builtins.concatLists (
         map (ws: [
-          "$mod CTRL, ${toString ws}, movetoworkspacesilent, ${toString ws}"
+          "SUPER CTRL, ${toString ws}, movetoworkspacesilent, ${toString ws}"
         ]) workspaces
       );
     };

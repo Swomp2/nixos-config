@@ -1,6 +1,6 @@
 {pkgs, unstable, ...}:
 {
-  services.swww.enable = true;
+  services.awww.enable = true;
 
   services.swayosd.enable = true;
 
@@ -33,7 +33,7 @@
   };
 
   wayland.windowManager.hyprland.settings = {
-    "exec-once" = [
+    "exec" = [
       "systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-hyprland.service xdg-document-portal.service"
     ];
   };

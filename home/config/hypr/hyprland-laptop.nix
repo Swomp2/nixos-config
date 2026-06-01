@@ -39,25 +39,23 @@ in
         sensitivity    = 0.9;
       };
 
-      "$mod" = "SUPER";
-
       binde = [
         ", XF86MonBrightnessUp, exec, swayosd-client --brightness +5"
         ", XF86MonBrightnessDown, exec, swayosd-client --brightness -5"
       ];
 
       bind = [
-        "$mod ALT, L, exec, bemenu-lockscreen"
-        "$mod ALT, F, togglefloating, active"
+        "SUPER ALT, L, exec, bemenu-lockscreen"
+        "SUPER ALT, F, togglefloating, active"
 
-        "$mod ALT, M, layoutmsg, swapwithmaster"
-        "$mod ALT, H, movewindow, l"
-        "$mod ALT, T, movewindow, d"
-        "$mod ALT, N, movewindow, u"
-        "$mod ALT, S, movewindow, r"
+        "SUPER ALT, M, layoutmsg, swapwithmaster"
+        "SUPER ALT, H, movewindow, l"
+        "SUPER ALT, T, movewindow, d"
+        "SUPER ALT, N, movewindow, u"
+        "SUPER ALT, S, movewindow, r"
       ] ++ builtins.concatLists (
         map (ws: [
-          "$mod ALT, ${toString ws}, movetoworkspacesilent, ${toString ws}"
+          "SUPER ALT, ${toString ws}, movetoworkspacesilent, ${toString ws}"
         ]) workspaces
       );
 

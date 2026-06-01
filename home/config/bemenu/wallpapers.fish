@@ -179,7 +179,7 @@ function apply_wallpaper
     # Без -o применяется ко всем output'ам.
     # --resize crop явно указывает нормальное поведение для обоев.
     for attempt in (seq 1 3)
-        if swww img "$file" \
+        if awww img "$file" \
             --resize crop \
             --transition-type outer \
             --transition-pos 0.5,0.3 \
@@ -192,7 +192,7 @@ function apply_wallpaper
         sleep 0.2
     end
 
-    echo "swww не смог установить обои: $file"
+    echo "awww не смог установить обои: $file"
     return 1
 end
 

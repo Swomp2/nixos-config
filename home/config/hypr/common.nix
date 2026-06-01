@@ -1,6 +1,9 @@
 {...}:
 {
   wayland.windowManager.hyprland = {
+
+    configType = "hyprlang";
+
     settings = {
       render = {
         cm_enabled  = true;

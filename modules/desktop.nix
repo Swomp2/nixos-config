@@ -1,7 +1,14 @@
 {config, pkgs, lib, unstable, inputs, ...}:
 {
   # Разрешение несвободных пакетов
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+
+    # Временное разрешение на использование небезопасного электрона для logseq
+    permittedInsecurePackages = [
+      "electron-39.8.10"
+    ];
+  };
 
   # Universal Wayland Session Manager
   programs.uwsm.enable = true;
