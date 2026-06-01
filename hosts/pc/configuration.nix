@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../disko/pc.nix                            # Тут всё, что связано с ПК
+    ../../disko/pc.nix                            # Тут всё, что связано с разметкой диска
 
     ../../modules/base.nix                        # Тут находятся базовые настройки системы
     ../../modules/desktop.nix                     # Тут всё, что связано с GUI

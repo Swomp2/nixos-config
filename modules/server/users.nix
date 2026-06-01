@@ -8,10 +8,8 @@
     home = homeDir;
     extraGroups = [
       "wheel"
-      "networkmanager"
-      "audio"
-      "video"
-      "gamemode"
+      "docker"
+      "systemd-journal"
     ];
     shell = pkgs.fish;
   };

@@ -3,7 +3,7 @@
 
   inputs = {
     # Добавление репозиториев
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Версия hyprland
@@ -26,7 +26,7 @@
 
     # Добавление модуля для управлением конфигами в домашней директории
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -40,9 +40,9 @@
   outputs = { self, nixpkgs, disko, home-manager, lanzaboote, ... }@inputs:
     let
       # Объявление общесистемных переменных
-      system = "x86_64-linux";
+      system   = "x86_64-linux";
       username = "swomp";
-      homeDir = "/home/${username}";
+      homeDir  = "/home/${username}";
 
       allowUnfreePredicate = pkg:
         builtins.elem (nixpkgs.lib.getName pkg) [
@@ -89,6 +89,24 @@
             ./modules/users.nix               # Тут идёт вся общесистемная конфигурация пользователей
             ./modules/system-home-manager.nix # Тут общесистемная конфигурация home-manager
             
+          ] ++ extraModules;
+        };
+
+      mkServer = { hostPath, extraModules ? [ ] }:
+
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+
+          specialArgs = {
+          	inherit inputs username homeDir unstable;
+          };
+
+          modules = [
+          	disko.nixosModules.disko
+          	lanzaboote.nixosModules.lanzaboote
+          	hostPath
+
+          	./modules/server/users.nix # Тут идёт вся общесистемная конфигурация пользователей для сервера
           ] ++ extraModules;
         };
 
@@ -143,7 +161,7 @@
             {
               users.users.${username}.hashedPassword = "$y$j9T$3wXS1qCIBpSmkvHf/s6mn.$IzM1ZoDQufoR.5wS/lLKZD.f1k8b/Nyj1J/hHYwsgp1";
             }
-		      ];
+		  ];
         };
 
         laptop = mkHost {
@@ -157,20 +175,16 @@
             {
               users.users.${username}.hashedPassword = "$y$j9T$Q2r6j1dZlRGIHYVnhXk4T.$FBGNdh1hckjNonKRcCruXa41vtB/2s.i9Lg8QktABg4";
             }
-		      ];
+		  ];
         };
 
-        vm = mkHost {
-          hostPath = ./hosts/vm/configuration.nix;
-          homeImports = [
-            ./home/vm.nix
-            ./home/common.nix
-          ];
+        server = mkServer {
+          hostPath = ./hosts/server/configuration.nix;
 
           extraModules = [
-            {
-              users.users.${username}.initialPassword = "swomp";
-			      }
+          	{
+          	  users.users.${username}.hashedPassword = "$y$j9T$VviH8YXVGoXdN.aLmCW8k0$5WUGOc854Zre7TPLD/JdqBCpqk5NwqPQD94DSdbJTEB";
+          	}
           ];
         };
       };

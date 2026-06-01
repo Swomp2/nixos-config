@@ -129,4 +129,42 @@
   };
 
   fonts.fontDir.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    mangohud
+    protonup-ng
+    nvtopPackages.amd
+    libnotify
+    rose-pine-cursor
+    unstable.hyprlock
+    unstable.hypridle
+    imagemagick
+    ffmpeg-full
+    p7zip-rar
+    rar
+    unrar
+    gruvbox-gtk-theme
+    papirus-icon-theme
+    sing-box
+    xray
+    v2raya
+    v2rayn
+    virt-viewer
+    guestfs-tools
+    cargo
+    rustc
+    nodejs_24
+    python3
+    gcc
+    gdb
+    libgcc
+    clang
+    clang-tools
+    gnumake
+    cmake
+    ninja
+    autoconf
+    automake
+    uv
+  ];
 }

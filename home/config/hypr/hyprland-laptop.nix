@@ -26,7 +26,6 @@ in
           scale    = 1;
 
           bitdepth = 10;
-          cm       = "auto";
           vrr      = 1;
         }
       ];
