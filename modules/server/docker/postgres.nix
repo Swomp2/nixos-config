@@ -18,6 +18,7 @@
 
       extraOptions = [
       	"--network=server-net"
+      	"--network-alias=postgres-nextcloud"
       ];
     };
 
@@ -41,6 +42,7 @@
 
       extraOptions = [
       	"--network=server-net"
+      	"--network-alias=postgres-synapse"
       ];
     };
   };

@@ -63,7 +63,6 @@
   	  53   # Pi-hole DNS TCP
   	  80   # HTTP для Let's Encrypt и redirect
   	  443  # HTTPS nginx
-  	  8448 # Matrix federation
   	  3478 # coturn TCP
   	  5349 # coturn TLS TCP
   	];

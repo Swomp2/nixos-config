@@ -1,5 +1,16 @@
 {...}:
 {
+  # Импорты всех файлов с настройками контейнеров
+  imports = [
+  	./docker/postgres.nix
+  	./docker/redis.nix
+  	./docker/nextcloud.nix
+  	./docker/pihole.nix
+  	./docker/clipcascade.nix
+  	./docker/coturn.nix
+  	./docker/synapse.nix
+  ];
+
   virtualisation.docker = {
   	enable = true;
 
@@ -22,22 +33,6 @@
 
   systemd.tmpfiles.rules = [
   	"d /srv/docker 0711 root root -"
-  	"d /srv/secrets 0700 root root -"
-
-  	"d /srv/nextcloud 0750 root root -"
-  	
-  	"d /srv/synapse 0750 root root -"
-  	"d /srv/synapse/workers 0750 root root -"
-  	
-  	"d /srv/postgres 0750 root root -"
-  	"d /srv/postgres/nextcloud 0750 root root -"
-  	"d /srv/postgres/synapse 0750 root root -"
-  	
-  	"d /srv/redis 0750 root root -"
-  	"d /srv/redis/nextcloud 0750 root root -"
-  	"d /srv/redis/synapse 0750 root root -"
-  	
-  	"d /srv/clipcascade 0750 root root -"
   	"d /srv/backups 0750 root root -"
   ];
 }

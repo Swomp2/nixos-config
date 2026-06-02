@@ -1,5 +1,11 @@
-{...}:
+{pkgs, ...}:
 {
+  systemd.tmpfiles.rules = [
+    "d /srv/redis 0755 root root -"
+    "d /srv/redis/nextcloud 0755 root root -"
+    "d /srv/redis/synapse 0755 root root -"
+  ];
+
   virtualisation.oci-containers.containers = {
     # Контейнер redis для nextcloud
   	redis-nextcloud = {
@@ -20,7 +26,8 @@
   	  ];
 
   	  extraOptions = [
-  	  	"--networ=server-net" # Подключение контейнера к server-net, чтобы другие контейнеры могли с ним взаимодействовать
+  	  	"--network=server-net" # Подключение контейнера к server-net, чтобы другие контейнеры могли с ним взаимодействовать
+  	  	"--network-alias=redis-nextcloud"
   	  ];
   	};
 
@@ -44,6 +51,7 @@
 
   	  extraOptions = [
   	  	"--network=server-net"# Подключение контейнера к server-net, чтобы другие контейнеры могли с ним взаимодействовать
+  	  	"--network-alias=redis-synapse"
   	  ];
   	};
   };
@@ -68,13 +76,13 @@
 
   # Запуск юнита redis контейнера для nextcloud
   systemd.services.docker-redis-nextcloud = {
-  	after    = [ "init-server-net.service" ]
-  	requires = [ "init-server-net.service" ]
+  	after    = [ "init-server-net.service" ];
+  	requires = [ "init-server-net.service" ];
   };
 
   # Запуск юнита redis контейнера для synapse
   systemd.services.docker-redis-synapse = {
-   	after    = [ "init-server-net.service" ]
-  	requires = [ "init-server-net.service" ]
+   	after    = [ "init-server-net.service" ];
+  	requires = [ "init-server-net.service" ];
   };
 }
