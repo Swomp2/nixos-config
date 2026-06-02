@@ -18,7 +18,6 @@
     postgresql
     jq
     yq
-    journalctl-desktop-notification
     zstd
     lz4
     pv

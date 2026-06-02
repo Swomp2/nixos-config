@@ -40,7 +40,7 @@
   	  X11Forwarding        = false;
   	  AllowAgentForwarding = "no";
   	  PermitTunnel         = "no";
-  	  UseDNS               = false;
+  	  UseDns               = false;
   	};
   };
 

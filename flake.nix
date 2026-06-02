@@ -102,6 +102,10 @@
           };
 
           modules = [
+            {
+              nixpkgs.config.allowUnfreePredicate = allowUnfreePredicate;
+            }
+           
           	disko.nixosModules.disko
           	lanzaboote.nixosModules.lanzaboote
           	hostPath
