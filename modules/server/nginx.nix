@@ -130,7 +130,6 @@ in
 
           access_log off;
           expires 6M;
-          add_header Cache-Control "public, max-age=15778463, immutable";
         '';
 
         # Главный фолбэк
