@@ -19,8 +19,10 @@ let
 in
 {
   systemd.tmpfiles.rules = [
-    "d ${synapseDir} 0755 root root -"
+    "d ${synapseDir} 0750 991 991 -"
     "d ${dataDir} 0750 991 991 -"
+    "Z ${synapseDir} - 991 991 -"
+    "Z ${dataDir} - 991 991 -"
   ];
 
   systemd.services.prepare-synapse-config = {
@@ -119,6 +121,15 @@ form_secret: "$form_secret"
 max_upload_size: 50M
 dynamic_thumbnails: true
 url_preview_enabled: true
+url_preview_ip_range_blacklist:
+  - "127.0.0.0/8"
+  - "10.0.0.0/8"
+  - "172.16.0.0/12"
+  - "192.168.0.0/16"
+  - "169.254.0.0/16"
+  - "::1/128"
+  - "fe80::/10"
+  - "fe00::/7"
 
 turn_uris:
   - "turn:swomp.ru:3478?transport=udp"
@@ -140,8 +151,48 @@ password_config:
 suppress_key_server_warning: true
 EOF
 
+      cat > ${dataDir}/log.config <<'EOF'
+version: 1
+
+formatters:
+  precise:
+    format: '%(asctime)s - %(name)s - %(lineno)d - %(levelname)s - %(message)s'
+
+handlers:
+  file:
+    class: logging.handlers.TimedRotatingFileHandler
+    formatter: precise
+    filename: /data/homeserver.log
+    when: midnight
+    backupCount: 7
+    encoding: utf8
+
+  console:
+    class: logging.StreamHandler
+    formatter: precise
+
+loggers:
+  synapse:
+    level: INFO
+
+  twisted:
+    level: INFO
+
+root:
+  level: INFO
+  handlers:
+    - file
+    - console
+
+disable_existing_loggers: false
+EOF
+
       chown 991:991 ${dataDir}/homeserver.yaml
       chmod 0640 ${dataDir}/homeserver.yaml
+
+      chown 991:991 ${dataDir}/log.config
+      chmod 0640 ${dataDir}/log.config
+      
       chown -R 991:991 ${dataDir}
     '';
   };

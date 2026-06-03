@@ -25,27 +25,29 @@
 
       generate_secret() {
         file="$1"
+        owner="$2"
+        mode="$3"
       
         if [ ! -s "$file" ]; then
           openssl rand -base64 48 > "$file"
         fi
       
-        chmod 600 "$file"
-        chown root:root "$file"
+        chown "$owner" "$file"
+        chmod "$mode" "$file"
       }
 
-      generate_secret /srv/secrets/postgres-nextcloud-password
-      generate_secret /srv/secrets/postgres-synapse-password
+      generate_secret /srv/secrets/postgres-nextcloud-password 82:82 0400
+      generate_secret /srv/secrets/postgres-synapse-password 82:82 0400
       
-      generate_secret /srv/secrets/nextcloud-admin-password
+      generate_secret /srv/secrets/nextcloud-admin-password root:root 0400
       
-      generate_secret /srv/secrets/pihole-web-password
+      generate_secret /srv/secrets/pihole-web-password root:root 0400
       
-      generate_secret /srv/secrets/coturn-static-auth-secret
+      generate_secret /srv/secrets/coturn-static-auth-secret root:root 0400
       
-      generate_secret /srv/secrets/synapse-registration-shared-secret
-      generate_secret /srv/secrets/synapse-macaroon-secret-key
-      generate_secret /srv/secrets/synapse-form-secret
+      generate_secret /srv/secrets/synapse-registration-shared-secret root:root 0400
+      generate_secret /srv/secrets/synapse-macaroon-secret-key root:root 0400
+      generate_secret /srv/secrets/synapse-form-secret root:root 0400
     '';
   };
 }

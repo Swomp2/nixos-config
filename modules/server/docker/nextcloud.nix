@@ -9,6 +9,9 @@ let
 
   secretsDir = "/srv/secrets";
 
+  nextcloudUid = "82";
+  nextcloudGid = "82";
+
   nextcloudDir = "/srv/nextcloud";
   htmlDir = "${nextcloudDir}/html";
   dataDir = "${nextcloudDir}/data";
@@ -142,7 +145,6 @@ let
   # Небольшой конфиг для российского зеркала базы вирусов clamav
   freshclamConfig = pkgs.writeText "freshclam.conf" ''
     DatabaseDirectory /var/lib/clamav
-    UpdateLogFile /dev/stdout
     LogTime yes
 
     DatabaseMirror https://mirror.truenetwork.ru/clamav
@@ -155,12 +157,16 @@ in
   # Создание директорий с нужными владельцами и правами
   systemd.tmpfiles.rules = [
     "d ${nextcloudDir} 0755 root root -"
-    "d ${htmlDir} 0755 33 33 -"
-    "d ${htmlDir}/config 0755 33 33 -"
-    "d ${dataDir} 0750 33 33 -"
-    "d ${appsDir} 0755 33 33 -"
+    "d ${htmlDir} 0755 ${nextcloudUid} ${nextcloudGid} -"
+    "d ${htmlDir}/config 0755 ${nextcloudUid} ${nextcloudGid} -"
+    "d ${dataDir} 0750 ${nextcloudUid} ${nextcloudGid} -"
+    "d ${appsDir} 0755 ${nextcloudUid} ${nextcloudGid} -"
     "d ${phpDir} 0755 root root -"
     "d ${phpDir}/conf.d 0755 root root -"
+
+    "Z ${htmlDir}/config - ${nextcloudUid} ${nextcloudGid} -"
+    "Z ${dataDir} - ${nextcloudUid} ${nextcloudGid} -"
+    "Z ${appsDir} - ${nextcloudUid} ${nextcloudGid} -"
 
     "d ${clamavDir} 0755 root root -"
     "d ${clamavDbDir} 0755 root root -"
@@ -190,8 +196,8 @@ in
     };
 
     script = ''
-      install -d -m 0755 -o 33 -g 33 ${htmlDir}/config
-      install -m 0640 -o 33 -g 33 ${nextcloudConfig} ${htmlDir}/config/server.config.php
+      install -d -m 0755 -o ${nextcloudUid} -g ${nextcloudGid} ${htmlDir}/config
+      install -m 0640 -o ${nextcloudUid} -g ${nextcloudGid} ${nextcloudConfig} ${htmlDir}/config/server.config.php
 
       install -d -m 0755 -o root -g root ${phpDir}/conf.d
       install -m 0644 -o root -g root ${phpConfig} ${phpDir}/conf.d/server.ini

@@ -109,7 +109,8 @@ in
 
           include ${config.services.nginx.package}/conf/fastcgi_params;
 
-          fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+          fastcgi_param DOCUMENT_ROOT /var/www/html;
+          fastcgi_param SCRIPT_FILENAME /var/www/html$fastcgi_script_name;
           fastcgi_param PATH_INFO $path_info;
           fastcgi_param HTTPS on;
           fastcgi_param modHeadersAvailable true;
@@ -124,12 +125,42 @@ in
           fastcgi_send_timeout 3600;
         '';
 
+        locations."^~ /index.php".extraConfig = ''
+          fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+          set $path_info $fastcgi_path_info;
+        
+          include ${config.services.nginx.package}/conf/fastcgi_params;
+        
+          fastcgi_param DOCUMENT_ROOT /var/www/html;
+          fastcgi_param SCRIPT_FILENAME /var/www/html/index.php;
+          fastcgi_param PATH_INFO $path_info;
+          fastcgi_param PATH_TRANSLATED /var/www/html$path_info;
+          fastcgi_param HTTPS on;
+          fastcgi_param modHeadersAvailable true;
+          fastcgi_param front_controller_active true;
+        
+          fastcgi_pass 127.0.0.1:9000;
+        
+          fastcgi_intercept_errors on;
+          fastcgi_request_buffering off;
+        
+          fastcgi_read_timeout 3600;
+          fastcgi_send_timeout 3600;
+        '';
+
         # Правила для статических файлов nextcloud
         locations."~ \\.(?:css|js|mjs|svg|gif|ico|jpg|jpeg|png|webp|wasm|tflite|map|ogg|flac)$".extraConfig = ''
           try_files $uri /index.php$request_uri;
 
           access_log off;
           expires 6M;
+        '';
+
+        # Правила для шрифтов
+        locations."~ \\.(?:otf|woff2?)$".extraConfig = ''
+          try_files $uri /index.php$request_uri;
+          expires 7d;
+          access_log off;
         '';
 
         # Главный фолбэк
