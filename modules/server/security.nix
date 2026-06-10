@@ -1,7 +1,13 @@
 {config, pkgs, lib, username, ...}:
+let
+  enableSecureBoot = false;
+in
 {
+  boot.loader.systemd-boot.enable = 
+    if enableSecureBoot then lib.mkForce false else true;
+
   boot.lanzaboote = {
-  	enable = true;
+  	enable = enableSecureBoot;
   	pkiBundle = "/var/lib/sbctl";
   };
 

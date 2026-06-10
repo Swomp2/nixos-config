@@ -1,6 +1,6 @@
 {config, pkgs, ...}:
 let
-  coturnImage = "coturn/coturn:4.12.0-alpine";
+  coturnImage = "coturn/coturn:4.12-alpine";
 
   domain = "swomp.ru";
   publicAddress = "80.251.125.180";
@@ -100,8 +100,13 @@ in
 
   systemd.services.${coturnService} = {
     after = [
+      "network-online.target"
       "prepare-coturn-config.service"
       "acme-${domain}.service"
+    ];
+
+    wants = [
+      "network-online.target"
     ];
 
     requires = [
