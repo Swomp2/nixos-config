@@ -57,11 +57,14 @@ in
 
   systemd.services.${piholeService} = {
     after = [
+      "network-online.target"
+      "docker.service"
       "init-server-net.service"
       "init-server-secrets.service"
     ];
 
     requires = [
+      "docker.service"
       "init-server-net.service"
       "init-server-secrets.service"
     ];
