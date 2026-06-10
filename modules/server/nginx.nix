@@ -91,6 +91,9 @@ in
           add_header X-Robots-Tag "noindex, nofollow" always;
           add_header X-XSS-Protection "1; mode=block" always;
 
+          client_body_timeout 300s;
+          client_body_buffer_size 512k;
+
           fastcgi_hide_header X-Powered-By;
         '';
 
@@ -195,6 +198,11 @@ in
         # 3. иначе передать запрос в /index.php
         locations."/".extraConfig = ''
           try_files $uri $uri/ /index.php$request_uri;
+        '';
+
+        # Устаревший редирект
+        locations."/remote".extraConfig = ''
+          return 301 /remote.php$request_uri;
         '';
       };
 
