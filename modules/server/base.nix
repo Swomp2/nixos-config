@@ -13,6 +13,14 @@
   	];
   };
 
+  # Автоматическая синхронизация времени по интернету
+  networking.timeServers = [
+  	"time.cloudflare.com"
+  	"0.pool.ntp.org"
+  	"1.pool.ntp.org"
+  	"2.pool.ntp.org"
+  ];
+
   # Автоудаление старых версий системы
   nix.gc = {
   	automatic  = true;
