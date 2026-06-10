@@ -28,6 +28,7 @@ in
     ];
 
     environment = {
+      SERVER_FORWARD_HEADERS_STRATEGY = "framework";
       CC_MAX_MESSAGE_SIZE_IN_MiB = "50";               # Максимальный размер сообщения
       CC_P2P_ENABLED = "false";                        # Отключение p2p режима, чтобы ВСЕ сообщения шли через сервер
       CC_ALLOWED_ORIGINS = "https://cc.swomp.ru,null"; # Запросы разрешены только из cc.swomp.ru

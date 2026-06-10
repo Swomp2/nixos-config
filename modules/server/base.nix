@@ -24,7 +24,7 @@
   boot.loader.systemd-boot.configurationLimit = 10;
 
   # Сокрытие загрузчика
-  boot.loader.timeout = 5;
+  boot.loader.timeout = 0;
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -37,7 +37,7 @@
   networking.networkmanager.enable = false;
 
   systemd.network.networks."10-lan" = {
-  	matchConfig.Name = "enp1s0";
+  	matchConfig.MACAddress = "68:1d:ef:46:9f:f7";
 
   	networkConfig = {
   	  Address = "192.168.1.244/24";

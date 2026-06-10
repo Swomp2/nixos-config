@@ -30,7 +30,6 @@ let
     server-name=${domain}
 
     fingerprint
-    lt-cred-mech
     no-multicast-peers
     no-cli
 
@@ -47,7 +46,7 @@ in
 {
   systemd.tmpfiles.rules = [
     "d ${coturnDir} 0755 root root -"
-    "d ${configDir} 0750 root root -"
+    "d ${configDir} 0755 root root -"
   ];
 
   systemd.services.prepare-coturn-config = {
@@ -73,12 +72,12 @@ in
     };
 
     script = ''
-      install -d -m 0750 -o root -g root ${configDir}
+      install -d -m 0755 -o root -g root ${configDir}
 
       cat ${baseConfig} > ${configDir}/turnserver.conf
       printf "static-auth-secret=%s\n" "$(cat ${secretsDir}/coturn-static-auth-secret)" >> ${configDir}/turnserver.conf
 
-      chmod 0640 ${configDir}/turnserver.conf
+      chmod 0644 ${configDir}/turnserver.conf
       chown root:root ${configDir}/turnserver.conf
     '';
   };
@@ -89,12 +88,12 @@ in
 
     volumes = [
       "${configDir}/turnserver.conf:/etc/coturn/turnserver.conf:ro"
-      "/var/lib/acme/${domain}/fullchain.pem:/certs/fullchain.pem:ro"
-      "/var/lib/acme/${domain}/key.pem:/certs/key.pem:ro"
+      "/var/lib/acme/${domain}:/certs:ro"
     ];
 
     extraOptions = [
       "--network=host"
+      "--user=0:0"
     ];
   };
 

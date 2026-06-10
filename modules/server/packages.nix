@@ -22,5 +22,6 @@
     lz4
     pv
     powertop
+    kitty.terminfo
   ];
 }

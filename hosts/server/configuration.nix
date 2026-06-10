@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{config, lib, pkgs, ...}:
 {
   imports = [
   	./hardware-configuration.nix
@@ -24,11 +24,19 @@
 
   boot.initrd.luks.devices.cryptroot.crypttabExtraOpts = ["tpm2-device=auto"];
 
+  # Отключение физического swap, использование только zram
+  swapDevices = lib.mkForce [];
+
   zramSwap = {
   	enable        = true;
   	memoryPercent = 100;
   	priority      = 100;
   };
+
+  boot.kernelParams = [
+    "systemd.gpt_auto=no"
+    "rd.systemd.gpt_auto=no"
+  ];
 
   boot.loader = {
   	efi = {
