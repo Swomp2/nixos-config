@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 let
   domain = "cloud.swomp.ru";
   lanAddress = "192.168.1.244";
@@ -152,6 +151,20 @@ let
 
     Checks 24
   '';
+
+  clamdConfig = pkgs.writeText "clamd.conf" ''
+    Foreground true
+    LogTime yes
+
+    DatabaseDirectory /var/lib/clamav
+
+    TCPSocket 3310
+    TCPAddr 0.0.0.0
+
+    StreamMaxLength 25M
+    MaxFileSize 100M
+    MaxScanSize 100M
+  '';
 in
 {
   # Создание директорий с нужными владельцами и правами
@@ -212,6 +225,7 @@ in
     volumes = [
       "${clamavDbDir}:/var/lib/clamav"
       "${freshclamConfig}:/etc/clamav/freshclam.conf:ro"
+      "${clamdConfig}:/etc/clamav/clamd.conf:ro"
     ];
 
     environment = {
