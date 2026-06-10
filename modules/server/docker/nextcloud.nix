@@ -120,6 +120,9 @@ let
 
       # Обслуживание начинается в 2 часа ночи
       'maintenance_window_start' => 2,
+
+      # Русский язык по умолчанию
+      'default_language' => 'ru',
     );
   '';
 
