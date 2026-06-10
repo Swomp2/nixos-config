@@ -87,10 +87,14 @@ in
     image = coturnImage;
     autoStart = true;
 
+    cmd = [
+      "-c"
+      "/etc/coturn/turnserver.conf"
+    ];
+
     volumes = [
       "${configDir}/turnserver.conf:/etc/coturn/turnserver.conf:ro"
-      "/var/lib/acme/${domain}/fullchain.pem:/certs/fullchain.pem:ro"
-      "/var/lib/acme/${domain}/key.pem:/certs/key.pem:ro"
+      "/var/lib/acme/${domain}:/certs:ro"
     ];
 
     extraOptions = [
