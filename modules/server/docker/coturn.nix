@@ -47,7 +47,7 @@ in
 {
   systemd.tmpfiles.rules = [
     "d ${coturnDir} 0755 root root -"
-    "d ${configDir} 0750 root root -"
+    "d ${configDir} 0755 root root -"
   ];
 
   systemd.services.prepare-coturn-config = {
@@ -78,7 +78,7 @@ in
       cat ${baseConfig} > ${configDir}/turnserver.conf
       printf "static-auth-secret=%s\n" "$(cat ${secretsDir}/coturn-static-auth-secret)" >> ${configDir}/turnserver.conf
 
-      chmod 0640 ${configDir}/turnserver.conf
+      chmod 0644 ${configDir}/turnserver.conf
       chown root:root ${configDir}/turnserver.conf
     '';
   };
