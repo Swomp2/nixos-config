@@ -24,6 +24,8 @@
 
   boot.initrd.luks.devices.cryptroot.crypttabExtraOpts = ["tpm2-device=auto"];
 
+  systemd.network.wait-online.enable = true;
+
   # Отключение физического swap, использование только zram
   swapDevices = lib.mkForce [];
 
