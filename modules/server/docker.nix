@@ -9,6 +9,7 @@
   	./docker/clipcascade.nix
   	./docker/coturn.nix
   	./docker/synapse.nix
+  	./docker/collabora.nix
   ];
 
   virtualisation.docker = {

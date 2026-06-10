@@ -49,6 +49,28 @@ in
         '';
       };
 
+      # Настройки для офиса collabora
+      "office.swomp.ru" = {
+        forceSSL = true;
+        enableACME = true;
+      
+        extraConfig = ''
+          client_max_body_size 0;
+        '';
+      
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:9980";
+          proxyWebsockets = true;
+      
+          extraConfig = ''
+            proxy_read_timeout 36000s;
+            proxy_send_timeout 36000s;
+            proxy_buffering off;
+          '';
+        };
+      };
+
+      # Настройки для nextcloud
       "cloud.swomp.ru" = {
         forceSSL = true;
         enableACME = true;
