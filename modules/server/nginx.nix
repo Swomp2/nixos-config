@@ -112,6 +112,7 @@ in
           fastcgi_param DOCUMENT_ROOT /var/www/html;
           fastcgi_param SCRIPT_FILENAME /var/www/html$fastcgi_script_name;
           fastcgi_param PATH_INFO $path_info;
+          fastcgi_param PATH_TRANSLATED /var/www/html$path_info;
           fastcgi_param HTTPS on;
           fastcgi_param modHeadersAvailable true;
           fastcgi_param front_controller_active true;
@@ -151,7 +152,6 @@ in
         # Правила для статических файлов nextcloud
         locations."~ \\.(?:css|js|mjs|svg|gif|ico|jpg|jpeg|png|webp|wasm|tflite|map|ogg|flac)$".extraConfig = ''
           try_files $uri /index.php$request_uri;
-
           access_log off;
           expires 6M;
         '';

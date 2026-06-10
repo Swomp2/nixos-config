@@ -100,8 +100,13 @@ in
 
   systemd.services.${coturnService} = {
     after = [
+      "network-online.target"
       "prepare-coturn-config.service"
       "acme-${domain}.service"
+    ];
+
+    wants = [
+      "network-online.target"
     ];
 
     requires = [
