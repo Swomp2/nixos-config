@@ -143,7 +143,7 @@ in
           fastcgi_pass 127.0.0.1:9000;
 
           fastcgi_intercept_errors on;
-          fastcgi_request_buffering off;
+          fastcgi_request_buffering on;
 
           fastcgi_read_timeout 3600;
           fastcgi_send_timeout 3600;
@@ -166,7 +166,7 @@ in
           fastcgi_pass 127.0.0.1:9000;
         
           fastcgi_intercept_errors on;
-          fastcgi_request_buffering off;
+          fastcgi_request_buffering on;
         
           fastcgi_read_timeout 3600;
           fastcgi_send_timeout 3600;
