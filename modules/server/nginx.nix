@@ -97,6 +97,32 @@ in
           fastcgi_hide_header X-Powered-By;
         '';
 
+        locations."^~ /remote.php".extraConfig = ''
+          fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+          set $path_info $fastcgi_path_info;
+        
+          try_files $fastcgi_script_name =404;
+        
+          include ${config.services.nginx.package}/conf/fastcgi_params;
+        
+          fastcgi_param DOCUMENT_ROOT /var/www/html;
+          fastcgi_param SCRIPT_FILENAME /var/www/html$fastcgi_script_name;
+          fastcgi_param PATH_INFO $path_info;
+          fastcgi_param PATH_TRANSLATED /var/www/html$path_info;
+          fastcgi_param HTTPS on;
+          fastcgi_param modHeadersAvailable true;
+          fastcgi_param front_controller_active true;
+        
+          fastcgi_pass 127.0.0.1:9000;
+        
+          fastcgi_intercept_errors on;
+          fastcgi_request_buffering on;
+          fastcgi_max_temp_file_size 0;
+        
+          fastcgi_read_timeout 3600;
+          fastcgi_send_timeout 3600;
+        '';
+
         # Надо для CardDAV
         locations."= /.well-known/carddav".extraConfig = ''
           return 301 /remote.php/dav/;
