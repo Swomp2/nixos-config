@@ -33,6 +33,11 @@
   	priority      = 100;
   };
 
+  boot.kernelParams = [
+    "systemd.gpt_auto=no"
+    "rd.systemd.gpt_auto=no"
+  ];
+
   boot.loader = {
   	efi = {
   	  canTouchEfiVariables = true;

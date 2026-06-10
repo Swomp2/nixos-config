@@ -1,5 +1,4 @@
 { pkgs, ... }:
-
 {
   boot = {
     consoleLogLevel = 3;

@@ -24,7 +24,7 @@
   boot.loader.systemd-boot.configurationLimit = 10;
 
   # Сокрытие загрузчика
-  boot.loader.timeout = 5;
+  boot.loader.timeout = 0;
 
   nix.settings.experimental-features = [
     "nix-command"
