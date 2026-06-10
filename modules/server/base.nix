@@ -37,7 +37,7 @@
   networking.networkmanager.enable = false;
 
   systemd.network.networks."10-lan" = {
-  	matchConfig.Name = "enp1s0";
+  	matchConfig.Name = "enp2s0";
 
   	networkConfig = {
   	  Address = "192.168.1.244/24";
