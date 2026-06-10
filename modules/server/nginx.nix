@@ -83,6 +83,7 @@ in
           client_max_body_size ${uploadLimit};
           fastcgi_buffers 64 4K;
 
+          add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" always;
           add_header Referrer-Policy "no-referrer" always;
           add_header X-Content-Type-Options "nosniff" always;
           add_header X-Frame-Options "SAMEORIGIN" always;

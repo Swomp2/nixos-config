@@ -4,7 +4,7 @@ let
   domain = "cloud.swomp.ru";
   lanAddress = "192.168.1.244";
 
-  nextcloudImage = "nextcloud:33.0.4-fpm-alpine";
+  nextcloudImage = "nextcloud:33.0.5-fpm-alpine";
   clamavImage = "clamav/clamav-debian:1.5.2_base";
 
   secretsDir = "/srv/secrets";
