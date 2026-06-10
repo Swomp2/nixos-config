@@ -144,6 +144,7 @@ in
 
           fastcgi_intercept_errors on;
           fastcgi_request_buffering on;
+          fastcgi_max_temp_file_size 0;
 
           fastcgi_read_timeout 3600;
           fastcgi_send_timeout 3600;
@@ -167,6 +168,7 @@ in
         
           fastcgi_intercept_errors on;
           fastcgi_request_buffering on;
+          fastcgi_max_temp_file_size 0;
         
           fastcgi_read_timeout 3600;
           fastcgi_send_timeout 3600;
