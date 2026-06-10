@@ -30,7 +30,6 @@ let
     server-name=${domain}
 
     fingerprint
-    lt-cred-mech
     no-multicast-peers
     no-cli
 
@@ -73,7 +72,7 @@ in
     };
 
     script = ''
-      install -d -m 0750 -o root -g root ${configDir}
+      install -d -m 0755 -o root -g root ${configDir}
 
       cat ${baseConfig} > ${configDir}/turnserver.conf
       printf "static-auth-secret=%s\n" "$(cat ${secretsDir}/coturn-static-auth-secret)" >> ${configDir}/turnserver.conf
@@ -87,11 +86,6 @@ in
     image = coturnImage;
     autoStart = true;
 
-    cmd = [
-      "-c"
-      "/etc/coturn/turnserver.conf"
-    ];
-
     volumes = [
       "${configDir}/turnserver.conf:/etc/coturn/turnserver.conf:ro"
       "/var/lib/acme/${domain}:/certs:ro"
@@ -99,6 +93,7 @@ in
 
     extraOptions = [
       "--network=host"
+      "--user=0:0"
     ];
   };
 
