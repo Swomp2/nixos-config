@@ -1,6 +1,6 @@
 {config, pkgs, lib, username, ...}:
 let
-  enableSecureBoot = false;
+  enableSecureBoot = true;
 in
 {
   boot.loader.systemd-boot.enable = 
