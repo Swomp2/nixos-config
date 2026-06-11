@@ -173,7 +173,7 @@ let
 
     DatabaseDirectory /var/lib/clamav
 
-    LocalSocket /run/clamav/clamd.sock
+    LocalSocket /tmp/clamd.sock
     LocalSocketMode 666
     FixStaleSocket yes
 
