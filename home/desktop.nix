@@ -13,7 +13,7 @@ in
   };
 
   # Отключение gnome keyring
-  services.gnome.gnome-keyring.enable = false;
+  services.gnome-keyring.enable = false;
 
   # Переменные графического окружения
   home.sessionVariables = {
