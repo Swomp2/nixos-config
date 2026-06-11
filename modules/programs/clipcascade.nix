@@ -23,7 +23,7 @@ let
     pkgs.gsettings-desktop-schemas
     pkgs.hicolor-icon-theme
     pkgs.shared-mime-info
-    pkgs.xorg.libX11
+    pkgs.libx11
   ] ++ appIndicatorPkgs;
 
   giTypelibPath = lib.concatStringsSep ":" (lib.flatten (map (pkg: [

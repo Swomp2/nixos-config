@@ -31,8 +31,9 @@
         ];
 
         tray = {
-          icon-size = 20;
-          spacing   = 8;
+          icon-size          = 20;
+          spacing            = 8;
+          show-passive-items = true;
         };
 
         wireplumber = {

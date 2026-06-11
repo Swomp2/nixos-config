@@ -3,6 +3,9 @@ let
   kvTheme = pkgs.gruvbox-kvantum;
 in
 {
+  # Включение xdg autostart
+  xdg.autostart.enable = true;
+
   # Включение hyprland в home manager
   wayland.windowManager.hyprland = {
     enable          = true;
@@ -108,10 +111,8 @@ in
 	  # Перезаписывать этот файл с помощью home manager
     force = true;
   };
-
+  
   # Включение keepassxc
-  xdg.autostart.enable = true;
-
   programs.keepassxc = {
     enable = true;
     autostart = true;
@@ -119,8 +120,8 @@ in
 
   # Включение ssh агента
   services.ssh-agent = {
-  	enable                = true;
-  	socket                = "ssh-agent";
+  	enable = true;
+  	socket = "ssh-agent";
   };
 
   home.packages = with pkgs; [
