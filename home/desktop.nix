@@ -12,16 +12,15 @@ in
     portalPackage   = null;
   };
 
-  # Отключение gnome keyring
-  services.gnome-keyring.enable = false;
+  # Включение gnome keyring
+  services.gnome-keyring.enable = true;
 
-  # Переменные графического окружения
+  # Переменные home manager
   home.sessionVariables = {
     QT_QPA_PLATFORM = "wayland;xcb";
     MOZ_ENABLE_WAYLAND = 1;
     VDPAU_DRIVER = "radeonsi";
     LIBVA_DRIVER_NAME = "radeonsi";
-    SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/ssh-agent";
   };
 
   # Отключение шрифтов на уровне home manager, потому что они включены на системном уровне
@@ -110,34 +109,18 @@ in
     force = true;
   };
 
-  # Делаем KeePassXC DBus службой секретов по умолчанию.
+  # Включение keepassxc
   xdg.autostart.enable = true;
 
   programs.keepassxc = {
     enable = true;
     autostart = true;
-
-    settings = {
-      FdoSecrets.Enabled = true;
-      SSHAgent.Enabled = false;
-    };
   };
 
-  # Нормальный OpenSSH agent, с которым будет работать KeePassXC.
-  systemd.user.services.ssh-agent = {
-    Unit = {
-      Description = "OpenSSH authentication agent";
-    };
-
-    Service = {
-      Type = "simple";
-      Environment = "SSH_AUTH_SOCK=%t/ssh-agent";
-      ExecStart = "${pkgs.openssh}/bin/ssh-agent -D -a %t/ssh-agent";
-    };
-
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
+  # Включение ssh агента
+  services.ssh-agent = {
+  	enable                = true;
+  	socket                = "ssh-agent";
   };
 
   home.packages = with pkgs; [

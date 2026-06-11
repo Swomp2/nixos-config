@@ -13,10 +13,10 @@
   # Universal Wayland Session Manager
   programs.uwsm.enable = true;
 
-  # Отключение gnome keyring
-  services.gnome.gnome-keyring.enable = false;
-  security.pam.services.greetd.enableGnomeKeyring = false;
-  security.pam.services.login.enableGnomeKeyring = false;
+  # Включение gnome keyring
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
+  security.pam.services.login.enableGnomeKeyring = true;
   
   # Включение hyprland
   programs.hyprland = {
