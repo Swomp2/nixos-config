@@ -45,16 +45,6 @@
     "/share/fonts"
   ];
 
-  services.gnome.gnome-keyring.enable = true;
-
-  security.pam.services = {
-    greetd.enableGnomeKeyring = true;
-    hyprlock.enableGnomeKeyring = true;
-    login.enableGnomeKeyring = true;
-  };
-
-  programs.seahorse.enable = true;
-
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     XCURSOR_SIZE = "32";

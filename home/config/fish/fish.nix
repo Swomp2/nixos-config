@@ -42,6 +42,11 @@ in
     interactiveShellInit = ''
       fish_default_key_bindings
 
+      # Использовать нормальный ssh агент
+      if test -S "$XDG_RUNTIME_DIR/ssh-agent"
+        set -gx SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent"
+      end
+
       set -gx ATUIN_NOBIND true
 
       if command -q atuin

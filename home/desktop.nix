@@ -18,6 +18,7 @@ in
     MOZ_ENABLE_WAYLAND = 1;
     VDPAU_DRIVER = "radeonsi";
     LIBVA_DRIVER_NAME = "radeonsi";
+    SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/ssh-agent";
   };
 
   # Отключение шрифтов на уровне home manager, потому что они включены на системном уровне
@@ -104,6 +105,30 @@ in
 
 	  # Перезаписывать этот файл с помощью home manager
     force = true;
+  };
+
+  # Делаем KeePassXC DBus службой секретов по умолчанию.
+  xdg.dataFile."dbus-1/services/org.freedesktop.secrets.service".text = ''
+    [D-BUS Service]
+    Name=org.freedesktop.secrets
+    Exec=${pkgs.keepassxc}/bin/keepassxc
+  '';
+
+  # Нормальный OpenSSH agent, с которым будет работать KeePassXC.
+  systemd.user.services.ssh-agent = {
+    Unit = {
+      Description = "OpenSSH authentication agent";
+    };
+
+    Service = {
+      Type = "simple";
+      Environment = "SSH_AUTH_SOCK=%t/ssh-agent";
+      ExecStart = "${pkgs.openssh}/bin/ssh-agent -D -a %t/ssh-agent";
+    };
+
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
   };
 
   home.packages = with pkgs; [
