@@ -12,6 +12,9 @@ in
     portalPackage   = null;
   };
 
+  # Отключение gnome keyring
+  services.gnome.gnome-keyring.enable = false;
+
   # Переменные графического окружения
   home.sessionVariables = {
     QT_QPA_PLATFORM = "wayland;xcb";
@@ -108,11 +111,17 @@ in
   };
 
   # Делаем KeePassXC DBus службой секретов по умолчанию.
-  xdg.dataFile."dbus-1/services/org.freedesktop.secrets.service".text = ''
-    [D-BUS Service]
-    Name=org.freedesktop.secrets
-    Exec=${pkgs.keepassxc}/bin/keepassxc
-  '';
+  xdg.autostart.enable = true;
+
+  programs.keepassxc = {
+    enable = true;
+    autostart = true;
+
+    settings = {
+      FdoSecrets.Enabled = true;
+      SSHAgent.Enabled = false;
+    };
+  };
 
   # Нормальный OpenSSH agent, с которым будет работать KeePassXC.
   systemd.user.services.ssh-agent = {
@@ -132,7 +141,6 @@ in
   };
 
   home.packages = with pkgs; [
-    keepassxc
     wl-clipboard
     bemenu
     grim
