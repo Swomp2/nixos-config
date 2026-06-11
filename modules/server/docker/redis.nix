@@ -1,9 +1,13 @@
 {pkgs, ...}:
+let
+  redisUid = "999";
+  redisGid = "1000";
+in
 {
   systemd.tmpfiles.rules = [
     "d /srv/redis 0755 root root -"
-    "d /srv/redis/nextcloud 0755 root root -"
-    "d /srv/redis/synapse 0755 root root -"
+    "d /srv/redis/nextcloud 0755 ${redisUid} ${redisGid} -"
+    "d /srv/redis/synapse 0755 ${redisUid} ${redisGid} -"
   ];
 
   virtualisation.oci-containers.containers = {

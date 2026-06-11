@@ -144,6 +144,18 @@ let
     opcache.interned_strings_buffer=16
   '';
 
+  # Конфиг для php fpm
+  phpFpmConfig = pkgs.writeText "zz-nextcloud-fpm.conf" ''
+    [www]
+    pm = dynamic
+    pm.max_children = 12
+    pm.start_servers = 3
+    pm.min_spare_servers = 2
+    pm.max_spare_servers = 6
+    pm.max_requests = 500
+    request_terminate_timeout = 3600s
+  '';
+
   # Небольшой конфиг для российского зеркала базы вирусов clamav
   freshclamConfig = pkgs.writeText "freshclam.conf" ''
     DatabaseDirectory /var/lib/clamav
@@ -187,6 +199,8 @@ in
     "d ${clamavDir} 0755 root root -"
     "d ${clamavDbDir} 0755 root root -"
     "d ${clamavConfigDir} 0755 root root -"
+
+    "d ${phpDir}/php-fpm.d 0755 root root -"
   ];
 
   # Создание конфигов на диске в нужных директориях
@@ -217,6 +231,9 @@ in
 
       install -d -m 0755 -o root -g root ${phpDir}/conf.d
       install -m 0644 -o root -g root ${phpConfig} ${phpDir}/conf.d/server.ini
+
+      install -d -m 0755 -o root -g root ${phpDir}/php-fpm.d
+      install -m 0644 -o root -g root ${phpFpmConfig} ${phpDir}/php-fpm.d/zz-nextcloud-fpm.conf
     '';
   };
 
@@ -259,6 +276,8 @@ in
       "${secretsDir}/postgres-nextcloud-password:/run/secrets/postgres-nextcloud-password:ro"
 
       "${secretsDir}/nextcloud-admin-password:/run/secrets/nextcloud-admin-password:ro"
+
+      "${phpDir}/php-fpm.d/zz-nextcloud-fpm.conf:/usr/local/etc/php-fpm.d/zz-nextcloud-fpm.conf:ro"
     ];
 
     # Переменные окружения контейнера
