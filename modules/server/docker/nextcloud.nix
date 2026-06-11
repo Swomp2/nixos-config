@@ -253,7 +253,7 @@ in
     ];
 
     environment = {
-      CLAMD_STARTUP_TIMEOUT = "60";
+      CLAMD_STARTUP_TIMEOUT = "900";
     };
 
     extraOptions = [
