@@ -173,6 +173,10 @@ let
 
     DatabaseDirectory /var/lib/clamav
 
+    LocalSocket /run/clamav/clamd.sock
+    LocalSocketMode 666
+    FixStaleSocket yes
+
     TCPSocket 3310
     TCPAddr 0.0.0.0
 
@@ -249,7 +253,7 @@ in
     ];
 
     environment = {
-      CLAMD_STARTUP_TIMEOUT = "900";
+      CLAMD_STARTUP_TIMEOUT = "60";
     };
 
     extraOptions = [
