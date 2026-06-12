@@ -32,6 +32,11 @@
     automount = true;
   };
 
+  programs.keepassxc = {
+    enable = true;
+    autostart = true;
+  };
+
   wayland.windowManager.hyprland.settings = {
     "exec" = [
       "systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-hyprland.service xdg-document-portal.service"

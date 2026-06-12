@@ -111,12 +111,6 @@ in
 	  # Перезаписывать этот файл с помощью home manager
     force = true;
   };
-  
-  # Включение keepassxc
-  programs.keepassxc = {
-    enable = true;
-    autostart = true;
-  };
 
   # Включение ssh агента
   services.ssh-agent = {
