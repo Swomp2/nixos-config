@@ -20,7 +20,7 @@
   	  onCalendar = "weekly";
   	};
 
-  	overrides.settings = {
+  	overrides = {
   	  global = {
   	  	Environment = {
   	  	  TZ = osConfig.time.timeZone;

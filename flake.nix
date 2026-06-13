@@ -19,7 +19,7 @@
 
     # Версия плагина курсоров для hyprland
     hypr-dynamic-cursors = {
-      url = "github:VirtCode/hypr-dynamic-cursors";
+      url = "github:VirtCode/hypr-dynamic-cursors/da447486c84e0be81f2cdd208af1ef92469f0a88";
       inputs.hyprland.follows = "hyprland";
     };
 

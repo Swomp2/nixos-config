@@ -121,6 +121,7 @@ in
   home.packages = with pkgs; [
     wl-clipboard
     bemenu
+    flatpak
     grim
     slurp
     hyprshot
