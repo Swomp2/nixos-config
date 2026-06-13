@@ -18,6 +18,7 @@ in
     ./config/fish/fish.nix
     ./config/dunst/dunst.nix
     ./config/btop/btop.nix
+    ./config/uwsm/env.nix
   ];
 
   xdg.configFile."mpv".source = ./config/mpv;

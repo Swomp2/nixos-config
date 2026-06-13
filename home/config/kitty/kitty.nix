@@ -13,8 +13,8 @@
       disable_ligatures       = "never";
       confirm_os_window_close = 0;
       background_opacity      = 0.8;
-      cursor_trail            = 7;
-      cursor_trail_decay      = "0.7 0.8";
+      cursor_trail            = 50;
+      cursor_trail_decay      = "0.3 0.6";
 
       # Цвета
       background = "#282828";

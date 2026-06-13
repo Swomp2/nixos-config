@@ -8,8 +8,8 @@ in
     ./autostart.nix
     ./common.nix
     ./commonBinds.nix
-    ./envVars.nix
     ./winRules.nix
+    ./envVars.nix
     ./plugins.nix
     ./hypridle.nix
     ./hyprlock.nix

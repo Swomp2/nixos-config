@@ -37,6 +37,18 @@
   	  	  "~/.icons:ro"
   	  	];
   	  };
+
+  	  "com.logseq.Logseq" = {
+  	  	Context.sockets = [
+  	  	  "wayland"
+  	  	  "!x11"
+  	  	  "!fallback-x11"
+  	  	];
+
+  	  	Environment = {
+  	  	  ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+  	  	};
+  	  };
   	};
   };
 }
