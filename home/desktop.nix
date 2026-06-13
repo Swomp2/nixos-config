@@ -133,7 +133,6 @@ in
     nomacs
     element-desktop
     firefox
-    logseq
     strawberry
     prismlauncher
     obs-studio

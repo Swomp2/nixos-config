@@ -9,6 +9,7 @@ in
 {
   imports = [
     ./desktop.nix
+    ./flatpak.nix
     ./config/starship/starship.nix
     ./config/ranger/ranger.nix
     ./config/wlogout/wlogout.nix

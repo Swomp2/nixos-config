@@ -12,7 +12,9 @@
     };
 
     users.${username} = {
-        imports = homeImports;
+        imports = [
+          inputs.nix-flatpak.homeManagerModules.nix-flatpak
+        ] ++ homeImports;
 
         home.username = username;
         home.homeDirectory = homeDir;

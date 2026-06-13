@@ -3,11 +3,6 @@
   # Разрешение несвободных пакетов
   nixpkgs.config = {
     allowUnfree = true;
-
-    # Временное разрешение на использование небезопасного электрона для logseq
-    permittedInsecurePackages = [
-      "electron-39.8.10"
-    ];
   };
 
   # Universal Wayland Session Manager
@@ -114,9 +109,6 @@
   # Включение службы для работы с внешними накопителями
   services.udisks2.enable = true;
   services.gvfs.enable = true;
-
-  # Включение flatpak
-  services.flatpak.enable = true;
 
   # Включение java
   programs.java = {

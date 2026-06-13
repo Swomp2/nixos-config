@@ -6,16 +6,21 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    # Модуль для декларативной установки flatpak пакетов
+    nix-flatpak = {
+      url = "github:gmodena/nix-flatpak/?ref=latest";
+    };
+
     # Версия hyprland
     hyprland = {
-    	url  = "github:hyprwm/Hyprland/v0.55.3";
-    	inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:hyprwm/Hyprland/v0.55.4";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     # Версия плагина курсоров для hyprland
     hypr-dynamic-cursors = {
-    	url = "github:VirtCode/hypr-dynamic-cursors";
-    	inputs.hyprland.follows = "hyprland";
+      url = "github:VirtCode/hypr-dynamic-cursors";
+      inputs.hyprland.follows = "hyprland";
     };
 
     # Добавление модуля для декларативной разметки дисков
@@ -37,7 +42,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, disko, home-manager, lanzaboote, ... }@inputs:
+  outputs = { self, nixpkgs, disko, home-manager, lanzaboote, nix-flatpak, ... }@inputs:
     let
       # Объявление общесистемных переменных
       system   = "x86_64-linux";
@@ -128,7 +133,9 @@
               inherit inputs username homeDir unstable homeImports;
           	};
 
-          	modules = homeImports ++ [
+          	modules = [
+          	  inputs.nix-flatpak.homeManagerModules.nix-flatpak
+          	] ++ homeImports ++ [
           	  {
           	  	home.username = username;
           	  	home.homeDirectory = homeDir;
