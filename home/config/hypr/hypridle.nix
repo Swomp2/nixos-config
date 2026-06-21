@@ -1,4 +1,4 @@
-{pkgs, unstable, ...}:
+{ pkgs, unstable, ... }:
 {
   services.hypridle = {
     enable = true;
@@ -14,7 +14,7 @@
         inhibit_sleep = 3;
       };
 
-      listener = [ 
+      listener = [
         {
           timeout = 180;
           on-timeout = "brightnessctl -s set 10";

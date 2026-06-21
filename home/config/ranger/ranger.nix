@@ -3,7 +3,7 @@
 {
   programs.ranger = {
     enable = true;
-    
+
     settings = {
       preview_files = true;
       preview_directories = true;

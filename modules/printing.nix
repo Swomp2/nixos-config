@@ -1,10 +1,16 @@
-{pkgs, username, lib, ...}:
 {
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  pkgs,
+  username,
+  lib,
+  ...
+}:
+{
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       "hplip"
     ];
-  
+
   services.printing = {
     enable = true;
     webInterface = true;
@@ -21,9 +27,9 @@
   };
 
   environment.systemPackages = with pkgs; [
-  	hplipWithPlugin
-  	system-config-printer
-  	simple-scan
+    hplipWithPlugin
+    system-config-printer
+    simple-scan
   ];
 
   users.users.${username}.extraGroups = [

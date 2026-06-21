@@ -1,4 +1,13 @@
-{username, homeDir, inputs, unstable, homeImports, ...}:
+{
+  username,
+  homeDir,
+  timeZone,
+  inputs,
+  unstable,
+  homeImports,
+  theme,
+  ...
+}:
 {
   home-manager = {
     useGlobalPkgs = true;
@@ -8,17 +17,26 @@
     backupFileExtension = "backup";
 
     extraSpecialArgs = {
-      inherit inputs username homeDir unstable homeImports;
+      inherit
+        inputs
+        username
+        homeDir
+        timeZone
+        unstable
+        homeImports
+        theme
+        ;
     };
 
     users.${username} = {
-        imports = [
-          inputs.nix-flatpak.homeManagerModules.nix-flatpak
-        ] ++ homeImports;
+      imports = [
+        inputs.nix-flatpak.homeManagerModules.nix-flatpak
+      ]
+      ++ homeImports;
 
-        home.username = username;
-        home.homeDirectory = homeDir;
-        home.stateVersion = "25.11";
+      home.username = username;
+      home.homeDirectory = homeDir;
+      home.stateVersion = "25.11";
     };
   };
 }

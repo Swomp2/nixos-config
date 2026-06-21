@@ -1,4 +1,12 @@
-{config, pkgs, lib, unstable, inputs, ...}:
+{
+  config,
+  pkgs,
+  lib,
+  unstable,
+  inputs,
+  theme,
+  ...
+}:
 {
   # Разрешение несвободных пакетов
   nixpkgs.config = {
@@ -12,30 +20,31 @@
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.greetd.enableGnomeKeyring = true;
   security.pam.services.login.enableGnomeKeyring = true;
-  
+
   # Включение hyprland
   programs.hyprland = {
-    enable          = true;
+    enable = true;
     xwayland.enable = true;
-    withUWSM        = true;
-    package         = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage   = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    withUWSM = true;
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
   # Импорт впн и clipcascade
   imports = [
-  	./programs/adguardvpn.nix
-  	./programs/clipcascade.nix
+    ./programs/adguardvpn.nix
+    ./programs/clipcascade.nix
   ];
 
   programs.adguardvpn-cli = {
-  	enable  = true;
-  	channel = "nightly";
+    enable = true;
+    channel = "nightly";
   };
 
   programs.clipcascade = {
-  	enable    = true;
-  	autostart = true;
+    enable = true;
+    autostart = true;
   };
 
   # Это для тем и иконок для greeter
@@ -47,11 +56,11 @@
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-    XCURSOR_SIZE = "32";
-    XCURSOR_THEME = "BreezeX-RosePine-Linux";
-    QT_QPA_PLATFORMTHEME = "qt6ct";
+    XCURSOR_SIZE = toString theme.cursor.size;
+    XCURSOR_THEME = theme.cursor.xcursorName;
+    QT_QPA_PLATFORMTHEME = theme.qt.platformTheme;
   };
-  
+
   # Это нужно для поддержки filepicker
   xdg.portal = {
     enable = true;
@@ -70,10 +79,10 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-  
+
     wireplumber = {
       enable = true;
-  
+
       extraConfig = {
         "10-audio-policy" = {
           "wireplumber.settings" = {
@@ -84,7 +93,7 @@
             "linking.allow-moving-streams" = true;
           };
         };
-  
+
         "15-lower-hdmi-priority" = {
           "monitor.alsa.rules" = [
             {
@@ -112,14 +121,14 @@
 
   # Включение java
   programs.java = {
-  	enable = true;
-  	package = pkgs.jdk;
+    enable = true;
+    package = pkgs.jdk;
   };
 
   # Настройки VPN
   programs.throne = {
-  	enable = true;
-  	tunMode.enable = true;
+    enable = true;
+    tunMode.enable = true;
   };
 
   fonts.fontDir.enable = true;

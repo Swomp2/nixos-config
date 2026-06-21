@@ -1,4 +1,9 @@
-{unstable, inputs, pkgs, ...}:
+{
+  unstable,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   wayland.windowManager.hyprland = {
     plugins = [
@@ -7,15 +12,15 @@
 
     settings = {
       "plugin:dynamic-cursors" = {
-        enabled   = true;
-        mode      = "tilt";
+        enabled = true;
+        mode = "tilt";
         threshold = 2;
 
         shake = {
-          enabled   = true;
+          enabled = true;
           threshold = 6.0;
-          limit     = 2;
-          timeout   = 1000;
+          limit = 2;
+          timeout = 1000;
         };
       };
     };

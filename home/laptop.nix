@@ -1,4 +1,4 @@
-{...}:
+{ ... }:
 {
   imports = [
     ./config/hypr/hyprland-laptop.nix

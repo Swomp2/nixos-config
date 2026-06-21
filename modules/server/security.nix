@@ -1,109 +1,114 @@
-{config, pkgs, lib, username, ...}:
+{
+  config,
+  pkgs,
+  lib,
+  username,
+  ...
+}:
 let
   enableSecureBoot = true;
 in
 {
-  boot.loader.systemd-boot.enable = 
-    if enableSecureBoot then lib.mkForce false else true;
+  boot.loader.systemd-boot.enable = if enableSecureBoot then lib.mkForce false else true;
 
   boot.lanzaboote = {
-  	enable = enableSecureBoot;
-  	pkiBundle = "/var/lib/sbctl";
+    enable = enableSecureBoot;
+    pkiBundle = "/var/lib/sbctl";
   };
 
   environment.systemPackages = [
-  	pkgs.sbctl
+    pkgs.sbctl
   ];
 
   users.users.${username} = {
-  	openssh.authorizedKeys.keyFiles = [
-  	  ./keys/pc.pub
-  	  ./keys/laptop.pub
-  	];
+    openssh.authorizedKeys.keyFiles = [
+      ./keys/pc.pub
+      ./keys/laptop.pub
+    ];
   };
 
   services.openssh = {
-  	enable = true;
-  	openFirewall = false;
+    enable = true;
+    openFirewall = false;
 
-  	hostKeys = [
-  	  {
-  	    path = "/etc/ssh/ssh_host_ed25519_key";
-  	    type = "ed25519";
-  	  }
-  	];
+    hostKeys = [
+      {
+        path = "/etc/ssh/ssh_host_ed25519_key";
+        type = "ed25519";
+      }
+    ];
 
-  	settings = {
-  	  PermitRootLogin              = "no";
-  	  PasswordAuthentication       = false;
-  	  KbdInteractiveAuthentication = false;
-  	  PubkeyAuthentication         = true;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PubkeyAuthentication = true;
 
-  	  AllowUsers = [
-  	  	username
-  	  ];
+      AllowUsers = [
+        username
+      ];
 
-  	  X11Forwarding        = false;
-  	  AllowAgentForwarding = "no";
-  	  PermitTunnel         = "no";
-  	  UseDns               = false;
-  	};
+      X11Forwarding = false;
+      AllowAgentForwarding = "no";
+      PermitTunnel = "no";
+      UseDns = false;
+    };
   };
 
   # Настройки sudo
   security.sudo = {
-  	enable = true;
-  	wheelNeedsPassword = true;
+    enable = true;
+    wheelNeedsPassword = true;
   };
 
   # Настройки файервола
   networking.firewall = {
-  	enable = true;
-  	
-  	checkReversePath = false;
-  	logReversePathDrops = false;
+    enable = true;
 
-	# Разрешённые входящие TCP для игр, звонков, TURN
-  	allowedTCPPorts = [
-  	  22   # SSH
-  	  53   # Pi-hole DNS TCP
-  	  80   # HTTP для Let's Encrypt и redirect
-  	  443  # HTTPS nginx
-  	  3478 # coturn TCP
-  	  5349 # coturn TLS TCP
-  	];
+    checkReversePath = false;
+    logReversePathDrops = false;
 
-	# Разрешённые UDP для игр, звонков, TURN/WebRTC
-  	allowedUDPPorts = [
-  	  53   # Pi-hole DNS UDP
-  	  3478 # coturn UDP
-  	  5349 # coturn TLS UDP
-  	];
+    # Разрешённые входящие TCP для игр, звонков, TURN
+    allowedTCPPorts = [
+      22 # SSH
+      53 # Pi-hole DNS TCP
+      80 # HTTP для Let's Encrypt и redirect
+      443 # HTTPS nginx
+      3478 # coturn TCP
+      5349 # coturn TLS TCP
+    ];
 
-  	# Главный диапазон для TURN relay
-  	allowedUDPPortRanges = [
-  	  {
-  	    from = 10000; 
-  	    to = 10100;
-  	  }
-  	];
+    # Разрешённые UDP для игр, звонков, TURN/WebRTC
+    allowedUDPPorts = [
+      53 # Pi-hole DNS UDP
+      3478 # coturn UDP
+      5349 # coturn TLS UDP
+    ];
 
-  	# ping для проверки работы сервера
-  	allowPing = true;
+    # Главный диапазон для TURN relay
+    allowedUDPPortRanges = [
+      {
+        from = 10000;
+        to = 10100;
+      }
+    ];
+
+    # ping для проверки работы сервера
+    allowPing = true;
   };
 
   # Защита от перебора пароля от SSH
   services.fail2ban = {
-  	enable   = true;
+    enable = true;
 
-  	maxretry = 2;
-  	bantime  = "2h";
+    maxretry = 2;
+    bantime = "2h";
 
-  	ignoreIP = [
-  	  "127.0.0.0/8"
-  	  "::1"
-  	  "192.168.1.0/24"
-  	];
+    ignoreIP = [
+      "127.0.0.0/8"
+      "::1"
+      "192.168.1.0/24"
+    ];
   };
 
   # Ужесточение ядра для сети

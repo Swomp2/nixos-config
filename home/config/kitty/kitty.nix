@@ -1,57 +1,57 @@
-{...}:
+{ theme, ... }:
 {
   programs.kitty = {
     enable = true;
 
     settings = {
       # Настройки
-      font_family             = "FiraCode Nerd Font";
-      font_size               = 10;
-      bold_font               = "auto";
-      italic_font             = "auto";
-      bold_italic_font        = "auto";
-      disable_ligatures       = "never";
+      font_family = theme.fonts.mono;
+      font_size = theme.fonts.sizes.small;
+      bold_font = "auto";
+      italic_font = "auto";
+      bold_italic_font = "auto";
+      disable_ligatures = "never";
       confirm_os_window_close = 0;
-      background_opacity      = 0.8;
-      cursor_trail            = 50;
-      cursor_trail_decay      = "0.3 0.6";
+      background_opacity = theme.opacity.terminal;
+      cursor_trail = 50;
+      cursor_trail_decay = "0.3 0.6";
 
       # Цвета
-      background = "#282828";
-      foreground = "#ebdbb2";
+      background = theme.colors.bg;
+      foreground = theme.colors.fg;
 
-      cursor     = "#928374";
+      cursor = theme.colors.muted;
 
-      selection_foreground = "#928374";
-      selection_background = "#3c3836";
+      selection_foreground = theme.colors.muted;
+      selection_background = theme.colors.bgAlt;
 
-      color0     = "#282828";
-      color8     = "#928374";
+      color0 = theme.colors.bg;
+      color8 = theme.colors.muted;
 
-      color1     = "#cc241d";
-      color9     = "#fb4934";
+      color1 = theme.colors.error;
+      color9 = theme.colors.errorBright;
 
-      color2     = "#98971a";
-      color10    = "#b8bb26";
+      color2 = theme.colors.green;
+      color10 = theme.colors.greenBright;
 
-      color3     = "#d79921";
-      color11    = "#fabd2d";
+      color3 = theme.colors.warning;
+      color11 = theme.colors.warningBright;
 
-      color4     = "#458588";
-      color12    = "#83a598";
+      color4 = theme.colors.blue;
+      color12 = theme.colors.blueBright;
 
-      color5     = "#b16286";
-      color13    = "#d3869b";
+      color5 = theme.colors.purple;
+      color13 = theme.colors.purpleBright;
 
-      color6     = "#689d6a";
-      color14    = "#8ec07c";
+      color6 = theme.colors.aqua;
+      color14 = theme.colors.aquaBright;
 
-      color7     = "#a89984";
-      color15    = "#928374";
+      color7 = theme.colors.neutral;
+      color15 = theme.colors.muted;
     };
 
     keybindings = {
-      "ctrl+plus"  = "change_font_size all +2.0";
+      "ctrl+plus" = "change_font_size all +2.0";
       "ctrl+minus" = "change_font_size all -2.0";
     };
   };

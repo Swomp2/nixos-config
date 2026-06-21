@@ -1,4 +1,9 @@
-{pkgs, unstable, ...}:
+{
+  homeDir,
+  theme,
+  unstable,
+  ...
+}:
 {
   programs.hyprlock = {
     enable = true;
@@ -8,7 +13,7 @@
       background = [
         {
           monitor = "";
-          path = "/home/swomp/lockscreen/lockscreen.png";
+          path = "${homeDir}/lockscreen/lockscreen.png";
         }
       ];
 
@@ -16,24 +21,24 @@
         {
           monitor = "";
           size = "200, 50";
-          outline_thickness = 2;
+          outline_thickness = theme.borders.width;
           dots_size = 0.3;
           dots_spacing = 0.15;
           dots_center = false;
           dots_rounding = -1;
-          outer_color = "rgb(d65d0e)";
-          inner_color = "rgb(282828)";
-          font_color = "rgb(ebdbb2)";
+          outer_color = theme.toHyprRgb theme.colors.accent;
+          inner_color = theme.toHyprRgb theme.colors.bg;
+          font_color = theme.toHyprRgb theme.colors.fg;
           fade_on_empty = true;
           fade_timeout = 1000;
           placeholder_text = "<i>Введи пароль</i>";
           hide_input = false;
           rounding = -1;
-          check_color = "rgb(d65d0e)";
-          fail_color = "rgb(fb4934)";
+          check_color = theme.toHyprRgb theme.colors.accent;
+          fail_color = theme.toHyprRgb theme.colors.errorBright;
           fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
           fail_transition = 300;
-          capslock_color = "rgb(cc241d)";
+          capslock_color = theme.toHyprRgb theme.colors.error;
           numlock_color = -1;
           bothlock_color = -1;
           swap_font_color = false;
@@ -49,9 +54,9 @@
         {
           monitor = "";
           text = "Не подсматривай :)";
-          color = "rgb(ebdbb2)";
+          color = theme.toHyprRgb theme.colors.fg;
           font_size = 25;
-          font_family = "Ubuntu";
+          font_family = theme.fonts.ui;
 
           position = "0, 60";
           halign = "center";
@@ -61,9 +66,9 @@
         {
           monitor = "";
           text = "$TIME";
-          color = "rgb(ebdbb2)";
+          color = theme.toHyprRgb theme.colors.fg;
           font_size = 70;
-          font_family = "Ubuntu";
+          font_family = theme.fonts.ui;
 
           position = "0, 150";
           halign = "center";

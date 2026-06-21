@@ -62,7 +62,10 @@
               type = "filesystem";
               format = "ext4";
               mountpoint = "/";
-              mountOptions = [ "defaults" "noatime" ];
+              mountOptions = [
+                "defaults"
+                "noatime"
+              ];
             };
           };
 
@@ -72,7 +75,10 @@
               type = "filesystem";
               format = "ext4";
               mountpoint = "/home";
-              mountOptions = [ "defaults" "noatime" ];
+              mountOptions = [
+                "defaults"
+                "noatime"
+              ];
             };
           };
         };

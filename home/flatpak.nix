@@ -1,54 +1,54 @@
-{osConfig, ...}:
+{ theme, timeZone, ... }:
 {
   services.flatpak = {
-  	enable = true;
+    enable = true;
 
-  	remotes = [
-  	  {
-  	  	name     = "flathub";
-  	  	location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
-  	  }
-  	];
+    remotes = [
+      {
+        name = "flathub";
+        location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+      }
+    ];
 
-  	packages = [
-  	  "com.logseq.Logseq"
-  	  "org.telegram.desktop"
-  	];
+    packages = [
+      "com.logseq.Logseq"
+      "org.telegram.desktop"
+    ];
 
-  	update.auto = {
-  	  enable = true;
-  	  onCalendar = "weekly";
-  	};
+    update.auto = {
+      enable = true;
+      onCalendar = "weekly";
+    };
 
-  	overrides = {
-  	  global = {
-  	  	Environment = {
-  	  	  TZ = osConfig.time.timeZone;
+    overrides = {
+      global = {
+        Environment = {
+          TZ = timeZone;
 
-  	  	  XCURSOR_PATH = "/run/host/user-share/icons:/run/host/share/icons";
+          XCURSOR_PATH = "/run/host/user-share/icons:/run/host/share/icons";
 
-  	  	  XCURSOR_THEME = "BreezeX-RosePine-Linux";
-  	  	  XCURSOR_SIZE = "32";
-  	  	};
+          XCURSOR_THEME = theme.cursor.xcursorName;
+          XCURSOR_SIZE = toString theme.cursor.size;
+        };
 
-  	  	Context.filesystems = [
-  	  	  "/nix/store:ro"
-  	  	  "xdg-data/icons:ro"
-  	  	  "~/.icons:ro"
-  	  	];
-  	  };
+        Context.filesystems = [
+          "/nix/store:ro"
+          "xdg-data/icons:ro"
+          "~/.icons:ro"
+        ];
+      };
 
-  	  "com.logseq.Logseq" = {
-  	  	Context.sockets = [
-  	  	  "wayland"
-  	  	  "!x11"
-  	  	  "!fallback-x11"
-  	  	];
+      "com.logseq.Logseq" = {
+        Context.sockets = [
+          "wayland"
+          "!x11"
+          "!fallback-x11"
+        ];
 
-  	  	Environment = {
-  	  	  ELECTRON_OZONE_PLATFORM_HINT = "wayland";
-  	  	};
-  	  };
-  	};
+        Environment = {
+          ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+        };
+      };
+    };
   };
 }

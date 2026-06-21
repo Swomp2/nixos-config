@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, theme, ... }:
 
 {
   programs.starship = {
@@ -42,16 +42,16 @@
       palette = "gruvbox_dark";
 
       palettes.gruvbox_dark = {
-        color_fg0 = "#fbf1c7";
-        color_bg1 = "#3c3836";
-        color_bg3 = "#665c54";
-        color_blue = "#458588";
-        color_aqua = "#689d6a";
-        color_green = "#98971a";
-        color_orange = "#d65d0e";
-        color_purple = "#b16286";
-        color_red = "#cc241d";
-        color_yellow = "#d79921";
+        color_fg0 = theme.colors.fgStrong;
+        color_bg1 = theme.colors.bgAlt;
+        color_bg3 = theme.colors.bgMuted;
+        color_blue = theme.colors.blue;
+        color_aqua = theme.colors.aqua;
+        color_green = theme.colors.green;
+        color_orange = theme.colors.accent;
+        color_purple = theme.colors.purple;
+        color_red = theme.colors.error;
+        color_yellow = theme.colors.warning;
       };
 
       os = {
@@ -179,12 +179,12 @@
       docker_context = {
         symbol = "";
         style = "bg:color_bg3";
-        format = "[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)";
+        format = "[[ $symbol( $context) ](fg:${theme.colors.blueBright} bg:color_bg3)]($style)";
       };
 
       conda = {
         style = "bg:color_bg3";
-        format = "[[ $symbol( $environment) ](fg:#83a598 bg:color_bg3)]($style)";
+        format = "[[ $symbol( $environment) ](fg:${theme.colors.blueBright} bg:color_bg3)]($style)";
       };
 
       pixi = {

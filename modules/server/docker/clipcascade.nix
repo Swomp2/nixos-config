@@ -1,4 +1,4 @@
-{config, ...}:
+{ config, ... }:
 let
   clipcascadeImage = "sathvikrao/clipcascade:0.7.0";
 
@@ -29,10 +29,10 @@ in
 
     environment = {
       SERVER_FORWARD_HEADERS_STRATEGY = "framework";
-      CC_MAX_MESSAGE_SIZE_IN_MiB = "50";               # Максимальный размер сообщения
-      CC_P2P_ENABLED = "false";                        # Отключение p2p режима, чтобы ВСЕ сообщения шли через сервер
+      CC_MAX_MESSAGE_SIZE_IN_MiB = "50"; # Максимальный размер сообщения
+      CC_P2P_ENABLED = "false"; # Отключение p2p режима, чтобы ВСЕ сообщения шли через сервер
       CC_ALLOWED_ORIGINS = "https://cc.swomp.ru,null"; # Запросы разрешены только из cc.swomp.ru
-      CC_SIGNUP_ENABLED = "false";                     # Отключение регистрации новых пользователей
+      CC_SIGNUP_ENABLED = "false"; # Отключение регистрации новых пользователей
     };
 
     extraOptions = [

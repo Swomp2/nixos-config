@@ -19,7 +19,7 @@ let
 
   clamavDir = "/srv/clamav";
   clamavDbDir = "${clamavDir}/db";
-  
+
   clamavConfigDir = "${clamavDir}/config";
 
   backend = config.virtualisation.oci-containers.backend;
