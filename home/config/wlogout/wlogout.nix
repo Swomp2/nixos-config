@@ -1,44 +1,44 @@
-{...}:
+{ theme, ... }:
 {
   programs.wlogout = {
     enable = true;
 
     layout = [
       {
-        "label"   = "shutdown";
-        "action"  = "systemctl poweroff";
+        "label" = "shutdown";
+        "action" = "systemctl poweroff";
         "keybind" = "s";
-        "width"   = 0.18;
-        "height"  = 0.55;
+        "width" = 0.18;
+        "height" = 0.55;
       }
       {
-        "label"   = "reboot";
-        "action"  = "systemctl reboot";
+        "label" = "reboot";
+        "action" = "systemctl reboot";
         "keybind" = "r";
-        "width"   = 0.18;
-        "height"  = 0.55;
+        "width" = 0.18;
+        "height" = 0.55;
       }
       {
-        "label"  = "logout";
-        "action"  = "hyprctl dispatch exit";
+        "label" = "logout";
+        "action" = "hyprctl dispatch exit";
         "keybind" = "o";
-        "width"   = 0.18;
-        "height"  = 0.55;
+        "width" = 0.18;
+        "height" = 0.55;
       }
       {
-        "label"   = "lock";
-        "action"  = "bemenu-lockscreen";
+        "label" = "lock";
+        "action" = "bemenu-lockscreen";
         "keybind" = "l";
-        "width"   = 0.18;
-        "height"  = 0.55;
+        "width" = 0.18;
+        "height" = 0.55;
       }
     ];
 
     style = ''
       window {
-        font-family: FiraCode Nerd Font;
+        font-family: ${theme.fonts.mono};
         font-size: 14pt;
-        color: #282828; /* text */
+        color: ${theme.colors.bg};
         background-color: transparent;
       }
 
@@ -47,24 +47,23 @@
         background-position: center;
         background-size: 50%;
         border-style: solid;
-        border-radius: 8px;
-        border-width: 2px;
-        border-color: #d65d0e;
-        background-color: #ebdbb2;
-        color: #282828;
-        margin: 10px;
-        transition:
-        background-color 0.3s ease-in-out;
+        border-radius: ${toString theme.borders.radius}px;
+        border-width: ${toString theme.borders.width}px;
+        border-color: ${theme.colors.accent};
+        background-color: ${theme.colors.fg};
+        color: ${theme.colors.bg};
+        margin: ${toString theme.spacing.lg}px;
+        transition: background-color 0.3s ease-in-out;
       }
 
       button:hover {
-        background-color: #3c3836;
-        color: #ebdbb2;
+        background-color: ${theme.colors.bgAlt};
+        color: ${theme.colors.fg};
       }
 
       button:focus {
-        background-color: #282828;
-        color: #ebdbb2;
+        background-color: ${theme.colors.bg};
+        color: ${theme.colors.fg};
       }
 
       #logout {

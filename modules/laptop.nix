@@ -1,4 +1,10 @@
-{config, pkgs, unstable, inputs, ...}:
+{
+  config,
+  pkgs,
+  unstable,
+  inputs,
+  ...
+}:
 
 {
   powerManagement.enable = true;
@@ -28,11 +34,11 @@
   };
 
   disabledModules = [ "services/hardware/tlp.nix" ];
-  
+
   imports = [
     "${inputs.nixpkgs-unstable}/nixos/modules/services/hardware/tlp.nix"
   ];
-  
+
   # Параметры батареи
   services.power-profiles-daemon.enable = true;
 
@@ -42,9 +48,13 @@
       "bluez5.enable-hw-volume" = true;
       "bluez5.enable-sbc-xq" = true;
       "bluez5.hfphsp-backend" = "native";
-      "bluez5.roles" = [ "a2dp_sink" "hfp_hf" "hfp_ag" ];
+      "bluez5.roles" = [
+        "a2dp_sink"
+        "hfp_hf"
+        "hfp_ag"
+      ];
     };
-  
+
     "monitor.bluez.rules" = [
       # Для всех bluetooth-гарнитур:
       # при подключении сразу поднимать аудиопрофиль
@@ -56,13 +66,19 @@
         ];
         actions = {
           "update-props" = {
-            "bluez5.auto-connect" = [ "a2dp_sink" "hfp_hf" ];
-            "bluez5.hw-volume" = [ "a2dp_sink" "hfp_hf" ];
+            "bluez5.auto-connect" = [
+              "a2dp_sink"
+              "hfp_hf"
+            ];
+            "bluez5.hw-volume" = [
+              "a2dp_sink"
+              "hfp_hf"
+            ];
             "device.profile" = "a2dp-sink";
           };
         };
       }
-  
+
       # Любой bluetooth-вывод делаем приоритетнее встроенной карты
       {
         matches = [
@@ -77,7 +93,7 @@
           };
         };
       }
-  
+
       # Любой bluetooth-вход делаем приоритетнее встроенных микрофонов
       {
         matches = [
@@ -94,7 +110,7 @@
       }
     ];
   };
-  
+
   environment.systemPackages = with pkgs; [
     brightnessctl
     acpi

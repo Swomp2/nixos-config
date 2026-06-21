@@ -14,21 +14,21 @@ in
 
     environment = {
       aliasgroup1 = "https://cloud.swomp.ru:443";
-      
+
       server_name = "office.swomp.ru";
-      
+
       extra_params = builtins.concatStringsSep " " [
         "--o:ssl.enable=false"
         "--o:ssl.termination=true"
         "--o:welcome.enable=false"
-      
+
         "--o:net.post_allow.host[0]=cloud\\.swomp\\.ru"
         "--o:net.post_allow.host[1]=office\\.swomp\\.ru"
-      
+
         "--o:storage.wopi.host[0]=cloud\\.swomp\\.ru"
         "--o:storage.wopi.host[1]=office\\.swomp\\.ru"
       ];
-      
+
       dictionaries = "ru_RU en_US";
     };
 

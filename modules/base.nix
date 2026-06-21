@@ -1,24 +1,30 @@
-{config, pkgs, inputs, ...}:
+{
+  config,
+  pkgs,
+  inputs,
+  timeZone,
+  ...
+}:
 
 {
-  time.timeZone = "Europe/Moscow";
+  time.timeZone = timeZone;
 
   i18n.defaultLocale = "ru_RU.UTF-8";
 
   # Включение runtime библиотек для питона
   programs.nix-ld = {
-  	enable = true;
-  	libraries = with pkgs; [
-  	  stdenv.cc.cc
-  	];
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc
+    ];
   };
 
   # Автоудаление старых версий системы
   nix.gc = {
-  	automatic  = true;
-  	dates      = "weekly";
-  	options    = "--delete-older-than 14d";
-  	persistent = true;
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+    persistent = true;
   };
 
   boot.loader.systemd-boot.configurationLimit = 10;
@@ -40,24 +46,24 @@
   # Псевдонимы
   environment.shellAliases = {
     cat = "bat";
-    ls  = "lsd";
+    ls = "lsd";
     clear = "clear -T xterm-256color";
   };
 
   # Переопределение глобальных переменных
   environment.sessionVariables = {
-  	EDITOR = "micro";
-  	VISUAL = "micro";
+    EDITOR = "micro";
+    VISUAL = "micro";
 
-  	TERMINAL = "kitty";
-  	TERMCMD = "kitty";
+    TERMINAL = "kitty";
+    TERMCMD = "kitty";
   };
 
   # Включение команды home-manager
   environment.systemPackages = [
-  	inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.home-manager
+    inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.home-manager
   ];
-  
+
   system.stateVersion = "25.11"; # Версия первой установленной NixOS на этой машине не связана с версией пакетов
 
 }

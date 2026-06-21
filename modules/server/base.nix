@@ -1,32 +1,32 @@
-{pkgs, ...}:
+{ pkgs, timeZone, ... }:
 
 {
-  time.timeZone = "Europe/Moscow";
+  time.timeZone = timeZone;
 
   i18n.defaultLocale = "ru_RU.UTF-8";
 
   # Включение runtime библиотек для питона
   programs.nix-ld = {
-  	enable = true;
-  	libraries = with pkgs; [
-  	  stdenv.cc.cc
-  	];
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc
+    ];
   };
 
   # Автоматическая синхронизация времени по интернету
   networking.timeServers = [
-  	"time.cloudflare.com"
-  	"0.pool.ntp.org"
-  	"1.pool.ntp.org"
-  	"2.pool.ntp.org"
+    "time.cloudflare.com"
+    "0.pool.ntp.org"
+    "1.pool.ntp.org"
+    "2.pool.ntp.org"
   ];
 
   # Автоудаление старых версий системы
   nix.gc = {
-  	automatic  = true;
-  	dates      = "weekly";
-  	options    = "--delete-older-than 14d";
-  	persistent = true;
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+    persistent = true;
   };
 
   boot.loader.systemd-boot.configurationLimit = 10;
@@ -45,13 +45,16 @@
   networking.networkmanager.enable = false;
 
   systemd.network.networks."10-lan" = {
-  	matchConfig.MACAddress = "68:1d:ef:46:9f:f7";
+    matchConfig.MACAddress = "68:1d:ef:46:9f:f7";
 
-  	networkConfig = {
-  	  Address = "192.168.1.244/24";
-  	  Gateway = "192.168.1.1";
-  	  DNS     = ["1.1.1.1" "9.9.9.9"];
-  	};
+    networkConfig = {
+      Address = "192.168.1.244/24";
+      Gateway = "192.168.1.1";
+      DNS = [
+        "1.1.1.1"
+        "9.9.9.9"
+      ];
+    };
   };
 
   services.openssh.enable = true;
@@ -60,18 +63,18 @@
 
   # Псевдонимы
   environment.shellAliases = {
-    cat   = "bat";
-    ls    = "lsd";
+    cat = "bat";
+    ls = "lsd";
     clear = "clear -T xterm-256color";
-    top   = "btop";
+    top = "btop";
   };
 
   # Переопределение глобальных переменных
   environment.sessionVariables = {
-  	EDITOR = "micro";
-  	VISUAL = "micro";
+    EDITOR = "micro";
+    VISUAL = "micro";
   };
-  
+
   system.stateVersion = "25.11"; # Версия первой установленной NixOS на этой машине не связана с версией пакетов
 
 }

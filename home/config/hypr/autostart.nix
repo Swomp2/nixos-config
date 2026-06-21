@@ -1,4 +1,4 @@
-{pkgs, unstable, ...}:
+{ pkgs, unstable, ... }:
 {
   services.awww.enable = true;
 
@@ -6,29 +6,27 @@
 
   services.lxqt-policykit-agent.enable = true;
 
-  services.dunst.enable = true;
-
   services.cliphist.enable = true;
 
   services.nextcloud-client = {
-    enable            = true;
+    enable = true;
     startInBackground = true;
   };
 
   # Чтобы nextcloud не задерживал выключение
   systemd.user.services.nextcloud-client.Service = {
-  	TimeoutStopSec = "5s";
+    TimeoutStopSec = "5s";
   };
 
   programs.waybar = {
-    enable         = true;
-    package        = unstable.waybar;
+    enable = true;
+    package = unstable.waybar;
     systemd.enable = true;
   };
 
   services.udiskie = {
-    enable    = true;
-    tray      = "always";
+    enable = true;
+    tray = "always";
     automount = true;
   };
 

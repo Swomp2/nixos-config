@@ -42,14 +42,26 @@
     };
   };
 
-  outputs = { self, nixpkgs, disko, home-manager, lanzaboote, nix-flatpak, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      disko,
+      home-manager,
+      lanzaboote,
+      nix-flatpak,
+      ...
+    }@inputs:
     let
       # Объявление общесистемных переменных
-      system   = "x86_64-linux";
+      system = "x86_64-linux";
       username = "swomp";
-      homeDir  = "/home/${username}";
+      homeDir = "/home/${username}";
+      timeZone = "Europe/Moscow";
+      theme = import ./theme.nix;
 
-      allowUnfreePredicate = pkg:
+      allowUnfreePredicate =
+        pkg:
         builtins.elem (nixpkgs.lib.getName pkg) [
           "steam"
           "steam-unwrapped"
@@ -57,22 +69,27 @@
           "steamcmd"
           "corefonts"
         ];
-      
+
       pkgsStable = import inputs.nixpkgs {
         inherit system;
         config.allowUnfreePredicate = allowUnfreePredicate;
       };
-      
+
       unstable = import inputs.nixpkgs-unstable {
         inherit system;
         config.allowUnfreePredicate = allowUnfreePredicate;
       };
- 	  
-      # Эта функция нужна, чтобы не писать каждый раз 
-      # руками одинаковые конфигурации системы для 
+
+      # Эта функция нужна, чтобы не писать каждый раз
+      # руками одинаковые конфигурации системы для
       # разных устройств
-      mkHost = { hostPath, homeImports, extraModules ? [ ] }:
-        
+      mkHost =
+        {
+          hostPath,
+          homeImports,
+          extraModules ? [ ],
+        }:
+
         nixpkgs.lib.nixosSystem {
           inherit system;
 
@@ -82,7 +99,15 @@
           # {username, inputs, unstable, homeDir, ...}:
           # И дальше уже сам модуль
           specialArgs = {
-            inherit inputs username homeDir unstable homeImports;
+            inherit
+              inputs
+              username
+              homeDir
+              timeZone
+              unstable
+              homeImports
+              theme
+              ;
           };
 
           modules = [
@@ -91,75 +116,102 @@
             home-manager.nixosModules.default
             hostPath
 
-            ./modules/users.nix               # Тут идёт вся общесистемная конфигурация пользователей
+            ./modules/users.nix # Тут идёт вся общесистемная конфигурация пользователей
             ./modules/system-home-manager.nix # Тут общесистемная конфигурация home-manager
-            
-          ] ++ extraModules;
+
+          ]
+          ++ extraModules;
         };
 
-      mkServer = { hostPath, extraModules ? [ ] }:
+      mkServer =
+        {
+          hostPath,
+          extraModules ? [ ],
+        }:
 
         nixpkgs.lib.nixosSystem {
           inherit system;
 
           specialArgs = {
-          	inherit inputs username homeDir unstable;
+            inherit
+              inputs
+              username
+              homeDir
+              timeZone
+              unstable
+              theme
+              ;
           };
 
           modules = [
             {
               nixpkgs.config.allowUnfreePredicate = allowUnfreePredicate;
             }
-           
-          	disko.nixosModules.disko
-          	lanzaboote.nixosModules.lanzaboote
-          	hostPath
 
-          	./modules/server/users.nix # Тут идёт вся общесистемная конфигурация пользователей для сервера
-          ] ++ extraModules;
+            disko.nixosModules.disko
+            lanzaboote.nixosModules.lanzaboote
+            hostPath
+
+            ./modules/server/users.nix # Тут идёт вся общесистемная конфигурация пользователей для сервера
+          ]
+          ++ extraModules;
         };
 
-        mkHome = { homeImports }:
-          home-manager.lib.homeManagerConfiguration {
-            # Объявление переменной pkgs тут нужно из-за
-            # того, что pkgs не существует в этом модуле.
-            # В mkHost уже используется nixpgs.lib.nixosSystem,
-            # следовательно там не надо объявлять pkgs.
-            # Тут надо.
-            # То же самое с unstable
-            pkgs = pkgsStable;
+      mkHome =
+        { homeImports }:
+        home-manager.lib.homeManagerConfiguration {
+          # Объявление переменной pkgs тут нужно из-за
+          # того, что pkgs не существует в этом модуле.
+          # В mkHost уже используется nixpgs.lib.nixosSystem,
+          # следовательно там не надо объявлять pkgs.
+          # Тут надо.
+          # То же самое с unstable
+          pkgs = pkgsStable;
 
-          	extraSpecialArgs = {
-              inherit inputs username homeDir unstable homeImports;
-          	};
-
-          	modules = [
-          	  inputs.nix-flatpak.homeManagerModules.nix-flatpak
-          	] ++ homeImports ++ [
-          	  {
-          	  	home.username = username;
-          	  	home.homeDirectory = homeDir;
-          	  	home.stateVersion = "25.11";
-          	  }
-          	];
+          extraSpecialArgs = {
+            inherit
+              inputs
+              username
+              homeDir
+              timeZone
+              unstable
+              homeImports
+              theme
+              ;
           };
-    in {
-      homeConfigurations = {
-      	pc = mkHome {
-      	  homeImports = [
-      	  	./home/pc.nix
-      	  	./home/common.nix
-      	  ];
-      	};
 
-      	laptop = mkHome {
-      	  homeImports = [
-      	  	./home/laptop.nix
-      	  	./home/common.nix
-      	  ];
-      	};
+          modules = [
+            inputs.nix-flatpak.homeManagerModules.nix-flatpak
+          ]
+          ++ homeImports
+          ++ [
+            {
+              home.username = username;
+              home.homeDirectory = homeDir;
+              home.stateVersion = "25.11";
+            }
+          ];
+        };
+    in
+    {
+      formatter.${system} = pkgsStable.nixfmt-tree;
+
+      homeConfigurations = {
+        pc = mkHome {
+          homeImports = [
+            ./home/pc.nix
+            ./home/common.nix
+          ];
+        };
+
+        laptop = mkHome {
+          homeImports = [
+            ./home/laptop.nix
+            ./home/common.nix
+          ];
+        };
       };
-      
+
       nixosConfigurations = {
         pc = mkHost {
           hostPath = ./hosts/pc/configuration.nix;
@@ -170,9 +222,10 @@
 
           extraModules = [
             {
-              users.users.${username}.hashedPassword = "$y$j9T$3wXS1qCIBpSmkvHf/s6mn.$IzM1ZoDQufoR.5wS/lLKZD.f1k8b/Nyj1J/hHYwsgp1";
+              users.users.${username}.hashedPassword =
+                "$y$j9T$3wXS1qCIBpSmkvHf/s6mn.$IzM1ZoDQufoR.5wS/lLKZD.f1k8b/Nyj1J/hHYwsgp1";
             }
-		  ];
+          ];
         };
 
         laptop = mkHost {
@@ -184,18 +237,20 @@
 
           extraModules = [
             {
-              users.users.${username}.hashedPassword = "$y$j9T$Q2r6j1dZlRGIHYVnhXk4T.$FBGNdh1hckjNonKRcCruXa41vtB/2s.i9Lg8QktABg4";
+              users.users.${username}.hashedPassword =
+                "$y$j9T$Q2r6j1dZlRGIHYVnhXk4T.$FBGNdh1hckjNonKRcCruXa41vtB/2s.i9Lg8QktABg4";
             }
-		  ];
+          ];
         };
 
         server = mkServer {
           hostPath = ./hosts/server/configuration.nix;
 
           extraModules = [
-          	{
-          	  users.users.${username}.hashedPassword = "$y$j9T$VviH8YXVGoXdN.aLmCW8k0$5WUGOc854Zre7TPLD/JdqBCpqk5NwqPQD94DSdbJTEB";
-          	}
+            {
+              users.users.${username}.hashedPassword =
+                "$y$j9T$VviH8YXVGoXdN.aLmCW8k0$5WUGOc854Zre7TPLD/JdqBCpqk5NwqPQD94DSdbJTEB";
+            }
           ];
         };
       };

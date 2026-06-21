@@ -1,32 +1,38 @@
-{lib, pkgs, unstable, ...}:
-{	
+{
+  lib,
+  pkgs,
+  unstable,
+  ...
+}:
+{
   programs.steam = {
-  	enable = true;
+    enable = true;
 
-		# Это нужно для того, чтобы игры можно было запускать с gamemoderun
-  	package = unstable.steam.override {
-  	  extraPkgs = steamPkgs: with steamPkgs; [
-  	  	gamemode
-  	  ];
-  	};
-  	
-  	remotePlay.openFirewall = true;
-  	dedicatedServer.openFirewall = false;
+    # Это нужно для того, чтобы игры можно было запускать с gamemoderun
+    package = unstable.steam.override {
+      extraPkgs =
+        steamPkgs: with steamPkgs; [
+          gamemode
+        ];
+    };
+
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = false;
   };
 
   programs.gamemode = {
-  	enable = true;
+    enable = true;
 
-  	settings = {
-  	  general = {
-  	  	desiredgov = "performance";
-  	  	renice = 10;
-  	  	ioprio = 0;
-  	  };
-  	};
+    settings = {
+      general = {
+        desiredgov = "performance";
+        renice = 10;
+        ioprio = 0;
+      };
+    };
   };
   programs.gamescope = {
-  	enable = true;
-  	capSysNice = true;
+    enable = true;
+    capSysNice = true;
   };
 }

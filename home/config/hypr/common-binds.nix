@@ -1,4 +1,4 @@
-{...}:
+{ ... }:
 let
   workspaces = builtins.genList (x: x + 1) 9;
 in
@@ -30,7 +30,8 @@ in
         ", XF86AudioMicMute, exec, swayosd-client --input-volume mute-toggle"
         ", XF86AudioPlay, exec, swayosd-client --playerctl play-pause"
         ", Caps_Lock, exec, swayosd-client --caps-lock"
-      ] ++ builtins.concatLists (
+      ]
+      ++ builtins.concatLists (
         map (ws: [
           "SUPER, ${toString ws}, workspace, ${toString ws}"
         ]) workspaces

@@ -1,29 +1,36 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.programs.adguardvpn-cli;
 
-  installScriptUrl =
-    "https://raw.githubusercontent.com/AdguardTeam/AdGuardVPNCLI/master/scripts/${cfg.channel}/install.sh";
+  installScriptUrl = "https://raw.githubusercontent.com/AdguardTeam/AdGuardVPNCLI/master/scripts/${cfg.channel}/install.sh";
 
-  runtimePath = lib.makeBinPath (with pkgs; [
-    bash
-    coreutils
-    curl
-    findutils
-    gawk
-    gnugrep
-    gnused
-    gnutar
-    gzip
-    iproute2
-    iptables
-    kmod
-    nftables
-    procps
-    systemd
-    util-linux
-  ]);
+  runtimePath = lib.makeBinPath (
+    with pkgs;
+    [
+      bash
+      coreutils
+      curl
+      findutils
+      gawk
+      gnugrep
+      gnused
+      gnutar
+      gzip
+      iproute2
+      iptables
+      kmod
+      nftables
+      procps
+      systemd
+      util-linux
+    ]
+  );
 
   installHelper = pkgs.writeShellScriptBin "adguardvpn-cli-install" ''
     set -euo pipefail
@@ -34,7 +41,7 @@ let
     ${pkgs.curl}/bin/curl -fsSL '${installScriptUrl}' -o "$tmp"
     sudo ${pkgs.bash}/bin/sh "$tmp" -o "$dir" -a n -v
   '';
-  
+
   uninstallHelper = pkgs.writeShellScriptBin "adguardvpn-cli-uninstall" ''
     set -euo pipefail
     tmp="$(mktemp /tmp/adguardvpn-uninstall.XXXXXX.sh)"
@@ -61,11 +68,15 @@ in
     enable = lib.mkEnableOption "AdGuard VPN CLI wrapper for NixOS";
 
     channel = lib.mkOption {
-      type = lib.types.enum [ "release" "beta" "nightly" ];
+      type = lib.types.enum [
+        "release"
+        "beta"
+        "nightly"
+      ];
       default = "nightly";
       description = "Какой канал AdGuard VPN CLI использовать";
     };
-    
+
     dataDir = lib.mkOption {
       type = lib.types.str;
       default = "/var/lib/adguardvpn-cli";
@@ -86,7 +97,7 @@ in
     systemd.tmpfiles.rules = [
       "d ${cfg.dataDir} 0755 root root - -"
     ];
-    
+
     environment.systemPackages = [
       wrapper
       installHelper

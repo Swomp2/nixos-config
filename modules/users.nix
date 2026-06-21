@@ -1,4 +1,9 @@
-{pkgs, username, homeDir, ...}:
+{
+  pkgs,
+  username,
+  homeDir,
+  ...
+}:
 {
   users.mutableUsers = false;
 

@@ -1,14 +1,14 @@
-{config, ...}:
+{ config, ... }:
 let
-  piholeImage   = "pihole/pihole:2026.05.0";
+  piholeImage = "pihole/pihole:2026.05.0";
 
-  secretsDir    = "/srv/secrets";
+  secretsDir = "/srv/secrets";
 
-  piholeDir     = "/srv/pihole";
-  etcPiholeDir  = "${piholeDir}/etc-pihole";
-  dnsmasqDir    = "${piholeDir}/etc-dnsmasq.d";
+  piholeDir = "/srv/pihole";
+  etcPiholeDir = "${piholeDir}/etc-pihole";
+  dnsmasqDir = "${piholeDir}/etc-dnsmasq.d";
 
-  backend       = config.virtualisation.oci-containers.backend;
+  backend = config.virtualisation.oci-containers.backend;
 
   piholeService = "${backend}-pihole";
 in

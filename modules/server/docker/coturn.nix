@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{ config, pkgs, ... }:
 let
   coturnImage = "coturn/coturn:4.12-alpine";
 

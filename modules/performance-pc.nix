@@ -1,4 +1,9 @@
-{config, pkgs, unstable, ...}:
+{
+  config,
+  pkgs,
+  unstable,
+  ...
+}:
 {
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = "schedutil";
@@ -6,14 +11,14 @@
   boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linuxKernel.kernels.linux_xanmod_stable;
 
   boot.kernelParams = [
-      "amd_pstate=active"
+    "amd_pstate=active"
   ];
 
   hardware.amdgpu.opencl.enable = true;
 
   hardware.graphics = {
-  	package = unstable.mesa;
-  	package32 = unstable.pkgsi686Linux.mesa;
+    package = unstable.mesa;
+    package32 = unstable.pkgsi686Linux.mesa;
   };
 
   # Настройки для аудио девайсов

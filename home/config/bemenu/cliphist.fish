@@ -1,2 +1,2 @@
 #!/run/current-system/sw/bin/fish
-cliphist list | bemenu --nb "#282828" --nf "#fbf1c7" --tb "#d65d0e" --tf "#282828" --fb "#282828" --ff "#fbf1c7" --hb "#d65d0e" --hf "#282828" --ab "#282828" --af "#fbf1c7" -H 10 -W 0.18 -c --border 2 --bdr "#d65d0e" --prompt="История: " --list 5 -i --fn "Ubuntu Regular 12" | cliphist decode | wl-copy
+cliphist list | bemenu $bemenu_theme_args -H 10 -W 0.18 -c --prompt="История: " --list 5 -i | cliphist decode | wl-copy

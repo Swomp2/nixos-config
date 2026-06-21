@@ -1,5 +1,12 @@
-{config, pkgs, unstable, lib, ...}:
-let 
+{
+  config,
+  pkgs,
+  unstable,
+  lib,
+  theme,
+  ...
+}:
+let
   kvTheme = pkgs.gruvbox-kvantum;
 in
 {
@@ -8,11 +15,11 @@ in
 
   # Включение hyprland в home manager
   wayland.windowManager.hyprland = {
-    enable          = true;
-    systemd.enable  = false;
+    enable = true;
+    systemd.enable = false;
 
-    package         = null;
-    portalPackage   = null;
+    package = null;
+    portalPackage = null;
   };
 
   # Включение gnome keyring
@@ -29,47 +36,42 @@ in
   # Отключение шрифтов на уровне home manager, потому что они включены на системном уровне
   fonts.fontconfig.enable = lib.mkForce false;
 
-  # Включение starship
-  programs.starship = {
-    enable = true;
-  };
-
   # Включение стандартных директорий
   xdg.userDirs = {
-  	enable = true;
-  	createDirectories = true;
+    enable = true;
+    createDirectories = true;
 
-  	setSessionVariables = true;
+    setSessionVariables = true;
 
-  	documents = "$HOME/Документы";
-  	download  = "$HOME/Загрузки";
-  	music     = "$HOME/Музыка";
-  	pictures  = "$HOME/Изображения";
-  	videos    = "$HOME/Видео";
+    documents = "$HOME/Документы";
+    download = "$HOME/Загрузки";
+    music = "$HOME/Музыка";
+    pictures = "$HOME/Изображения";
+    videos = "$HOME/Видео";
   };
 
   # Тема для gtk
   gtk = {
-  	enable = true;
+    enable = true;
 
-  	theme = {
-  	  name    = "Gruvbox-Dark";
-  	  package = pkgs.gruvbox-gtk-theme;
-  	};
+    theme = {
+      name = theme.gtk.themeName;
+      package = pkgs.gruvbox-gtk-theme;
+    };
 
-  	iconTheme = {
-  	  name    = "Papirus-Dark";
-  	  package = pkgs.papirus-icon-theme;
-  	};
+    iconTheme = {
+      name = theme.gtk.iconThemeName;
+      package = pkgs.papirus-icon-theme;
+    };
 
-  	cursorTheme = {
-  	  name    = "BreezeX-RosePine-Linux";
-  	  package = pkgs.rose-pine-cursor;
-  	  size    = 32;
-  	};
+    cursorTheme = {
+      name = theme.cursor.xcursorName;
+      package = pkgs.rose-pine-cursor;
+      size = theme.cursor.size;
+    };
 
-  	# Фикс для новой версии home-manager
-  	gtk4.theme = config.gtk.theme;
+    # Фикс для новой версии home-manager
+    gtk4.theme = config.gtk.theme;
   };
 
   # Тема для qt
@@ -77,20 +79,20 @@ in
     enable = true;
 
     platformTheme.name = "qtct";
-    style.name         = "kvantum";
+    style.name = theme.qt.style;
 
     qt5ctSettings = {
       Appearance = {
-        icon_theme       = "Papirus-Dark";
-        style            = "kvantum";
+        icon_theme = theme.gtk.iconThemeName;
+        style = theme.qt.style;
         standard_dialogs = "xdgdesktopportal";
       };
     };
 
     qt6ctSettings = {
       Appearance = {
-        icon_theme       = "Papirus-Dark";
-        style            = "kvantum";
+        icon_theme = theme.gtk.iconThemeName;
+        style = theme.qt.style;
         standard_dialogs = "xdgdesktopportal";
       };
     };
@@ -99,23 +101,23 @@ in
   xdg.configFile."Kvantum/kvantum.kvconfig" = {
     text = "
 	  [General]
-	  theme=Gruvbox-Dark-Brown
+	  theme=${theme.qt.kvantumTheme}
   	";
-  	force = true;
+    force = true;
   };
 
-  xdg.configFile."Kvantum/Gruvbox-Dark-Brown" = { 
-  	source = "${kvTheme}/share/Kvantum/Gruvbox-Dark-Brown";
-	  recursive = true;
+  xdg.configFile."Kvantum/Gruvbox-Dark-Brown" = {
+    source = "${kvTheme}/share/Kvantum/Gruvbox-Dark-Brown";
+    recursive = true;
 
-	  # Перезаписывать этот файл с помощью home manager
+    # Перезаписывать этот файл с помощью home manager
     force = true;
   };
 
   # Включение ssh агента
   services.ssh-agent = {
-  	enable = true;
-  	socket = "ssh-agent";
+    enable = true;
+    socket = "ssh-agent";
   };
 
   home.packages = with pkgs; [
@@ -149,8 +151,6 @@ in
     gruvbox-kvantum
     nwg-look
     rose-pine-hyprcursor
-    wofi
-    wlogout
     rustfmt
     rust-analyzer
     pyright
@@ -162,6 +162,5 @@ in
     unstable.yt-dlp
     texliveFull
     qpdf
-    atuin
   ];
 }

@@ -1,19 +1,31 @@
-{...}:
+{ theme, ... }:
 {
+  imports = [
+    ./animations.nix
+    ./autostart.nix
+    ./common-binds.nix
+    ./env-vars.nix
+    ./hypridle.nix
+    ./hyprlock.nix
+    ./hyprsunset.nix
+    ./plugins.nix
+    ./win-rules.nix
+  ];
+
   wayland.windowManager.hyprland = {
 
     configType = "hyprlang";
 
     settings = {
       render = {
-        cm_enabled  = true;
+        cm_enabled = true;
         cm_auto_hdr = 0;
       };
 
       misc = {
-        disable_hyprland_logo     = true;
+        disable_hyprland_logo = true;
         on_focus_under_fullscreen = 2;
-        disable_watchdog_warning  = true;
+        disable_watchdog_warning = true;
       };
 
       master = {
@@ -25,23 +37,23 @@
       };
 
       general = {
-        border_size           = 2;
-        gaps_out              = 5;
-        gaps_in               = 3;
-        no_focus_fallback     = true;
-        "col.inactive_border" = "rgb(282828)";
-        "col.active_border"   = "rgb(d65d0e)";
-        layout                = "master";
+        border_size = 2;
+        gaps_out = 5;
+        gaps_in = 3;
+        no_focus_fallback = true;
+        "col.inactive_border" = theme.toHyprRgb theme.colors.bg;
+        "col.active_border" = theme.toHyprRgb theme.colors.accent;
+        layout = "master";
       };
 
       decoration = {
-        rounding         = 8;
-        inactive_opacity = 0.9;
+        rounding = theme.borders.radius;
+        inactive_opacity = theme.opacity.inactive;
 
         blur = {
           enabled = true;
-          size    = 10;
-          xray    = false;
+          size = 10;
+          xray = false;
         };
       };
     };

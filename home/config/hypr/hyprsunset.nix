@@ -1,4 +1,4 @@
-{pkgs, unstable, ...}:
+{ pkgs, unstable, ... }:
 {
   services.hyprsunset = {
     enable = true;

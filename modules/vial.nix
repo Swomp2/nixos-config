@@ -1,11 +1,11 @@
-{config, pkgs, ...}:
+{ config, pkgs, ... }:
 {
-	services.udev.packages = with pkgs; [
-	    vial
-	    via
-	];
+  services.udev.packages = with pkgs; [
+    vial
+    via
+  ];
 
-	environment.systemPackages = with pkgs; [
-		vial
-	];
+  environment.systemPackages = with pkgs; [
+    vial
+  ];
 }

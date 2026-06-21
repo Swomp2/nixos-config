@@ -2,11 +2,11 @@
 {
   boot = {
     consoleLogLevel = 3;
-    
+
     initrd.verbose = false;
     initrd.systemd.enable = true;
-    initrd.kernelModules = ["i915"];
-    
+    initrd.kernelModules = [ "i915" ];
+
     kernelParams = [
       "quiet"
       "udev.log_level=3"
