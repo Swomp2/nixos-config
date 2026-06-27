@@ -26,7 +26,7 @@
           LANG = "ru_RU.UTF-8";
           LANGUAGE = "ru_RU:ru";
           LC_MESSAGES = "ru_RU.UTF-8";
-        
+
           TZ = timeZone;
 
           XCURSOR_PATH = "/run/host/user-share/icons:/run/host/share/icons";

@@ -6,7 +6,7 @@
   # Русская локаль
   i18n = {
     defaultLocale = "ru_RU.UTF-8";
-  
+
     extraLocaleSettings = {
       LC_CTYPE = "ru_RU.UTF-8";
       LC_NUMERIC = "ru_RU.UTF-8";
@@ -49,12 +49,12 @@
 
   # Оптимизация хранилища nix
   nix.optimise = {
-  	automatic = true;
-  	dates = [ "weekly" ];
+    automatic = true;
+    dates = [ "weekly" ];
   };
 
   nix.settings = {
-  	auto-optimise-store = true;
+    auto-optimise-store = true;
   };
 
   boot.loader.systemd-boot.configurationLimit = 10;
@@ -100,7 +100,7 @@
   # Переопределение глобальных переменных
   environment.sessionVariables = {
     LANGUAGE = "ru_RU:ru";
-  
+
     EDITOR = "micro";
     VISUAL = "micro";
   };

@@ -215,13 +215,13 @@ in
           SWAYSOCK \
           DBUS_SESSION_BUS_ADDRESS \
           PATH || true
-  
+
         ${pkgs.systemd}/bin/systemctl --user start clipcascade.service
       '';
     in
     {
       home.packages = [ clipcascadePkg ];
-  
+
       systemd.user.services.clipcascade = {
         Unit = {
           Description = "ClipCascade clipboard sync client";
@@ -229,7 +229,7 @@ in
           PartOf = [ "graphical-session.target" ];
           After = [ "graphical-session.target" ];
         };
-  
+
         Service = {
           Type = "simple";
           ExecStart = "${clipcascadePkg}/bin/clipcascade ${lib.escapeShellArgs cfg.extraArgs}";
@@ -242,12 +242,12 @@ in
             "CLIPCASCADE_XMODE=auto"
           ];
         };
-  
+
         Install = lib.mkIf cfg.autostart {
           WantedBy = [ "graphical-session.target" ];
         };
       };
-  
+
       xdg.configFile."autostart/clipcascade.desktop" = lib.mkIf cfg.autostart {
         text = ''
           [Desktop Entry]

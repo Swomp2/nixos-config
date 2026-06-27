@@ -15,7 +15,7 @@
     hunspell
     hunspellDicts.ru_RU
     hyphenDicts.ru_RU
-  
+
     git
     curl
     wget

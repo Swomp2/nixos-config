@@ -54,7 +54,7 @@ in
     paper = "ru_RU.UTF-8";
     measurement = "ru_RU.UTF-8";
   };
-  
+
   home.sessionVariables = {
     LANGUAGE = "ru_RU:ru";
   };

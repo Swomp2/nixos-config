@@ -12,19 +12,19 @@ in
 {
   # Импорт adguard vpn и clipcascade
   imports = [
-  	./programs/adguardvpn.nix
-  	./programs/clipcascade.nix
+    ./programs/adguardvpn.nix
+    ./programs/clipcascade.nix
   ];
 
   # Включение adguard vpn и clipcascade
   programs.adguardvpn-cli = {
-  	enable = true;
-  	channel = "nightly";
+    enable = true;
+    channel = "nightly";
   };
 
   programs.clipcascade = {
-  	enable = true;
-  	autostart = true;
+    enable = true;
+    autostart = true;
   };
 
   # Включение xdg autostart
@@ -150,7 +150,7 @@ in
     hunspell
     hunspellDicts.ru_RU
     hyphenDicts.ru_RU
-    
+
     ungoogled-chromium
     mpv
     kdePackages.okular
