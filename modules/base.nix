@@ -84,8 +84,8 @@
   environment.sessionVariables = {
     LANGUAGE = "ru_RU:ru";
 
-    EDITOR = "micro";
-    VISUAL = "micro";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
 
     TERMINAL = "kitty";
     TERMCMD = "kitty";

@@ -58,6 +58,10 @@
 
       list = true; # Показывать невидимые символы
       listchars = "tab:» ,trail:·,nbsp:␣"; # Отображение tab/пробелов
+
+      fillchars = {
+        eob = " ";
+      };
     };
   };
 }

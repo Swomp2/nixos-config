@@ -70,15 +70,21 @@ in
   };
 
   # Файлы и папки должны по умолчанию открываться в файловом менеджере, а не в терминале
-  xdg.mimeApps.defaultApplications = {
-    "inode/directory" = [ "pcmanfm-qt.desktop" ];
-    "application/x-directory" = [ "pcmanfm-qt.desktop" ];
+  xdg.mimeApps = {
+    enable = true;
 
-    "text/plain" = [ "nvim.desktop" ];
-    "text/markdown" = [ "nvim.desktop" ];
-    "text/x-nix" = [ "nvim.desktop" ];
-    "application/json" = [ "nvim.desktop" ];
-    "application/x-shellscript" = [ "nvim.desktop" ];
+    defaultApplications = {
+      "inode/directory" = [ "pcmanfm-qt.desktop" ];
+      "application/x-directory" = [ "pcmanfm-qt.desktop" ];
+
+      "text/plain" = [ "nvim.desktop" ];
+      "text/markdown" = [ "nvim.desktop" ];
+      "text/x-nix" = [ "nvim.desktop" ];
+      "text/x-python" = [ "nvim.desktop" ];
+      "text/x-shellscript" = [ "nvim.desktop" ];
+      "application/json" = [ "nvim.desktop" ];
+      "application/x-shellscript" = [ "nvim.desktop" ];
+    };
   };
 
   # Отключение шрифтов на уровне home manager, потому что они включены на системном уровне

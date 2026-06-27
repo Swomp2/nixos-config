@@ -336,7 +336,7 @@ in
 
         highlight.enable = true; # Подсветка
         indent.enable = true; # Отступы
-        folding.enable = true; # Folding
+        folding.enable = false; # Сворачивание текста
 
         nixGrammars = true; # Грамматики через Nix
       };
@@ -352,6 +352,25 @@ in
           scope = {
             show_start = false; # Не показывать начало scope
             show_end = false; # Не показывать конец scope
+          };
+
+          exclude = {
+            filetypes = [
+              "dashboard"
+              "NvimTree"
+              "TelescopePrompt"
+              "Trouble"
+              "help"
+              "lazy"
+              "mason"
+            ];
+
+            buftypes = [
+              "terminal"
+              "nofile"
+              "quickfix"
+              "prompt"
+            ];
           };
         };
       };
