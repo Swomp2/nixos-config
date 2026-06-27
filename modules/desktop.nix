@@ -123,8 +123,6 @@
     nvtopPackages.amd
     libnotify
     rose-pine-cursor
-    unstable.hyprlock
-    unstable.hypridle
     imagemagick
     ffmpeg-full
     p7zip-rar
@@ -142,7 +140,6 @@
     gdb
     libgcc
     clang
-    clang-tools
     gnumake
     cmake
     ninja

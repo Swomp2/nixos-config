@@ -2,6 +2,15 @@
 
 {
   environment.systemPackages = with pkgs; [
+    (lib.hiPrio coreutils-full)
+
+    gettext
+    glibcLocales
+
+    hunspell
+    hunspellDicts.ru_RU
+    hyphenDicts.ru_RU
+    
     dig
     inetutils
     traceroute
@@ -22,6 +31,7 @@
     lz4
     pv
     powertop
+    btop
     kitty.terminfo
   ];
 }

@@ -43,6 +43,7 @@ in
     ./config/btop/btop.nix
     ./config/uwsm/env.nix
     ./config/firefox/firefox.nix
+    ./config/nvim/nvim.nix
   ];
 
   home.language = {

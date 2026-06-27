@@ -170,9 +170,7 @@ in
     gruvbox-kvantum
     nwg-look
     rose-pine-hyprcursor
-    rust-analyzer
     eslint
-    texlab
     unstable.yt-dlp
 
     ripgrep

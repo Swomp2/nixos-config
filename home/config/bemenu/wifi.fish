@@ -46,7 +46,7 @@ end
 # Ручной ввод SSID
 set -l ssid "$choice"
 if test "$choice" = "[ввести SSID вручную]"
-    set ssid (printf '' | bemenu -p "SSID")
+    set ssid (printf '' | bemenu $bemenu_theme_args -H 10 -W 0.13 -c --list 15 -i -p "SSID")
     if test -z "$ssid"
         exit 0
     end

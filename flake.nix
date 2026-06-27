@@ -26,7 +26,6 @@
     # Nixvim
     nixvim = {
       url = "github:nix-community/nixvim/nixos-26.05";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Добавление модуля для декларативной разметки дисков
@@ -184,7 +183,7 @@
 
           modules = [
             inputs.nix-flatpak.homeManagerModules.nix-flatpak
-            inputs.nixvim.homeManagerModules.nixvim
+            inputs.nixvim.homeModules.nixvim
           ]
           ++ homeImports
           ++ [

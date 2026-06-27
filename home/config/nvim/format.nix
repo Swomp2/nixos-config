@@ -3,14 +3,14 @@
 {
   programs.nixvim = {
     extraPackages = with pkgs; [
-      nixfmt-rfc-style # Форматтер Nix-кода, команда nixfmt
+      nixfmt # Форматтер Nix-кода, команда nixfmt
       stylua # Форматтер Lua
       ruff # Быстрый Python formatter/import sorter
       clang-tools # clang-format для C/C++
       rustfmt # Форматтер Rust
       shfmt # Форматтер sh/bash
       fish # Даёт fish_indent для fish-скриптов
-      nodePackages.prettier # Форматтер JSON/YAML/HTML/CSS/JS/TS
+      prettier # Форматтер JSON/YAML/HTML/CSS/JS/TS
       tex-fmt # Форматтер LaTeX/.tex
     ];
 

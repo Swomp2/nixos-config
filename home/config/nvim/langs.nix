@@ -194,7 +194,6 @@
           wrap = true; # В Markdown длинные строки лучше визуально переносить
           linebreak = true; # Переносить по словам
           breakindent = true; # Сохранять визуальный отступ при переносе
-          conceallevel = 2; # Красивее скрывать часть markdown-разметки
           textwidth = 100; # Условная ширина текста
           colorcolumn = "100"; # Вертикальная линия
           commentstring = "<!-- %s -->"; # HTML-комментарий внутри Markdown

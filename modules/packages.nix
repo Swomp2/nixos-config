@@ -7,21 +7,11 @@
 }:
 {
   environment.systemPackages = with pkgs; [
-    (lib.hiPrio coreutils-full)
-
-    gettext
-    glibcLocales
-
-    hunspell
-    hunspellDicts.ru_RU
-    hyphenDicts.ru_RU
-
     git
     curl
     wget
     dysk
     lsd
-    btop
     bat
     zip
     unzip
@@ -44,7 +34,6 @@
     lshw
     clinfo
     vulkan-tools
-    libva-utils
     vdpauinfo
   ];
 

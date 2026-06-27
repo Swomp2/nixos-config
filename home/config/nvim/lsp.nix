@@ -135,66 +135,70 @@ in
           taplo = {
             enable = true; # LSP для TOML
           };
-        };
+          
+          rust_analyzer = {
+            enable = true; # LSP для Rust
 
-        rust_analyzer = {
-          enable = true; # LSP для Rust
+            installCargo = true; # Скачивать cargo автоматически
+            installRustc = true; # Скачивать rustc автоматически
 
-          packageFallback = true; # rust-analyzer из devshell сможет переопределить версию nixvim
+            packageFallback = true; # rust-analyzer из devshell сможет переопределить версию nixvim
 
-          rootMarkers = [
-            "Cargo.toml" # Обычный Rust-проект
-            "flake.nix" # Rust-проект с Nix flake
-            ".git" # Запасной вариант
-          ]; # По этим файлам определяется корень проекта
+            rootMarkers = [
+              "Cargo.toml" # Обычный Rust-проект
+              "flake.nix" # Rust-проект с Nix flake
+              ".git" # Запасной вариант
+            ]; # По этим файлам определяется корень проекта
 
-          settings = {
-            rust-analyzer = {
-              cargo = {
-                allTargets = true; # Анализировать lib/bin/tests/examples/benches
+            settings = {
+              rust-analyzer = {
+                cargo = {
+                  allTargets = true; # Анализировать lib/bin/tests/examples/benches
 
-                buildScripts = {
-                  enable = true; # Запускать build.rs для точного анализа
+                  buildScripts = {
+                    enable = true; # Запускать build.rs для точного анализа
+                  };
+
+                  features = "all"; # Включить все Cargo features
                 };
 
-                features = "all"; # Включить все Cargo features
-              };
-
-              check = {
-                command = "clippy"; # Вместо cargo check использовать cargo clippy
-                allTargets = true; # Проверять все targets
-                features = "all"; # Проверять со всеми features
-              };
-
-              procMacro = {
-                enable = true; # Включить proc-macro, нужно для derive-макросов
-              };
-
-              inlayHints = {
-                bindingModeHints = {
-                  enable = false; # Не показывать лишний шум для ref/mut binding
+                check = {
+                  command = "clippy"; # Вместо cargo check использовать cargo clippy
+                  allTargets = true; # Проверять все targets
+                  features = "all"; # Проверять со всеми features
                 };
 
-                closureReturnTypeHints = {
-                  enable = "with_block"; # Показывать типы возврата у сложных closure
+                procMacro = {
+                  enable = true; # Включить proc-macro, нужно для derive-макросов
                 };
 
-                lifetimeElisionHints = {
-                  enable = "skip_trivial"; # Показывать жизненный цикл только где это полезно
-                };
+                inlayHints = {
+                  bindingModeHints = {
+                    enable = false; # Не показывать лишний шум для ref/mut binding
+                  };
 
-                typeHints = {
-                  enable = true; # Подсказки типов переменных
-                };
+                  closureReturnTypeHints = {
+                    enable = "with_block"; # Показывать типы возврата у сложных closure
+                  };
 
-                parameterHints = {
-                  enable = true; # Подсказки имён параметров
+                  lifetimeElisionHints = {
+                    enable = "skip_trivial"; # Показывать жизненный цикл только где это полезно
+                  };
+
+                  typeHints = {
+                    enable = true; # Подсказки типов переменных
+                  };
+
+                  parameterHints = {
+                    enable = true; # Подсказки имён параметров
+                  };
                 };
               };
             };
           };
         };
       };
+
 
       "blink-cmp" = {
         enable = true; # Красивый движок автодополнения
@@ -230,11 +234,6 @@ in
           source = true,
         }, -- Красивое floating-окно diagnostics с источником ошибки
       })
-
-      vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "${colors.errorBright}" })
-      vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "${colors.warningBright}" })
-      vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = "${colors.blueBright}" })
-      vim.api.nvim_set_hl(0, "DiagnosticHint", { fg = "${colors.aquaBright}" })
 
       vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "${colors.errorBright}", bg = "NONE" })
       vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = "${colors.warningBright}", bg = "NONE" })
