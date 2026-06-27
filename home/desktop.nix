@@ -145,14 +145,18 @@ in
     slurp
     hyprshot
     playerctl
+
     libreoffice-qt-fresh
+    hunspell
+    hunspellDicts.ru_RU
+    hyphenDicts.ru_RU
+    
     ungoogled-chromium
     mpv
     kdePackages.okular
     kdePackages.ark
     nomacs
     element-desktop
-    firefox
     strawberry
     prismlauncher
     obs-studio

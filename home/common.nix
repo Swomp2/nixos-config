@@ -42,7 +42,22 @@ in
     ./config/dunst/dunst.nix
     ./config/btop/btop.nix
     ./config/uwsm/env.nix
+    ./config/firefox/firefox.nix
   ];
+
+  home.language = {
+    base = "ru_RU.UTF-8";
+    messages = "ru_RU.UTF-8";
+    time = "ru_RU.UTF-8";
+    numeric = "ru_RU.UTF-8";
+    monetary = "ru_RU.UTF-8";
+    paper = "ru_RU.UTF-8";
+    measurement = "ru_RU.UTF-8";
+  };
+  
+  home.sessionVariables = {
+    LANGUAGE = "ru_RU:ru";
+  };
 
   xdg.configFile."mpv".source = ./config/mpv;
   xdg.configFile."mpv".recursive = true;

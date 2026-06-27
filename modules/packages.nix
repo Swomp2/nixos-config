@@ -2,10 +2,20 @@
   config,
   pkgs,
   unstable,
+  lib,
   ...
 }:
 {
   environment.systemPackages = with pkgs; [
+    (lib.hiPrio coreutils-full)
+
+    gettext
+    glibcLocales
+
+    hunspell
+    hunspellDicts.ru_RU
+    hyphenDicts.ru_RU
+  
     git
     curl
     wget
