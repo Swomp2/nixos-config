@@ -164,23 +164,18 @@ in
     kdePackages.qt6ct
     lxqt.pavucontrol-qt
     pcmanfm-qt
-    octaveFull
     vscodium
     libsForQt5.qt5ct
     kdePackages.qtstyleplugin-kvantum
     gruvbox-kvantum
     nwg-look
     rose-pine-hyprcursor
-    rustfmt
     rust-analyzer
-    pyright
     eslint
-    prettier
-    tex-fmt
-    asm-lsp
     texlab
     unstable.yt-dlp
-    texliveFull
-    qpdf
+
+    ripgrep
+    fd
   ];
 }
