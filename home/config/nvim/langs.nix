@@ -24,7 +24,6 @@
           softtabstop = 2; # Поведение Tab/Backspace при вводе
           commentstring = "# %s"; # Формат комментария для gc/comment.nvim
           textwidth = 100; # Условная граница длины строки
-          colorcolumn = "100"; # Вертикальная линия на 100 символах
         };
       };
 
@@ -36,7 +35,6 @@
           softtabstop = 2; # Удобный ввод отступов
           commentstring = "-- %s"; # Lua-комментарий
           textwidth = 100; # Ограничитель строки
-          colorcolumn = "100"; # Визуальная граница
         };
       };
 
@@ -48,7 +46,6 @@
           softtabstop = 4; # Tab/Backspace работают по 4 пробела
           commentstring = "# %s"; # Python-комментарий
           textwidth = 88; # Под black
-          colorcolumn = "88"; # Визуальная граница black
         };
       };
 
@@ -60,7 +57,6 @@
           softtabstop = 4; # Ввод отступа 4 пробела
           commentstring = "// %s"; # Rust-комментарий
           textwidth = 100; # Условная граница строки
-          colorcolumn = "100"; # Визуальная граница
         };
       };
 
@@ -73,7 +69,6 @@
           cindent = true; # Встроенные C-отступы
           commentstring = "// %s"; # C/C++-стиль комментария
           textwidth = 100; # Граница строки
-          colorcolumn = "100"; # Вертикальная линия
         };
       };
 
@@ -86,7 +81,6 @@
           cindent = true; # Встроенные C/C++-отступы
           commentstring = "// %s"; # C++ комментарий
           textwidth = 100; # Граница строки
-          colorcolumn = "100"; # Вертикальная линия
         };
       };
 
@@ -195,7 +189,6 @@
           linebreak = true; # Переносить по словам
           breakindent = true; # Сохранять визуальный отступ при переносе
           textwidth = 100; # Условная ширина текста
-          colorcolumn = "100"; # Вертикальная линия
           commentstring = "<!-- %s -->"; # HTML-комментарий внутри Markdown
         };
       };
@@ -207,7 +200,6 @@
           breakindent = true; # Сохранять визуальный отступ
           conceallevel = 2; # Красивее отображать LaTeX-разметку
           textwidth = 100; # Условная граница строки
-          colorcolumn = "100"; # Вертикальная линия
           commentstring = "% %s"; # LaTeX-комментарий
         };
       };
@@ -238,7 +230,6 @@
           linebreak = true; # Перенос по словам
           spell = false; # Не включаем spell, чтобы не ловить шум от русского/английского
           textwidth = 72; # Классическая ширина тела commit message
-          colorcolumn = "50,72"; # 50 для заголовка, 72 для тела
         };
       };
     };

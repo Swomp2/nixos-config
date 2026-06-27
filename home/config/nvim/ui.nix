@@ -263,6 +263,63 @@ in
               "╚══════╝  ╚═══╝  ╚═╝╚═╝     ╚═╝"
               ""
             ]; # Заголовок без своих биндов
+
+            center = [
+              {
+                icon = "  ";
+                desc = "Найти файл";
+                key = "f";
+                key_format = " [%s]";
+                action = "Telescope find_files";
+              }
+
+              {
+                icon = "󰈞  ";
+                desc = "Найти текст";
+                key = "g";
+                key_format = " [%s]";
+                action = "Telescope live_grep";
+              }
+
+              {
+                icon = "  ";
+                desc = "Недавние файлы";
+                key = "r";
+                key_format = " [%s]";
+                action = "Telescope oldfiles";
+              }
+
+              {
+                icon = "  ";
+                desc = "Файловое дерево";
+                key = "e";
+                key_format = " [%s]";
+                action = "NvimTreeToggle";
+              }
+
+              {
+                icon = "  ";
+                desc = "Новый файл";
+                key = "n";
+                key_format = " [%s]";
+                action = "enew";
+              }
+
+              {
+                icon = "󰗼  ";
+                desc = "Выйти";
+                key = "q";
+                key_format = " [%s]";
+                action = "qa";
+              }
+            ]; # Кнопки в центре dashboard
+
+            footer = [
+              ""
+              "neovim loaded"
+            ]; # Нижняя подпись
+
+            vertical_center = true; # Центрировать dashboard по вертикали
           };
         };
       };
@@ -398,15 +455,36 @@ in
         };
       };
 
-      gitsigns = {
-        enable = true; # Git-знаки слева
+      neogit = {
+        enable = true; # Полноценный Git UI внутри Neovim
 
         settings = {
-          current_line_blame = true; # Blame текущей строки
-          current_line_blame_opts = {
-            delay = 700; # Задержка blame
+          kind = "tab"; # Открывать Neogit в отдельной вкладке
+
+          integrations = {
+            diffview = true; # Использовать diffview для просмотра diff-ов
+            telescope = true; # Интеграция с Telescope
+          };
+
+          signs = {
+            hunk = [
+              ""
+              ""
+            ]; # Не добавлять лишние символы вокруг hunk-ов
+            item = [
+              "▸"
+              "▾"
+            ]; # Свёрнутый/развёрнутый пункт
+            section = [
+              "▸"
+              "▾"
+            ]; # Свёрнутая/развёрнутая секция
           };
         };
+      };
+
+      diffview = {
+        enable = true; # Удобный просмотр diff-ов по всем изменённым файлам
       };
 
       trouble = {
