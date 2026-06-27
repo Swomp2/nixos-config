@@ -33,7 +33,7 @@
         compiler_method = "latexmk"; # Основной сборщик — latexmk
 
         compiler_latexmk = {
-          executable = "latexmk"; # Команда сборки
+          executable = "${pkgs.texliveFull}/bin/latexmk"; # Команда сборки
 
           continuous = 0; # Не запускать постоянную фоновую сборку
           callback = 1; # Получать статус сборки от latexmk
@@ -48,6 +48,7 @@
             "-file-line-error" # Ошибки в формате file:line
             "-shell-escape" # Как в lualatexmk из VS Code
             "-lualatex" # Сборка именно через LuaLaTeX
+            "-auxdir=Временное" # Дублируем директорию временных файлов и для компилятора
           ];
         };
 
@@ -58,6 +59,9 @@
     };
 
     extraConfigLua = ''
+      local latexmk = "${pkgs.texliveFull}/bin/latexmk"
+      local qpdf = "${pkgs.qpdf}/bin/qpdf"
+
       local function latex_document()
         -- Если VimTeX нашёл главный .tex файл, используем его
         if vim.b.vimtex and vim.b.vimtex.tex and vim.b.vimtex.tex ~= "" then
@@ -91,7 +95,7 @@
         vim.notify("LuaLaTeX: сборка " .. vim.fn.fnamemodify(doc, ":t"))
 
         vim.fn.jobstart({
-          "latexmk",
+          latexmk,
           "-cd",
           "-synctex=1",
           "-interaction=nonstopmode",
@@ -114,7 +118,7 @@
             vim.notify("qpdf: оптимизация " .. pdf)
 
             vim.fn.jobstart({
-              "qpdf",
+              qpdf,
               "--optimize-images",
               "--stream-data=compress",
               "--object-streams=generate",

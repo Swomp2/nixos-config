@@ -93,10 +93,11 @@ in
                     "-interaction=nonstopmode"
                     "-shell-escape"
                     "-synctex=1"
+                    "-auxdir=Временное"
                     "%f"
                   ]; # LuaLaTeX + SyncTeX, чтобы потом прыгать между PDF и .tex
 
-                  onSave = true; # Не собирать автоматически при каждом сохранении
+                  onSave = false; # Не собирать автоматически при каждом сохранении
                   forwardSearchAfter = false; # Forward search настроим отдельно в latex.nix
                 };
 
