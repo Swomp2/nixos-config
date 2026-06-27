@@ -50,6 +50,37 @@ in
     LIBVA_DRIVER_NAME = "radeonsi";
   };
 
+  # Делаем редактором по умолчанию nvim
+  xdg.desktopEntries.nvim = {
+    name = "Neovim";
+    genericName = "Text Editor";
+    exec = "kitty -e nvim %F";
+    terminal = false;
+    categories = [
+      "Utility"
+      "TextEditor"
+    ];
+    mimeType = [
+      "text/plain"
+      "text/markdown"
+      "text/x-nix"
+      "application/json"
+      "application/x-shellscript"
+    ];
+  };
+
+  # Файлы и папки должны по умолчанию открываться в файловом менеджере, а не в терминале
+  xdg.mimeApps.defaultApplications = {
+    "inode/directory" = [ "pcmanfm-qt.desktop" ];
+    "application/x-directory" = [ "pcmanfm-qt.desktop" ];
+
+    "text/plain" = [ "nvim.desktop" ];
+    "text/markdown" = [ "nvim.desktop" ];
+    "text/x-nix" = [ "nvim.desktop" ];
+    "application/json" = [ "nvim.desktop" ];
+    "application/x-shellscript" = [ "nvim.desktop" ];
+  };
+
   # Отключение шрифтов на уровне home manager, потому что они включены на системном уровне
   fonts.fontconfig.enable = lib.mkForce false;
 
