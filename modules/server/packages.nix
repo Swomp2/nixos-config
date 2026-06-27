@@ -10,7 +10,7 @@
     hunspell
     hunspellDicts.ru_RU
     hyphenDicts.ru_RU
-    
+
     dig
     inetutils
     traceroute

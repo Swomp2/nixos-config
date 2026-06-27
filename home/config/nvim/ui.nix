@@ -412,11 +412,11 @@ in
 
       colorizer = {
         enable = true; # Показывать реальные цвета прямо в коде, как в VS Code
-      
+
         settings = {
           filetypes = [
             "*" # Включить почти для всех filetype
-      
+
             "!dashboard" # Не нужно на стартовом экране
             "!NvimTree" # Не нужно в дереве файлов
             "!TelescopePrompt" # Не нужно в Telescope input
@@ -425,17 +425,17 @@ in
             "!lazy" # На случай lazy-like буферов
             "!mason" # На случай mason-like буферов
           ];
-      
+
           user_commands = true; # Даёт команды :ColorizerToggle, :ColorizerReloadAllBuffers и т.д.
-      
+
           lazy_load = false; # Включать сразу, а не ждать ручного attach
-      
+
           options = {
             parsers = {
               css = true; # Включить весь CSS-набор: hex, names, rgb(), hsl(), oklch(), css vars
-      
+
               css_fn = true; # CSS-функции: rgb(), rgba(), hsl(), hsla(), oklch() и т.п.
-      
+
               hex = {
                 default = true; # Все обычные hex-форматы
                 rrggbb = true; # #RRGGBB
@@ -443,41 +443,41 @@ in
                 rrggbbaa = true; # #RRGGBBAA
                 aarrggbb = true; # #AARRGGBB
               };
-      
+
               names = {
                 enable = true; # Цвета словами: red, blue, white, black и т.д.
                 lowercase = true; # red
                 camelcase = true; # LightBlue
                 uppercase = false; # RED обычно слишком шумно
               };
-      
+
               css_var = {
                 enable = true; # Подсвечивать var(--color), если переменная найдена
                 parsers = {
                   css = true; # Разбирать значения CSS-переменных как CSS-цвета
                 };
               };
-      
+
               tailwind = {
                 enable = true; # Подсветка Tailwind-классов типа bg-red-500/text-stone-300
                 lsp = false; # Без зависимости от tailwindcss-language-server
               };
-      
+
               sass = {
                 enable = true; # Sass/SCSS-переменные цветов
               };
-      
+
               xcolor = {
                 enable = true; # LaTeX/xcolor: red!50, blue!20 и похожие конструкции
               };
             };
-      
+
             display = {
               mode = [
                 "background" # Красить фон самого цвета
                 "virtualtext" # Дополнительно показывать цветной маркер рядом
               ];
-      
+
               virtualtext = {
                 position = "after"; # Маркер после найденного цвета
               };

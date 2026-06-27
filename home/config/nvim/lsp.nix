@@ -135,7 +135,7 @@ in
           taplo = {
             enable = true; # LSP для TOML
           };
-          
+
           rust_analyzer = {
             enable = true; # LSP для Rust
 
@@ -198,7 +198,6 @@ in
           };
         };
       };
-
 
       "blink-cmp" = {
         enable = true; # Красивый движок автодополнения
