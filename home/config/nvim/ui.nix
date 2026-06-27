@@ -13,20 +13,20 @@ in
 
         undercurl = true; # Волнистое подчёркивание diagnostics
         underline = true; # Обычное подчёркивание
-        bold = true;      # Разрешить жирный текст
+        bold = true; # Разрешить жирный текст
 
         italic = {
-          strings = false;   # Строки без курсива
-          emphasis = true;   # Markdown emphasis курсивом
-          comments = true;   # Комментарии курсивом
+          strings = false; # Строки без курсива
+          emphasis = true; # Markdown emphasis курсивом
+          comments = true; # Комментарии курсивом
           operators = false; # Операторы без курсива
-          folds = true;      # Fold-текст курсивом
+          folds = true; # Fold-текст курсивом
         };
 
-        strikethrough = true;     # Разрешить зачёркивание
+        strikethrough = true; # Разрешить зачёркивание
         invert_selection = false; # Не инвертировать visual selection
-        invert_signs = false;     # Не инвертировать signcolumn
-        invert_tabline = false;   # Не инвертировать tabline/bufferline
+        invert_signs = false; # Не инвертировать signcolumn
+        invert_tabline = false; # Не инвертировать tabline/bufferline
 
         inverse = true; # Инверсия для search/diff/statusline/error-групп
 
@@ -35,50 +35,50 @@ in
         transparent_mode = theme.opacity.terminal < 1.0; # Если opacity.terminal меньше 1.0, фон Neovim прозрачный
 
         palette_overrides = {
-          dark0 = colors.bg;       # Основной фон
-          dark1 = colors.bgAlt;    # Вторичный фон
-          dark2 = colors.bgMuted;  # Приглушённый фон
+          dark0 = colors.bg; # Основной фон
+          dark1 = colors.bgAlt; # Вторичный фон
+          dark2 = colors.bgMuted; # Приглушённый фон
 
           light0 = colors.fgStrong; # Яркий текст
-          light1 = colors.fg;       # Обычный текст
-          gray = colors.muted;      # Приглушённый текст
+          light1 = colors.fg; # Обычный текст
+          gray = colors.muted; # Приглушённый текст
 
           neutral_orange = colors.accent; # Главный акцент
-          bright_orange = colors.accent;  # Яркий акцент
+          bright_orange = colors.accent; # Яркий акцент
 
-          neutral_yellow = colors.warning;       # Warning
-          bright_yellow = colors.warningBright;  # Яркий warning
+          neutral_yellow = colors.warning; # Warning
+          bright_yellow = colors.warningBright; # Яркий warning
 
-          neutral_red = colors.error;      # Error
+          neutral_red = colors.error; # Error
           bright_red = colors.errorBright; # Яркий error
 
-          neutral_green = colors.green;       # Green
-          bright_green = colors.greenBright;  # Bright green
+          neutral_green = colors.green; # Green
+          bright_green = colors.greenBright; # Bright green
 
-          neutral_blue = colors.blue;       # Blue
-          bright_blue = colors.blueBright;  # Bright blue
+          neutral_blue = colors.blue; # Blue
+          bright_blue = colors.blueBright; # Bright blue
 
-          neutral_purple = colors.purple;       # Purple
-          bright_purple = colors.purpleBright;  # Bright purple
+          neutral_purple = colors.purple; # Purple
+          bright_purple = colors.purpleBright; # Bright purple
 
-          neutral_aqua = colors.aqua;       # Aqua
-          bright_aqua = colors.aquaBright;  # Bright aqua
+          neutral_aqua = colors.aqua; # Aqua
+          bright_aqua = colors.aquaBright; # Bright aqua
         };
 
         overrides = {
           Normal = {
             fg = colors.fg; # Основной текст
-            bg = "NONE";   # Прозрачный фон
+            bg = "NONE"; # Прозрачный фон
           };
 
           NormalFloat = {
-            fg = colors.fg;    # Текст floating-окон
+            fg = colors.fg; # Текст floating-окон
             bg = colors.bgAlt; # Фон floating-окон
           };
 
           FloatBorder = {
             fg = colors.accent; # Рамка floating-окон
-            bg = colors.bgAlt;  # Фон рамки
+            bg = colors.bgAlt; # Фон рамки
           };
 
           CursorLine = {
@@ -90,12 +90,12 @@ in
           };
 
           Search = {
-            fg = colors.bg;            # Текст найденного
+            fg = colors.bg; # Текст найденного
             bg = colors.warningBright; # Фон найденного
           };
 
           IncSearch = {
-            fg = colors.bg;     # Текст текущего совпадения
+            fg = colors.bg; # Текст текущего совпадения
             bg = colors.accent; # Фон текущего совпадения
           };
 
@@ -121,7 +121,7 @@ in
 
           NvimTreeNormal = {
             fg = colors.fg; # Текст дерева файлов
-            bg = "NONE";   # Прозрачный фон дерева
+            bg = "NONE"; # Прозрачный фон дерева
           };
 
           NvimTreeFolderName = {
@@ -134,18 +134,18 @@ in
           };
 
           TelescopeNormal = {
-            fg = colors.fg;    # Текст Telescope
+            fg = colors.fg; # Текст Telescope
             bg = colors.bgAlt; # Фон Telescope
           };
 
           TelescopeBorder = {
             fg = colors.accent; # Рамка Telescope
-            bg = colors.bgAlt;  # Фон рамки
+            bg = colors.bgAlt; # Фон рамки
           };
 
           TelescopeSelection = {
             fg = colors.fgStrong; # Выбранная строка
-            bg = colors.bgMuted;  # Фон выбранной строки
+            bg = colors.bgMuted; # Фон выбранной строки
             bold = true;
           };
         };
@@ -164,24 +164,31 @@ in
           options = {
             theme = "gruvbox"; # lualine сам берёт dark/light по opts.background
             icons_enabled = true; # Иконки в statusline
-            globalstatus = true;  # Один statusline на весь экран
+            globalstatus = true; # Один statusline на весь экран
 
             component_separators = {
-              left = "│";  # Разделитель компонентов
+              left = "│"; # Разделитель компонентов
               right = "│";
             };
 
             section_separators = {
-              left = "";  # Powerline-разделитель
+              left = ""; # Powerline-разделитель
               right = "";
             };
           };
 
           sections = {
             lualine_a = [ "mode" ]; # NORMAL/INSERT/VISUAL
-            lualine_b = [ "branch" "diff" ]; # Git-ветка и diff
+            lualine_b = [
+              "branch"
+              "diff"
+            ]; # Git-ветка и diff
             lualine_c = [ "filename" ]; # Имя файла
-            lualine_x = [ "diagnostics" "encoding" "filetype" ]; # LSP/кодировка/тип
+            lualine_x = [
+              "diagnostics"
+              "encoding"
+              "filetype"
+            ]; # LSP/кодировка/тип
             lualine_y = [ "progress" ]; # Позиция в файле
             lualine_z = [ "location" ]; # Строка:колонка
           };
@@ -203,9 +210,9 @@ in
             offsets = [
               {
                 filetype = "NvimTree"; # Отступ под дерево файлов
-                text = "Файлы";        # Заголовок дерева
+                text = "Файлы"; # Заголовок дерева
                 text_align = "center"; # Центрировать
-                separator = true;      # Разделитель
+                separator = true; # Разделитель
               }
             ];
           };
@@ -400,6 +407,82 @@ in
 
         settings = {
           check_ts = true; # Учитывать Treesitter
+        };
+      };
+
+      colorizer = {
+        enable = true; # Показывать реальные цвета прямо в коде, как в VS Code
+      
+        settings = {
+          filetypes = [
+            "*" # Включить почти для всех filetype
+      
+            "!dashboard" # Не нужно на стартовом экране
+            "!NvimTree" # Не нужно в дереве файлов
+            "!TelescopePrompt" # Не нужно в Telescope input
+            "!Trouble" # Не нужно в Trouble
+            "!help" # Не нужно в help-файлах
+            "!lazy" # На случай lazy-like буферов
+            "!mason" # На случай mason-like буферов
+          ];
+      
+          user_commands = true; # Даёт команды :ColorizerToggle, :ColorizerReloadAllBuffers и т.д.
+      
+          lazy_load = false; # Включать сразу, а не ждать ручного attach
+      
+          options = {
+            parsers = {
+              css = true; # Включить весь CSS-набор: hex, names, rgb(), hsl(), oklch(), css vars
+      
+              css_fn = true; # CSS-функции: rgb(), rgba(), hsl(), hsla(), oklch() и т.п.
+      
+              hex = {
+                default = true; # Все обычные hex-форматы
+                rrggbb = true; # #RRGGBB
+                rgb = true; # #RGB
+                rrggbbaa = true; # #RRGGBBAA
+                aarrggbb = true; # #AARRGGBB
+              };
+      
+              names = {
+                enable = true; # Цвета словами: red, blue, white, black и т.д.
+                lowercase = true; # red
+                camelcase = true; # LightBlue
+                uppercase = false; # RED обычно слишком шумно
+              };
+      
+              css_var = {
+                enable = true; # Подсвечивать var(--color), если переменная найдена
+                parsers = {
+                  css = true; # Разбирать значения CSS-переменных как CSS-цвета
+                };
+              };
+      
+              tailwind = {
+                enable = true; # Подсветка Tailwind-классов типа bg-red-500/text-stone-300
+                lsp = false; # Без зависимости от tailwindcss-language-server
+              };
+      
+              sass = {
+                enable = true; # Sass/SCSS-переменные цветов
+              };
+      
+              xcolor = {
+                enable = true; # LaTeX/xcolor: red!50, blue!20 и похожие конструкции
+              };
+            };
+      
+            display = {
+              mode = [
+                "background" # Красить фон самого цвета
+                "virtualtext" # Дополнительно показывать цветной маркер рядом
+              ];
+      
+              virtualtext = {
+                position = "after"; # Маркер после найденного цвета
+              };
+            };
+          };
         };
       };
     };

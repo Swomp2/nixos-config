@@ -139,54 +139,54 @@ in
 
         rust_analyzer = {
           enable = true; # LSP для Rust
-        
+
           packageFallback = true; # rust-analyzer из devshell сможет переопределить версию nixvim
-        
+
           rootMarkers = [
             "Cargo.toml" # Обычный Rust-проект
-            "flake.nix"  # Rust-проект с Nix flake
-            ".git"       # Запасной вариант
+            "flake.nix" # Rust-проект с Nix flake
+            ".git" # Запасной вариант
           ]; # По этим файлам определяется корень проекта
-        
+
           settings = {
             rust-analyzer = {
               cargo = {
                 allTargets = true; # Анализировать lib/bin/tests/examples/benches
-        
+
                 buildScripts = {
                   enable = true; # Запускать build.rs для точного анализа
                 };
-        
+
                 features = "all"; # Включить все Cargo features
               };
-        
+
               check = {
                 command = "clippy"; # Вместо cargo check использовать cargo clippy
                 allTargets = true; # Проверять все targets
                 features = "all"; # Проверять со всеми features
               };
-        
+
               procMacro = {
                 enable = true; # Включить proc-macro, нужно для derive-макросов
               };
-        
+
               inlayHints = {
                 bindingModeHints = {
                   enable = false; # Не показывать лишний шум для ref/mut binding
                 };
-        
+
                 closureReturnTypeHints = {
                   enable = "with_block"; # Показывать типы возврата у сложных closure
                 };
-        
+
                 lifetimeElisionHints = {
                   enable = "skip_trivial"; # Показывать жизненный цикл только где это полезно
                 };
-        
+
                 typeHints = {
                   enable = true; # Подсказки типов переменных
                 };
-        
+
                 parameterHints = {
                   enable = true; # Подсказки имён параметров
                 };

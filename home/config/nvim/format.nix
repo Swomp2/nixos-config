@@ -59,7 +59,7 @@
           ]; # Fish shell
 
           tex = [
-          	"tex-fmt"
+            "tex-fmt"
           ]; # LaTeX/.tex
 
           json = [
