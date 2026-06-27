@@ -31,22 +31,6 @@
       inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
-  # Импорт впн и clipcascade
-  imports = [
-    ./programs/adguardvpn.nix
-    ./programs/clipcascade.nix
-  ];
-
-  programs.adguardvpn-cli = {
-    enable = true;
-    channel = "nightly";
-  };
-
-  programs.clipcascade = {
-    enable = true;
-    autostart = true;
-  };
-
   # Это для тем и иконок для greeter
   environment.pathsToLink = [
     "/share/icons"
@@ -148,10 +132,6 @@
     unrar
     gruvbox-gtk-theme
     papirus-icon-theme
-    sing-box
-    xray
-    v2raya
-    v2rayn
     virt-viewer
     guestfs-tools
     cargo

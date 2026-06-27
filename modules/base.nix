@@ -16,6 +16,8 @@
     enable = true;
     libraries = with pkgs; [
       stdenv.cc.cc
+      openssl
+      zlib
     ];
   };
 
@@ -23,8 +25,14 @@
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 14d";
+    options = "--delete-older-than 7d";
     persistent = true;
+  };
+
+  # Оптимизация хранилища nix
+  nix.optimise = {
+  	automatic = true;
+  	dates = [ "weekly" ];
   };
 
   boot.loader.systemd-boot.configurationLimit = 10;

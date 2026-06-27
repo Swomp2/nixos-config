@@ -13,7 +13,7 @@ in
   virtualisation.oci-containers.containers = {
     # Контейнер redis для nextcloud
     redis-nextcloud = {
-      image = "redis:7-alpine"; # Образ redis, рантайм от alpine
+      image = "redis:8.8.0-alpine"; # Образ redis, рантайм от alpine
       autoStart = true; # Автозагрузка при включении сервера
 
       volumes = [

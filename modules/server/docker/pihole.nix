@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  piholeImage = "pihole/pihole:2026.05.0";
+  piholeImage = "pihole/pihole:2026.06.0";
 
   secretsDir = "/srv/secrets";
 

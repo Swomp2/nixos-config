@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  synapseImage = "matrixdotorg/synapse:v1.153.0";
+  synapseImage = "matrixdotorg/synapse:v1.155.0";
 
   serverName = "swomp.ru"; # Имя matrix сервера. Ники будут типа @something:swomp.ru
   publicBaseUrl = "https://matrix.swomp.ru/";

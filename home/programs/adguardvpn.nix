@@ -34,18 +34,24 @@ let
 
   installHelper = pkgs.writeShellScriptBin "adguardvpn-cli-install" ''
     set -euo pipefail
+
     dir='${cfg.dataDir}'
     tmp="$(mktemp /tmp/adguardvpn-install.XXXXXX.sh)"
+
     trap 'rm -f "$tmp"' EXIT
-    sudo ${pkgs.coreutils}/bin/install -d -m 0755 "$dir"
+
+    ${pkgs.coreutils}/bin/install -d -m 0755 "$dir"
     ${pkgs.curl}/bin/curl -fsSL '${installScriptUrl}' -o "$tmp"
     sudo ${pkgs.bash}/bin/sh "$tmp" -o "$dir" -a n -v
   '';
 
   uninstallHelper = pkgs.writeShellScriptBin "adguardvpn-cli-uninstall" ''
     set -euo pipefail
+
     tmp="$(mktemp /tmp/adguardvpn-uninstall.XXXXXX.sh)"
+
     trap 'rm -f "$tmp"' EXIT
+
     ${pkgs.curl}/bin/curl -fsSL '${installScriptUrl}' -o "$tmp"
     sudo ${pkgs.bash}/bin/sh "$tmp" -o '${cfg.dataDir}' -u -a y -v
   '';
@@ -86,19 +92,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.nix-ld.enable = lib.mkDefault true;
-
-    programs.nix-ld.libraries = with pkgs; [
-      stdenv.cc.cc
-      openssl
-      zlib
-    ];
-
-    systemd.tmpfiles.rules = [
-      "d ${cfg.dataDir} 0755 root root - -"
-    ];
-
-    environment.systemPackages = [
+    home.packages = [
       wrapper
       installHelper
       uninstallHelper

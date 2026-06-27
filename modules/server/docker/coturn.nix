@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  coturnImage = "coturn/coturn:4.12-alpine";
+  coturnImage = "coturn/coturn:4.14-alpine";
 
   domain = "swomp.ru";
   publicAddress = "80.251.125.180";

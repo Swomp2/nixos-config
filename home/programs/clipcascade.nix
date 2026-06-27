@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  username ? "swomp",
   ...
 }:
 
@@ -172,12 +171,6 @@ in
   options.programs.clipcascade = {
     enable = lib.mkEnableOption "ClipCascade client";
 
-    user = lib.mkOption {
-      type = lib.types.str;
-      default = username;
-      description = "Home Manager user for which ClipCascade should be installed.";
-    };
-
     autostart = lib.mkOption {
       type = lib.types.bool;
       default = false;
@@ -207,68 +200,66 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    home-manager.users.${cfg.user} =
-      { lib, pkgs, ... }:
-      let
-        autostartScript = pkgs.writeShellScript "clipcascade-autostart" ''
-          ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd \
-            DISPLAY \
-            WAYLAND_DISPLAY \
-            XAUTHORITY \
-            XDG_CURRENT_DESKTOP \
-            XDG_SESSION_TYPE \
-            XDG_SESSION_DESKTOP \
-            DESKTOP_SESSION \
-            HYPRLAND_INSTANCE_SIGNATURE \
-            SWAYSOCK \
-            DBUS_SESSION_BUS_ADDRESS \
-            PATH || true
-
-          ${pkgs.systemd}/bin/systemctl --user start clipcascade.service
-        '';
-      in
-      {
-        home.packages = [ clipcascadePkg ];
-
-        systemd.user.services.clipcascade = {
-          Unit = {
-            Description = "ClipCascade clipboard sync client";
-            Documentation = "https://github.com/Sathvik-Rao/ClipCascade";
-            PartOf = [ "graphical-session.target" ];
-            After = [ "graphical-session.target" ];
-          };
-
-          Service = {
-            Type = "simple";
-            ExecStart = "${clipcascadePkg}/bin/clipcascade ${lib.escapeShellArgs cfg.extraArgs}";
-            Restart = "on-failure";
-            RestartSec = 3;
-            Environment = [
-              "PYSTRAY_BACKEND=appindicator"
-              "GDK_BACKEND=wayland,x11"
-              "CLIPCASCADE_GUI=true"
-              "CLIPCASCADE_XMODE=auto"
-            ];
-          };
-
-          Install = lib.mkIf cfg.autostart {
-            WantedBy = [ "graphical-session.target" ];
-          };
+  config = lib.mkIf cfg.enable (
+    let
+      autostartScript = pkgs.writeShellScript "clipcascade-autostart" ''
+        ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd \
+          DISPLAY \
+          WAYLAND_DISPLAY \
+          XAUTHORITY \
+          XDG_CURRENT_DESKTOP \
+          XDG_SESSION_TYPE \
+          XDG_SESSION_DESKTOP \
+          DESKTOP_SESSION \
+          HYPRLAND_INSTANCE_SIGNATURE \
+          SWAYSOCK \
+          DBUS_SESSION_BUS_ADDRESS \
+          PATH || true
+  
+        ${pkgs.systemd}/bin/systemctl --user start clipcascade.service
+      '';
+    in
+    {
+      home.packages = [ clipcascadePkg ];
+  
+      systemd.user.services.clipcascade = {
+        Unit = {
+          Description = "ClipCascade clipboard sync client";
+          Documentation = "https://github.com/Sathvik-Rao/ClipCascade";
+          PartOf = [ "graphical-session.target" ];
+          After = [ "graphical-session.target" ];
         };
-
-        xdg.configFile."autostart/clipcascade.desktop" = lib.mkIf cfg.autostart {
-          text = ''
-            [Desktop Entry]
-            Type=Application
-            Name=ClipCascade
-            Comment=Clipboard sync client
-            Exec=${autostartScript}
-            Terminal=false
-            StartupNotify=false
-            X-GNOME-Autostart-enabled=true
-          '';
+  
+        Service = {
+          Type = "simple";
+          ExecStart = "${clipcascadePkg}/bin/clipcascade ${lib.escapeShellArgs cfg.extraArgs}";
+          Restart = "on-failure";
+          RestartSec = 3;
+          Environment = [
+            "PYSTRAY_BACKEND=appindicator"
+            "GDK_BACKEND=wayland,x11"
+            "CLIPCASCADE_GUI=true"
+            "CLIPCASCADE_XMODE=auto"
+          ];
+        };
+  
+        Install = lib.mkIf cfg.autostart {
+          WantedBy = [ "graphical-session.target" ];
         };
       };
-  };
+  
+      xdg.configFile."autostart/clipcascade.desktop" = lib.mkIf cfg.autostart {
+        text = ''
+          [Desktop Entry]
+          Type=Application
+          Name=ClipCascade
+          Comment=Clipboard sync client
+          Exec=${autostartScript}
+          Terminal=false
+          StartupNotify=false
+          X-GNOME-Autostart-enabled=true
+        '';
+      };
+    }
+  );
 }

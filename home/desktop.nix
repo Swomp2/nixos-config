@@ -10,6 +10,23 @@ let
   kvTheme = pkgs.gruvbox-kvantum;
 in
 {
+  # Импорт adguard vpn и clipcascade
+  imports = [
+  	./programs/adguardvpn.nix
+  	./programs/clipcascade.nix
+  ];
+
+  # Включение adguard vpn и clipcascade
+  programs.adguardvpn-cli = {
+  	enable = true;
+  	channel = "nightly";
+  };
+
+  programs.clipcascade = {
+  	enable = true;
+  	autostart = true;
+  };
+
   # Включение xdg autostart
   xdg.autostart.enable = true;
 
@@ -145,7 +162,6 @@ in
     pcmanfm-qt
     octaveFull
     vscodium
-    gui-for-singbox
     libsForQt5.qt5ct
     kdePackages.qtstyleplugin-kvantum
     gruvbox-kvantum

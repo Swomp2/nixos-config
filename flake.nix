@@ -86,7 +86,6 @@
       mkHost =
         {
           hostPath,
-          homeImports,
           extraModules ? [ ],
         }:
 
@@ -105,7 +104,6 @@
               homeDir
               timeZone
               unstable
-              homeImports
               theme
               ;
           };
@@ -113,11 +111,9 @@
           modules = [
             disko.nixosModules.disko
             lanzaboote.nixosModules.lanzaboote
-            home-manager.nixosModules.default
             hostPath
 
             ./modules/users.nix # Тут идёт вся общесистемная конфигурация пользователей
-            ./modules/system-home-manager.nix # Тут общесистемная конфигурация home-manager
 
           ]
           ++ extraModules;
@@ -215,10 +211,6 @@
       nixosConfigurations = {
         pc = mkHost {
           hostPath = ./hosts/pc/configuration.nix;
-          homeImports = [
-            ./home/pc.nix
-            ./home/common.nix
-          ];
 
           extraModules = [
             {
@@ -230,10 +222,6 @@
 
         laptop = mkHost {
           hostPath = ./hosts/laptop/configuration.nix;
-          homeImports = [
-            ./home/laptop.nix
-            ./home/common.nix
-          ];
 
           extraModules = [
             {

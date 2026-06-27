@@ -2,7 +2,7 @@
 {
   virtualisation.oci-containers.containers = {
     postgres-nextcloud = {
-      image = "postgres:16-alpine";
+      image = "postgres:18.4-alpine";
       autoStart = true;
 
       volumes = [
