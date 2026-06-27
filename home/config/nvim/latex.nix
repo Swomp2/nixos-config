@@ -15,6 +15,21 @@
         mappings_enabled = false; # Не добавлять VimTeX-бинды
         imaps_enabled = false; # Не добавлять VimTeX insert-mode сокращения
 
+        syntax_enabled = true;
+
+        syntax_conceal = {
+          accents = 1; # Красивее отображать акценты
+          cites = 1; # Красивее отображать citations
+          fancy = 1; # Красивые спецсимволы
+          greek = 1; # Греческие буквы в формулах
+          math_bounds = 1; # Скрывать часть math-разметки
+          math_delimiters = 1; # Красивее отображать math delimiters
+          math_fracs = 1; # Красивее отображать дроби
+          math_super_sub = 1; # Красивее отображать степени/индексы
+          sections = 1; # Красивее отображать section-команды
+          styles = 1; # Красивее отображать textbf/textit
+        };
+
         compiler_method = "latexmk"; # Основной сборщик — latexmk
 
         compiler_latexmk = {

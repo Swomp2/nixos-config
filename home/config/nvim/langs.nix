@@ -198,7 +198,10 @@
           wrap = true; # В LaTeX текст удобнее читать с переносами
           linebreak = true; # Переносить по словам
           breakindent = true; # Сохранять визуальный отступ
+
           conceallevel = 2; # Красивее отображать LaTeX-разметку
+          concealcursor = "nc"; # Conceal в normal/command модах, не мешает insert моду
+
           textwidth = 100; # Условная граница строки
           commentstring = "% %s"; # LaTeX-комментарий
         };

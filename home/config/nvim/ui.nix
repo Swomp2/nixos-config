@@ -450,6 +450,8 @@ in
         enable = true; # Красивые уведомления
 
         settings = {
+          background_colour = colors.bg; # Фон уведомлений
+
           timeout = 2500; # Время показа
           stages = "fade_in_slide_out"; # Анимация
         };
@@ -583,5 +585,20 @@ in
         };
       };
     };
+
+    extraConfigLua = ''
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "tex",
+          "plaintex",
+          "bib",
+        },
+        desc = "Use VimTeX syntax instead of Treesitter for LaTeX",
+        callback = function()
+          pcall(vim.treesitter.stop) -- Остановить Treesitter для текущего буфера
+          vim.bo.syntax = "ON" -- Вернуть обычную regex syntax-подсветку Vim/VimTeX
+        end,
+      })
+    '';
   };
 }
