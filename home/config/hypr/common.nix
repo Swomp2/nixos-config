@@ -17,11 +17,6 @@
     configType = "hyprlang";
 
     settings = {
-      render = {
-        cm_enabled = true;
-        cm_auto_hdr = 0;
-      };
-
       misc = {
         disable_hyprland_logo = true;
         on_focus_under_fullscreen = 2;

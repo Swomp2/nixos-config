@@ -16,9 +16,37 @@ in
 
           bitdepth = 10;
 
+          cm = "hdredid";
+          supports_hdr = 1;
+          supports_wide_color = 1;
+
+          # min_luminance = 0.45;
+          # max_luminance = 450;
+          # max_avg_luminance = 400;
+
+          sdr_min_luminance = 0.2;
+          sdr_max_luminance = 220;
+          sdrbrightness = 1.1;
+          sdrsaturation = 1.2;
+
           vrr = 1;
         }
       ];
+
+      render = {
+        cm_enabled = true;
+        cm_auto_hdr = 1;
+        send_content_type = true;
+
+        keep_unmodified_copy = 2;
+
+        use_fp16 = 2;
+
+        non_shader_cm = 2;
+        use_shader_blur_blend = true;
+
+        cm_sdr_eotf = "gamma22";
+      };
 
       input = {
         kb_layout = "us, ru";
