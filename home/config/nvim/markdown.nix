@@ -4,7 +4,7 @@
   programs.nixvim = {
     extraPackages = with pkgs; [
       pandoc # Конвертация Markdown -> PDF через LuaLaTeX
-      weasyprint
+      python314Packages.weasyprint # Промежуточный html файл
       glow # Markdown-preview прямо в терминале/Neovim
     ];
 

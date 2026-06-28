@@ -12,6 +12,7 @@
       fish # Даёт fish_indent для fish-скриптов
       prettier # Форматтер JSON/YAML/HTML/CSS/JS/TS
       tex-fmt # Форматтер LaTeX/.tex
+      taplo # Форматтер для TOML
     ];
 
     plugins.conform-nvim = {
@@ -21,74 +22,79 @@
 
       settings = {
         formatters_by_ft = {
-          nix = [
-            "nixfmt"
-          ]; # Nix
+          "*" = [
+            "trim_whitespace" # Убирать пробелы в конце строк во всех файлах
+            "trim_newlines" # Убирать лишние пустые строки в конце всех файлов
+          ];
+
+          nix = [ "nixfmt" ];
 
           lua = [
             "stylua"
-          ]; # Lua
+          ];
 
           python = [
             "ruff_organize_imports"
             "ruff_format"
-          ]; # Python: сначала imports, потом форматирование
+          ];
 
           c = [
             "clang_format"
-          ]; # C
+          ];
 
           cpp = [
             "clang_format"
-          ]; # C++
+          ];
 
           rust = [
             "rustfmt"
-          ]; # Rust
+          ];
 
           sh = [
             "shfmt"
-          ]; # POSIX shell
+          ];
 
           bash = [
             "shfmt"
-          ]; # Bash
+          ];
 
           fish = [
             "fish_indent"
-          ]; # Fish shell
+          ];
 
           tex = [
             "tex-fmt"
-          ]; # LaTeX/.tex
+          ];
 
           json = [
             "prettier"
-          ]; # JSON
+          ];
 
           jsonc = [
             "prettier"
-          ]; # JSON с комментариями
+          ];
 
           yaml = [
             "prettier"
-          ]; # YAML
+          ];
 
           html = [
             "prettier"
-          ]; # HTML
+          ];
 
           css = [
             "prettier"
-          ]; # CSS
+          ];
 
           javascript = [
             "prettier"
-          ]; # JavaScript
+          ];
 
           typescript = [
             "prettier"
-          ]; # TypeScript
+          ];
+
+          toml = [ "taplo" ];
         };
 
         default_format_opts = {
@@ -102,7 +108,7 @@
         };
 
         notify_on_error = true; # Показывать ошибку, если formatter сломался
-        notify_no_formatters = false; # Не шуметь, если для filetype нет formatter-а
+        notify_no_formatters = false; # Не шуметь, если для типа файла нет formatter-а
 
         formatters = {
           clang_format = {
