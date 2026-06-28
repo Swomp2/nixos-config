@@ -4,6 +4,7 @@
   programs.nixvim = {
     extraPackages = with pkgs; [
       pandoc # Конвертация Markdown -> PDF через LuaLaTeX
+      weasyprint
       glow # Markdown-preview прямо в терминале/Neovim
     ];
 
@@ -100,6 +101,10 @@
     };
 
     extraConfigLua = ''
+      local pandoc = "${pkgs.pandoc}/bin/pandoc"
+      local weasyprint = "${pkgs.weasyprint}/bin/weasyprint"
+      local qpdf = "${pkgs.qpdf}/bin/qpdf"
+
       local function markdown_document()
         local file = vim.api.nvim_buf_get_name(0)
 
@@ -125,15 +130,33 @@
 
         local dir = vim.fn.fnamemodify(doc, ":p:h")
         local name = vim.fn.fnamemodify(doc, ":t:r")
+        local css = dir .. "/" .. name .. ".css"
         local pdf = name .. ".pdf"
 
-        vim.notify("Pandoc: Markdown -> PDF через LuaLaTeX")
+        if vim.fn.filereadable(css) == 0 then
+          vim.notify("CSS-файл не найден: " .. css, vim.log.levels.ERROR)
+          return
+        end
+
+        vim.notify("Pandoc: Markdown -> HTML -> PDF через CSS")
 
         vim.fn.jobstart({
-          "pandoc",
+          pandoc,
           doc,
-          "--pdf-engine=lualatex",
+
+          "--from=markdown",
+          "--to=html5",
           "--standalone",
+
+          "--css",
+          css,
+
+          "--pdf-engine",
+          weasyprint,
+
+          "--resource-path",
+          dir,
+
           "-o",
           pdf,
         }, {
@@ -143,14 +166,14 @@
 
           on_exit = function(_, code)
             if code ~= 0 then
-              vim.notify("Pandoc завершился с ошибкой", vim.log.levels.ERROR)
+              vim.notify("Pandoc/WeasyPrint завершился с ошибкой", vim.log.levels.ERROR)
               return
             end
 
             vim.notify("qpdf: оптимизация " .. pdf)
 
             vim.fn.jobstart({
-              "qpdf",
+              qpdf,
               "--optimize-images",
               "--stream-data=compress",
               "--object-streams=generate",
@@ -175,5 +198,6 @@
         })
       end, {})
     '';
+
   };
 }
