@@ -104,6 +104,7 @@
       local pandoc = "${pkgs.pandoc}/bin/pandoc"
       local weasyprint = "${pkgs.python314Packages.weasyprint}/bin/weasyprint"
       local qpdf = "${pkgs.qpdf}/bin/qpdf"
+      local zathura = "${pkgs.zathura}/bin/zathura"
 
       local function markdown_document()
         local file = vim.api.nvim_buf_get_name(0)
@@ -119,6 +120,25 @@
         end
 
         return file
+      end
+
+      local function markdown_pdf()
+        local doc = markdown_document()
+
+        if not doc then
+          return nil
+        end
+
+        local dir = vim.fn.fnamemodify(doc, ":p:h")
+        local name = vim.fn.fnamemodify(doc, ":t:r")
+        local pdf = dir .. "/" .. name .. ".pdf"
+
+        if vim.fn.filereadable(pdf) == 0 then
+          vim.notify("PDF ещё не существует: " .. pdf, vim.log.levels.ERROR)
+          return nil
+        end
+
+        return pdf
       end
 
       vim.api.nvim_create_user_command("MarkdownBuildQpdf", function()
@@ -195,6 +215,36 @@
               end,
             })
           end,
+        })
+      end, {})
+
+      vim.api.nvim_create_user_command("MarkdownOpenPdf", function()
+        local pdf = markdown_pdf()
+
+        if not pdf then
+          return
+        end
+
+        local uwsm = vim.fn.exepath("uwsm")
+        local cmd = nil
+
+        if uwsm ~= "" then
+          cmd = {
+            uwsm,
+            "app",
+            "--",
+            zathura,
+            pdf,
+          }
+        else
+          cmd = {
+            zathura,
+            pdf,
+          }
+        end
+
+        vim.fn.jobstart(cmd, {
+          detach = true,
         })
       end, {})
     '';
