@@ -11,13 +11,45 @@ in
         {
           output = "eDP-1";
           mode = "2048x1280@120";
-          position = "auto";
+          position = "0x0";
           scale = 1;
 
           bitdepth = 10;
-          vrr = 1;
+          cm = "dcip3";
+
+          supports_wide_color = 1;
+          supports_hdr = 1;
+
+          min_luminance = 0.0005;
+          max_luminance = 500;
+          max_avg_luminance = 400;
+
+          vrr = 0;
+        }
+
+        # Внешние подключаемые мониторы
+        {
+          output = "";
+          mode = "preffered";
+          position = "auto";
+          scale = "auto";
         }
       ];
+
+      render = {
+        cm_enabled = true;
+
+        # HDR будет включаться только для полноэкранного hdr контента
+        cm_auto_hdr = 2;
+        send_content_type = true;
+
+        keep_unmodified_copy = 2;
+        use_fp16 = 2;
+        non_shader_cm = 2;
+        use_shader_blur_blend = true;
+
+        cm_sdr_eotf = "gamma22";
+      };
 
       input = {
         kb_layout = "us, ru";
