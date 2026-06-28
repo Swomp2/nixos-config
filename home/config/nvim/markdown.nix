@@ -102,7 +102,7 @@
 
     extraConfigLua = ''
       local pandoc = "${pkgs.pandoc}/bin/pandoc"
-      local weasyprint = "${pkgs.weasyprint}/bin/weasyprint"
+      local weasyprint = "${pkgs.python314Packages.weasyprint}/bin/weasyprint"
       local qpdf = "${pkgs.qpdf}/bin/qpdf"
 
       local function markdown_document()
