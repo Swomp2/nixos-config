@@ -11,24 +11,28 @@
         after_sleep_cmd = "hyprctl dispatch dpms on";
         ignore_dbus_inhibit = false;
         ignore_systemd_inhibit = false;
+        ignore_wayland_inhibit = false;
         inhibit_sleep = 3;
       };
 
       listener = [
         {
           timeout = 180;
+          ignore_inhibit = false;
           on-timeout = "brightnessctl -s set 10";
           on-resume = "brightnessctl -r";
         }
 
         {
           timeout = 300;
+          ignore_inhibit = false;
           on-timeout = "loginctl lock-session && hyprctl dispatch dpms off";
           on-resume = "hyprctl dispatch dpms on && brightnessctl -r";
         }
 
         {
           timeout = 900;
+          ignore_inhibit = false;
           on-timeout = "systemctl suspend";
         }
       ];

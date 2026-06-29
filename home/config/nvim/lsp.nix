@@ -18,59 +18,148 @@ in
         servers = {
           nixd = {
             enable = true; # LSP для Nix/NixOS/Home Manager/flakes
-            packageFallback = true; # Локальный nixd из devshell сможет переопределить nixvim-версию
+
+            packageFallback = true; # nixd из devshell сможет иметь приоритет
 
             rootMarkers = [
               "flake.nix"
               ".git"
-            ]; # Корень проекта искать по flake.nix или git
-          };
-
-          lua_ls = {
-            enable = true; # LSP для Lua, нужен для конфигов Neovim/плагинов
+            ];
 
             settings = {
-              Lua = {
-                runtime = {
-                  version = "LuaJIT"; # Neovim использует LuaJIT
+              nixpkgs = {
+                expr = ''
+                  let
+                    flake = builtins.getFlake (builtins.toString ./.);
+                  in
+                    import flake.inputs.nixpkgs {
+                      system = "x86_64-linux";
+                    }
+                '';
+              };
+
+              formatting = {
+                command = [ "nixfmt" ];
+              };
+
+              options = {
+                nixos-pc = {
+                  expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.pc.options";
                 };
 
-                diagnostics = {
-                  globals = [
-                    "vim"
-                  ]; # Не ругаться на глобальную переменную vim
+                nixos-laptop = {
+                  expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.laptop.options";
                 };
 
-                workspace = {
-                  checkThirdParty = false; # Не спрашивать про сторонние Lua-библиотеки
+                nixos-server = {
+                  expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.server.options";
                 };
 
-                telemetry = {
-                  enable = false; # Отключить телеметрию LuaLS
+                home-pc = {
+                  expr = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.pc.options";
+                };
+
+                home-laptop = {
+                  expr = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.laptop.options";
                 };
               };
             };
           };
 
-          pyright = {
-            enable = true; # LSP для Python
+          lua_ls = {
+            enable = true;
+            packageFallback = true;
 
             settings = {
-              python = {
+              runtime = {
+                version = "LuaJIT";
+              };
+
+              diagnostics = {
+                globals = [
+                  "vim"
+                ];
+              };
+
+              workspace = {
+                checkThirdParty = false;
+              };
+
+              telemetry = {
+                enable = false;
+              };
+            };
+          };
+
+          basedpyright = {
+            enable = true;
+            packageFallback = true;
+
+            rootMarkers = [
+              "pyproject.toml"
+              "setup.py"
+              "setup.cfg"
+              "requirements.txt"
+              ".venv"
+              ".git"
+            ];
+
+            settings = {
+              basedpyright = {
+                disableOrganizeImports = true;
+
                 analysis = {
-                  autoSearchPaths = true; # Автоматически искать import paths
-                  useLibraryCodeForTypes = true; # Использовать код библиотек для типов
-                  typeCheckingMode = "basic"; # Мягкая проверка типов, не слишком шумная
-                  diagnosticMode = "workspace"; # Проверять весь workspace, а не только открытый файл
+                  autoSearchPaths = true;
+                  useLibraryCodeForTypes = true;
+
+                  # Для скорости. Если хочешь проверку всего проекта — поставь "workspace".
+                  diagnosticMode = "openFilesOnly";
+
+                  # Мягко. Для более строгой проверки потом можно поставить "standard".
+                  typeCheckingMode = "basic";
+
+                  inlayHints = {
+                    variableTypes = true;
+                    callArgumentNames = true;
+                    functionReturnTypes = true;
+                  };
+                };
+              };
+            };
+          };
+
+          ruff = {
+            enable = true;
+            packageFallback = true;
+
+            rootMarkers = [
+              "pyproject.toml"
+              "ruff.toml"
+              ".ruff.toml"
+              ".git"
+            ];
+
+            extraOptions = {
+              init_options = {
+                settings = {
+                  configurationPreference = "filesystemFirst";
+                  organizeImports = false;
                 };
               };
             };
           };
 
           clangd = {
-            enable = true; # LSP для C/C++
+            enable = true;
+            packageFallback = true;
 
-            packageFallback = true; # Позволяет devshell-версии clangd иметь приоритет
+            rootMarkers = [
+              "compile_commands.json"
+              "compile_flags.txt"
+              "CMakeLists.txt"
+              ".clangd"
+              ".git"
+            ];
 
             cmd = [
               "clangd"
@@ -78,16 +167,84 @@ in
               "--clang-tidy"
               "--completion-style=detailed"
               "--header-insertion=iwyu"
-            ]; # Индексация проекта, clang-tidy, подробные дополнения, подсказки include
+            ];
+          };
+
+          rust_analyzer = {
+            enable = true;
+
+            installCargo = true;
+            installRustc = true;
+
+            packageFallback = true;
+
+            rootMarkers = [
+              "Cargo.toml"
+              "rust-project.json"
+              "flake.nix"
+              ".git"
+            ];
+
+            settings = {
+              cargo = {
+                allTargets = true;
+
+                buildScripts = {
+                  enable = true;
+                };
+
+                features = "all";
+              };
+
+              check = {
+                command = "clippy";
+                allTargets = true;
+                features = "all";
+              };
+
+              procMacro = {
+                enable = true;
+              };
+
+              inlayHints = {
+                bindingModeHints = {
+                  enable = false;
+                };
+
+                closureReturnTypeHints = {
+                  enable = "with_block";
+                };
+
+                lifetimeElisionHints = {
+                  enable = "skip_trivial";
+                };
+
+                typeHints = {
+                  enable = true;
+                };
+
+                parameterHints = {
+                  enable = true;
+                };
+              };
+            };
           };
 
           texlab = {
-            enable = true; # LSP для LaTeX/BibTeX
+            enable = true;
+            packageFallback = true;
+
+            rootMarkers = [
+              ".latexmkrc"
+              "latexmkrc"
+              ".git"
+            ];
 
             settings = {
               texlab = {
                 build = {
-                  executable = "latexmk"; # Сборщик LaTeX-документов
+                  executable = "latexmk";
+
                   args = [
                     "-lualatex"
                     "-interaction=nonstopmode"
@@ -95,104 +252,156 @@ in
                     "-synctex=1"
                     "-auxdir=Временное"
                     "%f"
-                  ]; # LuaLaTeX + SyncTeX, чтобы потом прыгать между PDF и .tex
+                  ];
 
-                  onSave = false; # Не собирать автоматически при каждом сохранении
-                  forwardSearchAfter = false; # Forward search настроим отдельно в latex.nix
+                  onSave = false;
+                  forwardSearchAfter = false;
                 };
 
                 chktex = {
-                  onOpenAndSave = false; # Не включать шумный chktex автоматически
-                  onEdit = false; # Не проверять LaTeX на каждый ввод
+                  onOpenAndSave = false;
+                  onEdit = false;
                 };
               };
             };
           };
 
           marksman = {
-            enable = true; # LSP для Markdown: ссылки, заголовки, diagnostics
+            enable = true;
+            packageFallback = true;
+
+            rootMarkers = [
+              ".marksman.toml"
+              ".git"
+            ];
           };
 
           bashls = {
-            enable = true; # LSP для shell-скриптов
+            enable = true;
+            packageFallback = true;
+
+            rootMarkers = [
+              ".git"
+            ];
+          };
+
+          fish_lsp = {
+            enable = true;
+
+            packageFallback = true;
+
+            rootMarkers = [
+              ".git"
+            ];
           };
 
           jsonls = {
-            enable = true; # LSP для JSON
+            enable = true;
+            packageFallback = true;
+
+            settings = {
+              validate = {
+                enable = true;
+              };
+            };
           };
 
           yamlls = {
-            enable = true; # LSP для YAML
+            enable = true;
+            packageFallback = true;
+
+            settings = {
+              validate = true;
+              hover = true;
+              completion = true;
+              keyOrdering = false;
+
+              format = {
+                enable = false;
+              };
+            };
           };
 
           html = {
-            enable = true; # LSP для HTML
+            enable = true;
+            packageFallback = true;
+
+            settings = {
+              html = {
+                format = {
+                  enable = false;
+                };
+
+                hover = {
+                  documentation = true;
+                  references = true;
+                };
+              };
+            };
           };
 
           cssls = {
-            enable = true; # LSP для CSS
+            enable = true;
+            packageFallback = true;
+
+            settings = {
+              css = {
+                validate = true;
+              };
+
+              scss = {
+                validate = true;
+              };
+
+              less = {
+                validate = true;
+              };
+            };
           };
 
           taplo = {
-            enable = true; # LSP для TOML
-          };
-
-          rust_analyzer = {
-            enable = true; # LSP для Rust
-
-            installCargo = true; # Скачивать cargo автоматически
-            installRustc = true; # Скачивать rustc автоматически
-
-            packageFallback = true; # rust-analyzer из devshell сможет переопределить версию nixvim
+            enable = true;
+            packageFallback = true;
 
             rootMarkers = [
-              "Cargo.toml" # Обычный Rust-проект
-              "flake.nix" # Rust-проект с Nix flake
-              ".git" # Запасной вариант
-            ]; # По этим файлам определяется корень проекта
+              ".taplo.toml"
+              "taplo.toml"
+              "Cargo.toml"
+              ".git"
+            ];
+          };
+
+          ts_ls = {
+            enable = true;
+            packageFallback = true;
+
+            rootMarkers = [
+              "package.json"
+              "tsconfig.json"
+              "jsconfig.json"
+              ".git"
+            ];
 
             settings = {
-              rust-analyzer = {
-                cargo = {
-                  allTargets = true; # Анализировать lib/bin/tests/examples/benches
-
-                  buildScripts = {
-                    enable = true; # Запускать build.rs для точного анализа
-                  };
-
-                  features = "all"; # Включить все Cargo features
-                };
-
-                check = {
-                  command = "clippy"; # Вместо cargo check использовать cargo clippy
-                  allTargets = true; # Проверять все targets
-                  features = "all"; # Проверять со всеми features
-                };
-
-                procMacro = {
-                  enable = true; # Включить proc-macro, нужно для derive-макросов
-                };
-
+              javascript = {
                 inlayHints = {
-                  bindingModeHints = {
-                    enable = false; # Не показывать лишний шум для ref/mut binding
-                  };
+                  includeInlayEnumMemberValueHints = true;
+                  includeInlayFunctionLikeReturnTypeHints = true;
+                  includeInlayFunctionParameterTypeHints = true;
+                  includeInlayParameterNameHints = "literals";
+                  includeInlayPropertyDeclarationTypeHints = true;
+                  includeInlayVariableTypeHints = false;
+                };
+              };
 
-                  closureReturnTypeHints = {
-                    enable = "with_block"; # Показывать типы возврата у сложных closure
-                  };
-
-                  lifetimeElisionHints = {
-                    enable = "skip_trivial"; # Показывать жизненный цикл только где это полезно
-                  };
-
-                  typeHints = {
-                    enable = true; # Подсказки типов переменных
-                  };
-
-                  parameterHints = {
-                    enable = true; # Подсказки имён параметров
-                  };
+              typescript = {
+                inlayHints = {
+                  includeInlayEnumMemberValueHints = true;
+                  includeInlayFunctionLikeReturnTypeHints = true;
+                  includeInlayFunctionParameterTypeHints = true;
+                  includeInlayParameterNameHints = "literals";
+                  includeInlayPropertyDeclarationTypeHints = true;
+                  includeInlayVariableTypeHints = false;
                 };
               };
             };

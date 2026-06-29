@@ -3,7 +3,7 @@
 {
   programs.nixvim = {
     extraPackages = with pkgs; [
-      texliveFull # Даёт latexmk, lualatex, synctex и LaTeX-пакеты
+      texliveFull
       qpdf # Оптимизация PDF после сборки
       zathura # PDF viewer для VimTeX
     ];

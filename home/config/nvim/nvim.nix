@@ -11,6 +11,7 @@ in
     ./lsp.nix
     ./markdown.nix
     ./ui.nix
+    ./snippets.nix
   ];
 
   home.sessionVariables = {

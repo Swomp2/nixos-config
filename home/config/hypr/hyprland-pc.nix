@@ -48,6 +48,13 @@ in
         cm_sdr_eotf = "gamma22";
       };
 
+      cursor = {
+        no_hardware_cursors = 1;
+
+        enable_hyprcursor = true;
+        sync_gsettings_theme = true;
+      };
+
       input = {
         kb_layout = "us, ru";
         kb_options = "grp:rshift_toggle";

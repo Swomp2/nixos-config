@@ -9,6 +9,7 @@
       clang-tools # clang-format для C/C++
       rustfmt # Форматтер Rust
       shfmt # Форматтер sh/bash
+      shellcheck # Статический анализатор shell скриптов
       fish # Даёт fish_indent для fish-скриптов
       prettier # Форматтер JSON/YAML/HTML/CSS/JS/TS
       tex-fmt # Форматтер LaTeX/.tex
@@ -60,10 +61,6 @@
 
           fish = [
             "fish_indent"
-          ];
-
-          tex = [
-            "tex-fmt"
           ];
 
           json = [
