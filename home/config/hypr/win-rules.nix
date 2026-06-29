@@ -16,6 +16,9 @@
         "match:class ^(org.strawberrymusicplayer.strawberry)$, workspace 2"
         "match:class ^(org.kde.ark)$, float on"
         "match:class ^(xdg-desktop-portal-gtk)$, float on"
+
+        "match:class ^(mpv)$, no_blur on"
+        "match:class ^(mpv)$, opacity 1.0 override 1.0 override 1.0 override"
       ];
     };
   };
